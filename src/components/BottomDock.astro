@@ -1,0 +1,29 @@
+<nav
+    class="dock fixed bottom-0 left-1/2 -translate-x-1/2 bg-black text-white p-4 rounded-t-2xl transition-transform duration-300 ease-out transform translate-y-3/4 hover:translate-y-0"
+>
+    <div class="flex items-center gap-4">
+        <a href="/" class="dock-item">🏠 Home</a>
+        <a href="/projects" class="dock-item">📁 Projects</a>
+        <a href="/about" class="dock-item">👤 About</a>
+        <a href="/contact" class="dock-item">📧 Contact</a>
+    </div>
+</nav>
+
+<style>
+    @reference "tailwindcss";
+
+    .dock {
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        min-width: 300px;
+        z-index: 1000;
+    }
+
+    .dock-item {
+        @apply text-white no-underline px-3 py-2 rounded-lg transition-colors duration-200;
+    }
+
+    .dock-item:hover {
+        @apply bg-violet-800;
+    }
+</style>
