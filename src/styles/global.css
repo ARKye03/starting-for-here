@@ -2,4 +2,15 @@
 
 :root {
     color-scheme: dark light;
+
+    /* Custom colors */
+    --color-primary: #8839ef;
+    --color-background-light: #F5F5F5;
+    --color-background-dark: #141118;
+
+    /* Custom border radius */
+    --radius-DEFAULT: 0.25rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-full: 9999px;
 }

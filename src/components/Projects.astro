@@ -1,0 +1,47 @@
+---
+// Projects.astro
+import ProjectCard from "./ProjectCard.astro";
+
+const projects = [
+    {
+        title: "Project One - Tech Startup Website",
+        description:
+            "A sleek and modern website design for a technology startup",
+    },
+    {
+        title: "Project Two - Fitness App UI",
+        description:
+            "A vibrant and engaging mobile app interface for a fitness application",
+    },
+    {
+        title: "Project Three - Coffee Branding",
+        description:
+            "An elegant branding and packaging design for a luxury coffee brand",
+    },
+];
+---
+
+<section>
+    <h2
+        class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+    >
+        My Best Projects
+    </h2>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-4">
+        {
+            projects.map((project) => (
+                <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                />
+            ))
+        }
+    </div>
+    <div class="flex px-4 py-8 justify-center">
+        <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+        >
+            <span class="truncate">View All Projects</span>
+        </button>
+    </div>
+</section>

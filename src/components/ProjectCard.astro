@@ -1,0 +1,21 @@
+---
+export interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div
+    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent bg-gray-400 dark:bg-gray-600"
+>
+    <p class="text-white text-base font-bold leading-tight line-clamp-2">
+        {title}
+    </p>
+    <div
+        class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+        <span class="text-white font-bold">View Project</span>
+    </div>
+</div>
