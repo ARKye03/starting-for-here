@@ -21,21 +21,13 @@ const { title = "Portfolio", currentPage = "home" } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class={"min-h-screen bg-background text-white"}>
-		<div
-			class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden"
-		>
-			<div class="layout-container flex h-full grow flex-col">
-				<div class="flex flex-1 justify-center py-5">
-					<div
-						class="layout-content-container flex flex-col max-w-[960px] flex-1"
-					>
-						<Header currentPage={currentPage} />
-						<slot />
-						<Footer />
-					</div>
-				</div>
+		<main class="max-w-[960px] mx-auto px-4 md:px-10 py-5">
+			<Header currentPage={currentPage} />
+			<div>
+				<slot />
 			</div>
-		</div>
+			<Footer />
+		</main>
 	</body>
 </html>
 
