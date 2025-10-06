@@ -2,15 +2,51 @@
 
 :root {
     color-scheme: dark light;
+}
 
-    /* Custom colors */
+/* Define custom colors as CSS custom properties that Tailwind can use */
+:root {
     --color-primary: #8839ef;
-    --color-background-light: #F5F5F5;
     --color-background-dark: #141118;
+}
 
-    /* Custom border radius */
-    --radius-DEFAULT: 0.25rem;
-    --radius-lg: 0.5rem;
-    --radius-xl: 0.75rem;
-    --radius-full: 9999px;
+/* Ensure the custom colors work with Tailwind utilities */
+.text-primary {
+    color: var(--color-primary);
+}
+
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-primary-90 {
+    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+}
+
+.bg-primary-80 {
+    background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+}
+
+.bg-primary-30 {
+    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.bg-primary-20 {
+    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.hover\:text-primary:hover {
+    color: var(--color-primary);
+}
+
+.hover\:bg-primary-90:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+}
+
+.hover\:bg-primary-30:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.bg-background-dark {
+    background-color: var(--color-background-dark);
 }
