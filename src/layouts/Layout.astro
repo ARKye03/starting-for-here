@@ -17,20 +17,12 @@ const { title = "Portfolio" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-background-dark text-gray-900 dark:text-white">
-		<div
-			class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden"
-		>
-			<div class="layout-container flex h-full grow flex-col">
-				<div
-					class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5"
-				>
-					<div
-						class="layout-content-container flex flex-col max-w-[960px] flex-1"
-					>
-						<slot />
-					</div>
-				</div>
+	<body
+		class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-white min-h-screen"
+	>
+		<div class="px-4 md:px-10 lg:px-40 flex justify-center py-5">
+			<div class="flex flex-col max-w-[960px] flex-1">
+				<slot />
 			</div>
 		</div>
 	</body>
