@@ -6,16 +6,9 @@ import Footer from "../components/Footer.astro";
 export interface Props {
 	title?: string;
 	currentPage?: "home" | "about" | "projects" | "contact";
-	variant?: "default" | "dark";
 }
 
-const {
-	title = "Portfolio",
-	currentPage = "home",
-	variant = "default",
-} = Astro.props;
-
-const isDark = variant === "dark";
+const { title = "Portfolio", currentPage = "home" } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,32 +20,22 @@ const isDark = variant === "dark";
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body
-		class={`min-h-screen ${isDark ? "bg-background-dark text-white" : "bg-background-light dark:bg-background-dark text-gray-900 dark:text-white"}`}
-	>
-		{
-			isDark ? (
-				<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-					<div class="layout-container flex h-full grow flex-col">
-						<div class="flex flex-1 justify-center py-5">
-							<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-								<Header currentPage={currentPage} />
-								<slot />
-								<Footer />
-							</div>
-						</div>
-					</div>
-				</div>
-			) : (
-				<div class="px-4 md:px-10 lg:px-40 flex justify-center py-5">
-					<div class="flex flex-col max-w-[960px] flex-1">
+	<body class={"min-h-screen bg-background text-white"}>
+		<div
+			class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden"
+		>
+			<div class="layout-container flex h-full grow flex-col">
+				<div class="flex flex-1 justify-center py-5">
+					<div
+						class="layout-content-container flex flex-col max-w-[960px] flex-1"
+					>
 						<Header currentPage={currentPage} />
 						<slot />
 						<Footer />
 					</div>
 				</div>
-			)
-		}
+			</div>
+		</div>
 	</body>
 </html>
 

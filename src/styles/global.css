@@ -53,6 +53,6 @@
     background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
 }
 
-.bg-background-dark {
+.bg-background {
     background-color: var(--color-background-dark);
 }
