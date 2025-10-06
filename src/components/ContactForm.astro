@@ -1,0 +1,69 @@
+---
+// ContactForm.astro
+---
+
+<div class="lg:w-3/5">
+    <form action="#" class="space-y-6" method="POST">
+        <div>
+            <label
+                class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                for="name">Name</label
+            >
+            <input
+                autocomplete="name"
+                class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                type="text"
+            />
+        </div>
+        <div>
+            <label
+                class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                for="email">Email</label
+            >
+            <input
+                autocomplete="email"
+                class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                type="email"
+            />
+        </div>
+        <div>
+            <label
+                class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                for="subject">Subject</label
+            >
+            <input
+                class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                id="subject"
+                name="subject"
+                placeholder="What is this about?"
+                type="text"
+            />
+        </div>
+        <div>
+            <label
+                class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                for="message">Message</label
+            >
+            <textarea
+                class="form-textarea block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                id="message"
+                name="message"
+                placeholder="Your message..."
+                rows="4"></textarea>
+        </div>
+        <div>
+            <button
+                class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                type="submit"
+            >
+                Send Message
+            </button>
+        </div>
+    </form>
+</div>
