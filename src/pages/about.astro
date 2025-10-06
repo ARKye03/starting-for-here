@@ -1,20 +1,16 @@
 ---
-import AboutLayout from "../layouts/AboutLayout.astro";
-import AboutHeader from "../components/AboutHeader.astro";
+import Layout from "../layouts/Layout.astro";
 import AboutHero from "../components/AboutHero.astro";
 import Journey from "../components/Journey.astro";
 import Skills from "../components/Skills.astro";
 import Philosophy from "../components/Philosophy.astro";
 import CallToAction from "../components/CallToAction.astro";
-import AboutFooter from "../components/AboutFooter.astro";
 ---
 
-<AboutLayout>
-    <AboutHeader />
+<Layout title="About Me - Portfolio" currentPage="about" variant="dark">
     <AboutHero />
     <Journey />
     <Skills />
     <Philosophy />
     <CallToAction />
-    <AboutFooter />
-</AboutLayout>
+</Layout>

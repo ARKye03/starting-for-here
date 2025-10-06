@@ -1,17 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContactHeader from "../components/ContactHeader.astro";
 import ContactInfo from "../components/ContactInfo.astro";
 import ContactForm from "../components/ContactForm.astro";
-import ContactFooter from "../components/ContactFooter.astro";
 ---
 
-<Layout title="Contact - Portfolio">
+<Layout title="Contact - Portfolio" currentPage="contact">
     <div
         class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden"
     >
         <div class="layout-container flex h-full grow flex-col">
-            <ContactHeader />
             <main class="flex-1">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">
                     <div class="flex flex-col gap-16 lg:flex-row lg:gap-24">
@@ -20,7 +17,6 @@ import ContactFooter from "../components/ContactFooter.astro";
                     </div>
                 </div>
             </main>
-            <ContactFooter />
         </div>
     </div>
 </Layout>
