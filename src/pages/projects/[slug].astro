@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const transitionName = `project-${project.slug}`;
 ---
 
 <Layout title={`${project.data.title} - Portfolio`} currentPage="projects">
@@ -33,7 +34,8 @@ const { Content } = await project.render();
                         <img
                             src={`/projects/${project.data.image}`}
                             alt={project.data.title}
-                            class="w-full h-auto object-cover grow"
+                            class="w-full h-auto object-cover"
+                            transition:name={transitionName}
                         />
                     </div>
                 )

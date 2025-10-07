@@ -10,14 +10,16 @@ export interface Props {
 const { title, description, slug, tags, image } = Astro.props;
 const projectUrl = slug ? `/projects/${slug}` : "#";
 const backgroundImage = image ? `/projects/${image}` : "";
+const transitionName = `project-${slug}`;
 ---
 
 <a
     href={projectUrl}
-    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent no-underline"
+    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent no-underline project-card"
     style={backgroundImage
-        ? `background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${backgroundImage}');`
+        ? `background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${backgroundImage}'); view-transition-name: ${transitionName};`
         : ""}
+    transition:name={transitionName}
 >
     <p class="text-white text-base font-bold leading-tight line-clamp-2">
         {title}
