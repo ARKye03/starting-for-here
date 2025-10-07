@@ -33,7 +33,7 @@ const { Content } = await project.render();
                         <img
                             src={`/projects/${project.data.image}`}
                             alt={project.data.title}
-                            class="w-full h-auto object-cover"
+                            class="w-full h-auto object-cover grow"
                         />
                     </div>
                 )
@@ -134,5 +134,16 @@ const { Content } = await project.render();
         padding: 0.125rem 0.25rem;
         border-radius: 0.25rem;
         font-size: 0.875em;
+    }
+    .grow {
+        display: inline-block;
+        transition-duration: 200ms;
+        transition-property: transform;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        transform: translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 </style>
