@@ -1,0 +1,129 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={`${project.data.title} - Portfolio`} currentPage="projects">
+    <article class="py-10 max-w-4xl mx-auto">
+        <!-- Project Header -->
+        <header class="mb-12">
+            <h1
+                class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
+            >
+                {project.data.title}
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
+                {project.data.description}
+            </p>
+
+            <!-- Tags -->
+            {
+                project.data.tags && project.data.tags.length > 0 && (
+                    <div class="flex gap-2 flex-wrap mb-6">
+                        {project.data.tags.map((tag) => (
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )
+            }
+
+            <!-- Links -->
+            <div class="flex gap-4">
+                {
+                    project.data.url && (
+                        <a
+                            href={project.data.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                        >
+                            <span>🔗</span>
+                            View Live Site
+                        </a>
+                    )
+                }
+                {
+                    project.data.github && (
+                        <a
+                            href={project.data.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                        >
+                            <span>💻</span>
+                            View on GitHub
+                        </a>
+                    )
+                }
+            </div>
+        </header>
+
+        <!-- Project Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+            <Content />
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <a
+                href="/projects"
+                class="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+            >
+                <span>←</span>
+                Back to Projects
+            </a>
+        </div>
+    </article>
+</Layout>
+
+<style>
+    /* Prose styles for markdown content */
+    :global(.prose) {
+        color: inherit;
+    }
+    :global(.prose h2) {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    :global(.prose h3) {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    :global(.prose p) {
+        margin-bottom: 1rem;
+        line-height: 1.75;
+    }
+    :global(.prose ul, .prose ol) {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+    }
+    :global(.prose li) {
+        margin-bottom: 0.5rem;
+    }
+    :global(.prose strong) {
+        font-weight: 600;
+    }
+    :global(.prose code) {
+        background-color: rgba(136, 57, 239, 0.1);
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+    }
+</style>

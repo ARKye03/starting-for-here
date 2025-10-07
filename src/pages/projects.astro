@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const allProjects = await getCollection("projects");
+const projects = allProjects.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<Layout title="Projects - Portfolio" currentPage="projects">
+    <div class="py-10">
+        <div class="mb-8">
+            <h1
+                class="text-4xl font-black leading-tight tracking-[-0.033em] mb-4"
+            >
+                All Projects
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                A collection of my work across web development, design, and
+                branding.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                projects.map((project) => (
+                    <ProjectCard
+                        title={project.data.title}
+                        description={project.data.description}
+                        slug={project.slug}
+                        tags={project.data.tags}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</Layout>

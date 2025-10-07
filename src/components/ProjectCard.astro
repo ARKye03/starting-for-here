@@ -2,20 +2,35 @@
 export interface Props {
     title: string;
     description: string;
+    slug?: string;
+    tags?: string[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, slug, tags } = Astro.props;
+const projectUrl = slug ? `/projects/${slug}` : "#";
 ---
 
-<div
-    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent bg-gray-400 dark:bg-gray-600"
+<a
+    href={projectUrl}
+    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent bg-gray-400 dark:bg-gray-600 no-underline"
 >
     <p class="text-white text-base font-bold leading-tight line-clamp-2">
         {title}
     </p>
+    {
+        tags && tags.length > 0 && (
+            <div class="flex gap-2 flex-wrap">
+                {tags.slice(0, 2).map((tag) => (
+                    <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">
+                        {tag}
+                    </span>
+                ))}
+            </div>
+        )
+    }
     <div
-        class="absolute inset-0 bg-primary-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
     >
         <span class="text-white font-bold">View Project</span>
     </div>
-</div>
+</a>

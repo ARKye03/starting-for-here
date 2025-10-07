@@ -1,23 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
-const projects = [
-    {
-        title: "Project One - Tech Startup Website",
-        description:
-            "A sleek and modern website design for a technology startup",
-    },
-    {
-        title: "Project Two - Fitness App UI",
-        description:
-            "A vibrant and engaging mobile app interface for a fitness application",
-    },
-    {
-        title: "Project Three - Coffee Branding",
-        description:
-            "An elegant branding and packaging design for a luxury coffee brand",
-    },
-];
+// Get all projects and sort by date (newest first)
+const allProjects = await getCollection("projects");
+const projects = allProjects
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 3); // Show only 3 most recent
 ---
 
 <section>
@@ -30,17 +19,20 @@ const projects = [
         {
             projects.map((project) => (
                 <ProjectCard
-                    title={project.title}
-                    description={project.description}
+                    title={project.data.title}
+                    description={project.data.description}
+                    slug={project.slug}
+                    tags={project.data.tags}
                 />
             ))
         }
     </div>
     <div class="flex px-4 py-8 justify-center">
-        <button
-            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
+        <a
+            href="/projects"
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
         >
             <span class="truncate">View All Projects</span>
-        </button>
+        </a>
     </div>
 </section>
