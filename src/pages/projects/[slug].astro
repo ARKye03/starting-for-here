@@ -27,6 +27,18 @@ const { Content } = await project.render();
                 {project.data.description}
             </p>
 
+            {
+                project.data.image && (
+                    <div class="mb-6 rounded-lg overflow-hidden">
+                        <img
+                            src={`/projects/${project.data.image}`}
+                            alt={project.data.title}
+                            class="w-full h-auto object-cover"
+                        />
+                    </div>
+                )
+            }
+
             <!-- Tags -->
             {
                 project.data.tags && project.data.tags.length > 0 && (
@@ -40,7 +52,6 @@ const { Content } = await project.render();
                 )
             }
 
-            <!-- Links -->
             <div class="flex gap-4">
                 {
                     project.data.url && (
@@ -71,12 +82,10 @@ const { Content } = await project.render();
             </div>
         </header>
 
-        <!-- Project Content -->
         <div class="prose prose-lg dark:prose-invert max-w-none">
             <Content />
         </div>
 
-        <!-- Back Button -->
         <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
             <a
                 href="/projects"
