@@ -64,7 +64,15 @@ let email = "rafa03-dev@proton.me";
                 </div>
             </div>
 
-            <form class="lg:w-3/5 space-y-6" action="#" method="POST">
+            <form
+                id="contact-form"
+                class="lg:w-3/5 space-y-6"
+                action="/api/contact"
+                method="POST"
+            >
+                <!-- Status messages -->
+                <div id="form-status" class="hidden rounded-lg p-4"></div>
+
                 <div>
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
@@ -77,6 +85,7 @@ let email = "rafa03-dev@proton.me";
                         name="name"
                         placeholder="Enter your name"
                         type="text"
+                        required
                     />
                 </div>
                 <div>
@@ -91,6 +100,7 @@ let email = "rafa03-dev@proton.me";
                         name="email"
                         placeholder="Enter your email"
                         type="email"
+                        required
                     />
                 </div>
                 <div>
@@ -104,6 +114,7 @@ let email = "rafa03-dev@proton.me";
                         name="subject"
                         placeholder="What is this about?"
                         type="text"
+                        required
                     />
                 </div>
                 <div>
@@ -116,15 +127,83 @@ let email = "rafa03-dev@proton.me";
                         id="message"
                         name="message"
                         placeholder="Your message..."
-                        rows="4"></textarea>
+                        rows="4"
+                        required></textarea>
                 </div>
                 <button
-                    class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    id="submit-btn"
+                    class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     type="submit"
                 >
-                    Send Message
+                    <span id="btn-text">Send Message</span>
                 </button>
             </form>
         </div>
     </div>
 </Layout>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const statusDiv = document.getElementById("form-status");
+        const submitBtn = document.getElementById(
+            "submit-btn",
+        ) as HTMLButtonElement;
+        const btnText = document.getElementById("btn-text");
+
+        form?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            if (btnText) btnText.textContent = "Sending...";
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Success
+                    if (statusDiv) {
+                        statusDiv.className =
+                            "rounded-lg p-4 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200";
+                        statusDiv.textContent =
+                            "✓ Message sent successfully! I'll get back to you soon.";
+                        statusDiv.classList.remove("hidden");
+                    }
+                    form.reset();
+                } else {
+                    // Error
+                    if (statusDiv) {
+                        statusDiv.className =
+                            "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
+                        statusDiv.textContent = `✗ ${result.error || "Failed to send message. Please try again."}`;
+                        statusDiv.classList.remove("hidden");
+                    }
+                }
+            } catch (error) {
+                if (statusDiv) {
+                    statusDiv.className =
+                        "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
+                    statusDiv.textContent =
+                        "✗ Network error. Please check your connection and try again.";
+                    statusDiv.classList.remove("hidden");
+                }
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                if (btnText) btnText.textContent = "Send Message";
+
+                // Hide status message after 5 seconds
+                setTimeout(() => {
+                    statusDiv?.classList.add("hidden");
+                }, 5000);
+            }
+        });
+    });
+</script>
