@@ -1,14 +1,138 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContactInfo from "../components/ContactInfo.astro";
-import ContactForm from "../components/ContactForm.astro";
+let email = "rafa03-dev@proton.me";
 ---
 
 <Layout title="Contact - Portfolio" currentPage="contact">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">
         <div class="flex flex-col gap-16 lg:flex-row lg:gap-24">
-            <ContactInfo />
-            <ContactForm />
+            <div class="flex flex-col gap-8 lg:w-2/5">
+                <div class="flex flex-col gap-4">
+                    <h1
+                        class="text-4xl font-black tracking-tighter sm:text-5xl text-gray-900 dark:text-white"
+                    >
+                        Get in Touch
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        I'm currently available for freelance work. Got a
+                        project in mind? Let's talk.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-10 text-primary"
+                        >
+                            <span class="text-xl">✉</span>
+                        </div>
+                        <div>
+                            <p
+                                class="font-semibold text-gray-900 dark:text-white"
+                            >
+                                Email
+                            </p>
+                            <a
+                                class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                href={`mailto:${email}`}>{email}</a
+                            >
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-10 text-primary"
+                        >
+                            <span class="text-xl">🌐</span>
+                        </div>
+                        <div>
+                            <p
+                                class="font-semibold text-gray-900 dark:text-white"
+                            >
+                                Social
+                            </p>
+                            <div class="flex gap-4">
+                                <a
+                                    class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                    href="#">LinkedIn</a
+                                >
+                                <a
+                                    class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                    href="https://github.com/ARKye03">GitHub</a
+                                >
+                                <a
+                                    class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                    href="#">Behance</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-3/5">
+                <form action="#" class="space-y-6" method="POST">
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                            for="name">Name</label
+                        >
+                        <input
+                            autocomplete="name"
+                            class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                            for="email">Email</label
+                        >
+                        <input
+                            autocomplete="email"
+                            class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            type="email"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                            for="subject">Subject</label
+                        >
+                        <input
+                            class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                            id="subject"
+                            name="subject"
+                            placeholder="What is this about?"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
+                            for="message">Message</label
+                        >
+                        <textarea
+                            class="form-textarea block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                            id="message"
+                            name="message"
+                            placeholder="Your message..."
+                            rows="4"></textarea>
+                    </div>
+                    <div>
+                        <button
+                            class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                            type="submit"
+                        >
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </Layout>
