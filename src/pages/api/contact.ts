@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+ // Route as server-rendered
+export const prerender = false;
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
@@ -21,7 +23,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Send email using Resend
         const { data: emailData, error } = await resend.emails.send({
-            from: 'Contact Form <onboarding@resend.dev>', // Change this to your verified domain
+            from: 'Contact Form <onboarding@resend.dev>',
             to: 'rafa03-dev@proton.me',
             replyTo: email,
             subject: `Contact Form: ${subject}`,
