@@ -17,7 +17,6 @@ const transitionName = `project-${project.slug}`;
 
 <Layout title={`${project.data.title} - Portfolio`} currentPage="projects">
     <article class="py-10 max-w-4xl mx-auto">
-        <!-- Project Header -->
         <header class="mb-12">
             <h1
                 class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
@@ -34,14 +33,13 @@ const transitionName = `project-${project.slug}`;
                         <img
                             src={`/projects/${project.data.image}`}
                             alt={project.data.title}
-                            class="w-full h-auto object-cover"
+                            class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
                             transition:name={transitionName}
                         />
                     </div>
                 )
             }
 
-            <!-- Tags -->
             {
                 project.data.tags && project.data.tags.length > 0 && (
                     <div class="flex gap-2 flex-wrap mb-6">
