@@ -9,7 +9,7 @@ const { currentPage = "home" } = Astro.props;
 <header
     class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#302938] px-4 md:px-10 py-3"
 >
-    <div class="flex items-center gap-4">
+    <a href="/" class="flex items-center gap-4">
         <div class="size-6 text-primary">
             <svg
                 fill="currentColor"
@@ -31,7 +31,7 @@ const { currentPage = "home" } = Astro.props;
         <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">
             Rafael
         </h2>
-    </div>
+    </a>
     <div class="hidden md:flex flex-1 justify-end gap-8">
         <div class="flex items-center gap-9">
             <a
@@ -72,9 +72,71 @@ const { currentPage = "home" } = Astro.props;
             <span class="truncate">Get in Touch</span>
         </a>
     </div>
-    <div class="md:hidden">
-        <button class="p-2">
-            <span class="text-xl">☰</span>
+    <div class="md:hidden relative">
+        <button id="mobile-menu-button" class="p-2" aria-label="Toggle menu">
+            <span id="menu-icon" class="text-xl">☰</span>
         </button>
+
+        <!-- Mobile Menu Dropdown -->
+        <div
+            id="mobile-menu"
+            class="absolute right-0 top-full mt-2 w-48 bg-background border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl opacity-0 invisible transition-all duration-200 ease-in-out z-50"
+        >
+            <nav class="flex flex-col py-2">
+                <a
+                    class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
+                        currentPage === "home" ? "text-primary" : ""
+                    }`}
+                    href="/"
+                >
+                    Home
+                </a>
+                <a
+                    class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
+                        currentPage === "about" ? "text-primary" : ""
+                    }`}
+                    href="/about"
+                >
+                    About
+                </a>
+                <a
+                    class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
+                        currentPage === "projects" ? "text-primary" : ""
+                    }`}
+                    href="/projects"
+                >
+                    Projects
+                </a>
+                <a
+                    class="mx-2 my-2 flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
+                    href="/get-in-touch"
+                >
+                    Get in Touch
+                </a>
+            </nav>
+        </div>
     </div>
 </header>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const button = document.getElementById("mobile-menu-button");
+        const menu = document.getElementById("mobile-menu");
+        const icon = document.getElementById("menu-icon");
+
+        button?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menu?.classList.toggle("opacity-0");
+            menu?.classList.toggle("invisible");
+            if (icon)
+                icon.textContent = menu?.classList.contains("opacity-0")
+                    ? "☰"
+                    : "✕";
+        });
+
+        document.addEventListener("click", () => {
+            menu?.classList.add("opacity-0", "invisible");
+            if (icon) icon.textContent = "☰";
+        });
+    });
+</script>
