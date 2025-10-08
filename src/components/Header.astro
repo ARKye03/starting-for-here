@@ -116,20 +116,3 @@ const { currentPage = "home" } = Astro.props;
         </nav>
     </details>
 </header>
-
-<style>
-    details > nav {
-        animation: fadeIn 200ms ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-4px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
