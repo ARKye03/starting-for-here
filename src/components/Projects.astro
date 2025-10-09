@@ -2,30 +2,30 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
-// Get all projects and sort by date (newest first)
+// Get all projects and sort by date
 const allProjects = await getCollection("projects");
 const projects = allProjects
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-    .slice(0, 3); // Show only 3 most recent
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3); // Show only 3
 ---
 
 <section>
-    <h2
-        class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
-    >
-        My Best Projects
-    </h2>
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-4">
-        {
-            projects.map((project) => (
-                <ProjectCard
-                    title={project.data.title}
-                    description={project.data.description}
-                    slug={project.slug}
-                    tags={project.data.tags}
-                    image={project.data.image}
-                />
-            ))
-        }
-    </div>
+  <h2
+    class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+  >
+    My Best Projects
+  </h2>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-4">
+    {
+      projects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          slug={project.slug}
+          tags={project.data.tags}
+          image={project.data.image}
+        />
+      ))
+    }
+  </div>
 </section>
