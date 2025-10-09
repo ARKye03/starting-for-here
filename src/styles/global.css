@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
-/* Register your custom font family and tell the browser where to find it. */
 @font-face {
     font-family: 'Iosevka';
-    src: url('/fonts/Iosevka-Regular.ttc') format('ttc');
+    src: url('/fonts/IosevkaAile-Regular.ttc') format('ttc');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
