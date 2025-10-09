@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
-:root {
-    color-scheme: dark light;
+/* Register your custom font family and tell the browser where to find it. */
+@font-face {
+    font-family: 'Iosevka';
+    src: url('/fonts/Iosevka-Regular.ttc') format('ttc');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 :root {
+    color-scheme: dark light;
     --color-primary: #8839ef;
     --color-background-dark: #141118;
+    font-family: 'Iosevka';
 }
 
 .text-primary {
