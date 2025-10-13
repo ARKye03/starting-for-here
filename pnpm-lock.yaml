@@ -21,7 +21,7 @@ importers:
         specifier: 6.1.2
         version: 6.1.2
       sharp:
-        specifier: ^0.34.4
+        specifier: 0.34.4
         version: 0.34.4
       tailwindcss:
         specifier: 4.1.14
