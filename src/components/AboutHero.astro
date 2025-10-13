@@ -1,3 +1,8 @@
+---
+import { Image } from "astro:assets";
+import myProfilePic from "@public/profile.webp";
+---
+
 <section class="@container">
     <div
         class="flex flex-col gap-6 px-4 py-16 @[864px]:flex-row-reverse @[864px]:items-center"
@@ -6,10 +11,11 @@
             <div
                 class="w-64 h-64 @[480px]:w-80 @[480px]:h-80 bg-center bg-no-repeat aspect-square bg-cover rounded-full bg-gray-300 dark:bg-gray-700"
             >
-                <img
-                    src="/random_asset.webp"
+                <Image
+                    src={myProfilePic}
                     alt="Design Illustration"
                     class="w-full h-full object-cover rounded-full"
+                    loading="eager"
                 />
             </div>
         </div>
