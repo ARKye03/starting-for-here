@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -30,11 +31,14 @@ const transitionName = `project-${project.slug}`;
             {
                 project.data.image && (
                     <div class="mb-6 rounded-lg overflow-hidden">
-                        <img
+                        <Image
                             src={`/projects/${project.data.image}`}
                             alt={project.data.title}
                             class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
                             transition:name={transitionName}
+                            width={800}
+                            height={400}
+                            loading="eager"
                         />
                     </div>
                 )
