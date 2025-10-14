@@ -11,14 +11,23 @@ const { currentPage = "home" } = Astro.props;
 <header
   class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#302938] px-4 md:px-10 py-3"
 >
-  <a href="/" class="flex items-center gap-4">
+  <a href="/" class="flex items-center gap-4 group">
     <div class="size-6 text-primary">
       <!-- I don't like this bottom/right thing, but hey, looks fine on mobile and web so 11/10 -->
       <Logo class="relative w-10 h-10 bottom-2 right-3" />
     </div>
-    <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">
-      Rafael Sanchez Martinez
-    </h2>
+    <div class="relative overflow-hidden">
+      <h2
+        class="text-lg font-bold leading-tight tracking-[-0.015em] transition-transform duration-300 group-hover:-translate-y-full"
+      >
+        Rafael Sanchez Martinez
+      </h2>
+      <span
+        class="absolute top-0 left-0 text-lg font-bold leading-tight tracking-[-0.015em] text-primary transform translate-y-full transition-transform duration-300 group-hover:translate-y-0"
+      >
+        aka ARKye03
+      </span>
+    </div>
   </a>
   <div class="hidden md:flex flex-1 justify-end gap-8">
     <div class="flex items-center gap-9">
