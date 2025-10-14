@@ -1,3 +1,8 @@
+---
+import { Image } from "astro:assets";
+import myProfilePic from "@public/profile.webp";
+---
+
 <section class="@container">
   <div
     class="flex flex-col-reverse gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row items-center"
@@ -39,10 +44,12 @@
     <div
       class="w-full max-w-[300px] @[864px]:max-w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full bg-gray-300 dark:bg-gray-700"
     >
-      <img
-        src="/arkye03.webp"
+      <Image
+        src={myProfilePic}
         alt="Profile"
         class="w-full h-full object-cover rounded-full"
+        loading="eager"
+        transition:name="myProfilePic"
       />
     </div>
   </div>
