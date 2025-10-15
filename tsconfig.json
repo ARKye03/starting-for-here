@@ -9,9 +9,6 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@public/*": [
-        "./public/*"
-      ],
       "@assets/*": [
         "./src/assets/*"
       ],
