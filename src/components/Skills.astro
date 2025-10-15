@@ -1,3 +1,18 @@
+---
+import { Image } from "astro:assets";
+
+import angularSvg from "@assets/aboutSVGs/brand-angular.svg";
+import astroSvg from "@assets/aboutSVGs/brand-astro.svg";
+import reactSvg from "@assets/aboutSVGs/brand-react.svg";
+import dotnetSvg from "@assets/aboutSVGs/dotnet-tile.svg";
+import sqlSvg from "@assets/aboutSVGs/sql.svg";
+import javascriptSvg from "@assets/aboutSVGs/brand-javascript.svg";
+import typescriptSvg from "@assets/aboutSVGs/brand-typescript.svg";
+import desktopSvg from "@assets/aboutSVGs/device-imac.svg";
+import gitSvg from "@assets/aboutSVGs/brand-git.svg";
+import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
+---
+
 <section>
   <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
     My Skills
@@ -31,87 +46,52 @@
 </section>
 
 <section>
-  <h2
-    class="text-white text-3xl font-serif font-bold leading-tight px-4 pb-3 pt-10"
-  >
+  <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
     My Tech Stack
   </h2>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-8">
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img src="/aboutSVGs/brand-angular.svg" alt="Angular" loading="lazy" />
+      <Image src={angularSvg} alt="Angular" loading="lazy" />
       <p class="text-white text-base font-medium">Angular</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/brand-astro.svg"
-        alt="Astro"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={astroSvg} alt="Astro" loading="lazy" />
       <p class="text-white text-base font-medium">Astro</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/brand-react.svg"
-        alt="React"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={reactSvg} alt="React" loading="lazy" />
       <p class="text-white text-base font-medium">React</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/dotnet-tile.svg"
-        alt=".NET"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={awsSvg} alt="AWS" loading="lazy" />
+      <p class="text-white text-base font-medium">AWS</p>
+    </div>
+    <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
+      <Image src={dotnetSvg} alt=".NET" loading="lazy" />
       <p class="text-white text-base font-medium">.NET</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img src="/aboutSVGs/sql.svg" alt="SQL" class="w-6 h-6" loading="lazy" />
+      <Image src={sqlSvg} alt="SQL" loading="lazy" />
       <p class="text-white text-base font-medium">SQL Databases</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/brand-javascript.svg"
-        alt="JavaScript"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={javascriptSvg} alt="JavaScript" loading="lazy" />
       <p class="text-white text-base font-medium">JavaScript</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/brand-typescript.svg"
-        alt="TypeScript"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={typescriptSvg} alt="TypeScript" loading="lazy" />
       <p class="text-white text-base font-medium">TypeScript</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/device-imac.svg"
-        alt="Desktop Apps"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={desktopSvg} alt="Desktop Apps" loading="lazy" />
       <p class="text-white text-base font-medium">Desktop Apps</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <img
-        src="/aboutSVGs/brand-git.svg"
-        alt="Git"
-        class="w-6 h-6"
-        loading="lazy"
-      />
+      <Image src={gitSvg} alt="Git" loading="lazy" />
       <p class="text-white text-base font-medium">Git</p>
     </div>
   </div>
-  <h2
-    class="text-white text-3xl font-serif font-bold leading-tight px-4 pb-3 pt-10"
-  >
+  <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
     Languages
   </h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 py-8">
