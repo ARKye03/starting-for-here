@@ -11,6 +11,8 @@ import typescriptSvg from "@assets/aboutSVGs/brand-typescript.svg";
 import desktopSvg from "@assets/aboutSVGs/device-imac.svg";
 import gitSvg from "@assets/aboutSVGs/brand-git.svg";
 import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
+import cfSvg from "@assets/aboutSVGs/brand-cloudflare.svg";
+import gnomeSvg from "@assets/aboutSVGs/brand-gnome.svg";
 ---
 
 <section>
@@ -51,6 +53,14 @@ import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
   </h2>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-8">
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
+      <Image src={cfSvg} alt="Cloudflare" loading="lazy" />
+      <p class="text-white text-base font-medium">Cloudflare</p>
+    </div>
+    <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
+      <Image src={awsSvg} alt="AWS" loading="lazy" />
+      <p class="text-white text-base font-medium">AWS</p>
+    </div>
+    <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <Image src={angularSvg} alt="Angular" loading="lazy" />
       <p class="text-white text-base font-medium">Angular</p>
     </div>
@@ -61,10 +71,6 @@ import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <Image src={reactSvg} alt="React" loading="lazy" />
       <p class="text-white text-base font-medium">React</p>
-    </div>
-    <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
-      <Image src={awsSvg} alt="AWS" loading="lazy" />
-      <p class="text-white text-base font-medium">AWS</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <Image src={dotnetSvg} alt=".NET" loading="lazy" />
@@ -81,6 +87,10 @@ import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <Image src={typescriptSvg} alt="TypeScript" loading="lazy" />
       <p class="text-white text-base font-medium">TypeScript</p>
+    </div>
+    <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
+      <Image src={gnomeSvg} alt="Gnome Tools" loading="lazy" width={24} />
+      <p class="text-white text-base font-medium">Gnome Tools</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <Image src={desktopSvg} alt="Desktop Apps" loading="lazy" />
