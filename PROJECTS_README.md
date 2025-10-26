@@ -1,4 +1,5 @@
 <!-- Generated with AI to reproduce it with other AIs lol, remember this -->
+
 # Adding New Projects
 
 ## Quick Start
@@ -17,7 +18,7 @@ title: "My Awesome Project"
 description: "A brief one-line description of the project"
 date: 2024-03-15
 featured: true
-tags: ["Web Design", "React", "TypeScript"]
+tags: ["Tag1", "Tag2", "Tag3"]
 url: "https://example.com/live-project"
 github: "https://github.com/username/project"
 ---
@@ -45,16 +46,18 @@ Share the outcomes and impact of the project.
 ## Frontmatter Fields
 
 ### Required Fields
+
 - **title**: The project name (string)
 - **description**: A one-line summary (string)
 - **date**: Publication date in YYYY-MM-DD format (date)
 
 ### Optional Fields
+
 - **featured**: Set to `true` to highlight the project (boolean, default: false)
 - **tags**: Array of technology/category tags (array of strings)
 - **url**: Live project URL (string, must be valid URL)
 - **github**: GitHub repository URL (string, must be valid URL)
-- **image**: Path to project image (string) - *coming soon*
+- **image**: Path to project image (string) - _coming soon_
 
 ## How It Works
 
