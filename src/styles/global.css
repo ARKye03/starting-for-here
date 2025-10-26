@@ -1,55 +1,55 @@
 @import "tailwindcss";
 
 :root {
-    color-scheme: only dark;
-    --color-primary: #8839ef;
-    --color-background-dark: #141118;
+  color-scheme: only dark;
+  --color-primary: #8839ef;
+  --color-background-dark: #141118;
 }
 
 .text-primary {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .bg-primary {
-    background-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 .bg-primary-90 {
-    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
 }
 
 .bg-primary-90 {
-    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
 }
 
 .bg-primary-80 {
-    background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
 }
 
 .bg-primary-30 {
-    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
 }
 
 .bg-primary-20 {
-    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
 .hover\:text-primary:hover {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .hover\:bg-primary-90:hover {
-    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
 }
 
 .hover\:bg-primary-90:hover {
-    background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 90%, transparent);
 }
 
 .hover\:bg-primary-30:hover {
-    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
 }
 
 .bg-background {
-    background-color: var(--color-background-dark);
+  background-color: var(--color-background-dark);
 }
