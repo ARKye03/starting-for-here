@@ -4,4 +4,4 @@ Created with the best Framework ever - [Astro](https://astro.build/), deployed o
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
