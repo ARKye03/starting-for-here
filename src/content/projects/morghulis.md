@@ -3,7 +3,16 @@ title: "Morghulis Desktop Shell"
 description: "A lightweight, hackable Wayland desktop shell that bridges minimal compositors like Hyprland and River with everyday desktop comforts."
 date: 2024-06-24
 featured: true
-tags: ["Wayland", "Linux", "Desktop Shell", "Hyprland", "River", "Vala", "Open Source"]
+tags:
+  [
+    "Wayland",
+    "Linux",
+    "Desktop Shell",
+    "Hyprland",
+    "River",
+    "Vala",
+    "Open Source",
+  ]
 github: "https://github.com/ARKye03/morghulis"
 image: "morghulis.webp"
 ---
