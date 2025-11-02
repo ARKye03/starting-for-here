@@ -4,7 +4,7 @@ description: "Portfolio website for me, showcasing my projects and services."
 date: 2025-10-01
 featured: true
 tags: ["Astro", "Tailwind CSS", "Web Design"]
-url: "https://starting-for-here.vercel.app/"
+url: "https://buildwitharkye.me/"
 image: "portfolio.webp"
 ---
 

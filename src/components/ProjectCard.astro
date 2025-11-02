@@ -1,10 +1,10 @@
 ---
 export interface Props {
-    title: string;
-    description: string;
-    slug?: string;
-    tags?: string[];
-    image?: string;
+  title: string;
+  description: string;
+  slug?: string;
+  tags?: string[];
+  image?: string;
 }
 
 const { title, description, slug, tags, image } = Astro.props;
@@ -14,31 +14,31 @@ const transitionName = `project-${slug}`;
 ---
 
 <a
-    href={projectUrl}
-    class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent no-underline project-card"
-    style={backgroundImage
-        ? `background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${backgroundImage}'); view-transition-name: ${transitionName};`
-        : ""}
-    transition:name={transitionName}
+  href={projectUrl}
+  class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent no-underline project-card"
+  style={backgroundImage
+    ? `background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${backgroundImage}'); view-transition-name: ${transitionName};`
+    : ""}
+  transition:name={transitionName}
 >
-    <p class="text-white text-base font-bold leading-tight line-clamp-2">
-        {title}
-    </p>
-    {
-        tags && tags.length > 0 && (
-            <div class="flex gap-2 flex-wrap">
-                {tags.slice(0, 2).map((tag) => (
-                    <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-        )
-    }
-    <div
-        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style="background-color: rgba(0, 0, 0, 0.6);"
-    >
-        <span class="text-white font-bold text-lg">View Project</span>
-    </div>
+  <p class="text-white text-base font-bold leading-tight line-clamp-2">
+    {title}
+  </p>
+  {
+    tags && tags.length > 0 && (
+      <div class="flex gap-2 flex-wrap">
+        {tags.slice(0, 2).map((tag) => (
+          <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+  <div
+    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    style="background-color: rgba(0, 0, 0, 0.6);"
+  >
+    <span class="text-white font-bold text-lg">View Project</span>
+  </div>
 </a>
