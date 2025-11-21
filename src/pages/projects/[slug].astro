@@ -103,6 +103,11 @@ const transitionName = `project-${project.slug}`;
 </Layout>
 
 <style>
+  .image-fade-mask {
+    mask-image: linear-gradient(to top, transparent 0%, black 20%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+  }
+
   /* Prose styles for markdown content */
   :global(.prose) {
     color: inherit;
