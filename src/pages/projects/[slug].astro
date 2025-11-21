@@ -34,7 +34,7 @@ const transitionName = `project-${project.slug}`;
             <Image
               src={`/projects/${project.data.image}`}
               alt={project.data.title}
-              class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+              class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300 image-fade-mask"
               transition:name={transitionName}
               width={800}
               height={400}
@@ -103,6 +103,11 @@ const transitionName = `project-${project.slug}`;
 </Layout>
 
 <style>
+  .image-fade-mask {
+    mask-image: linear-gradient(to top, transparent 0%, black 20%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+  }
+
   /* Prose styles for markdown content */
   :global(.prose) {
     color: inherit;

@@ -2,11 +2,13 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
-// Get all projects and sort by date
+// Define pinned projects in desired order
+const pinnedProjectSlugs = ["morghulis", "portfolio", "moogle"];
+
 const allProjects = await getCollection("projects");
-const projects = allProjects
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3); // Show only 3
+const projects = pinnedProjectSlugs
+  .map((slug) => allProjects.find((project) => project.slug === slug))
+  .filter((project) => project !== undefined);
 ---
 
 <section>
