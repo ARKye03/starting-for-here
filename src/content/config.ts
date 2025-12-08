@@ -5,7 +5,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    image: z.string().optional(), // Path relative to /public/projects/
+    images: z.array(z.string()).optional(), // Array of paths relative to /public/projects/
     tags: z.array(z.string()).optional(),
     url: z.string().url().optional(),
     github: z.string().url().optional(),

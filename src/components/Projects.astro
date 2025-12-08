@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
 // Define pinned projects in desired order
-const pinnedProjectSlugs = ["morghulis", "portfolio", "moogle"];
+const pinnedProjectSlugs = ["larasdelitesse", "morghulis", "portfolio"];
 
 const allProjects = await getCollection("projects");
 const projects = pinnedProjectSlugs
@@ -25,7 +25,7 @@ const projects = pinnedProjectSlugs
           description={project.data.description}
           slug={project.slug}
           tags={project.data.tags}
-          image={project.data.image}
+          image={project.data.images?.[0]}
         />
       ))
     }
