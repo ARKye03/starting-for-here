@@ -5,7 +5,7 @@ date: 2025-10-01
 featured: true
 tags: ["Astro", "Tailwind CSS", "Web Design"]
 url: "https://buildwitharkye.me/"
-image: "portfolio.webp"
+images: ["portfolio.webp"]
 ---
 
 ## Overview
