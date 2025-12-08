@@ -5,7 +5,7 @@ import ProjectCard from "@components/ProjectCard.astro";
 
 const allProjects = await getCollection("projects");
 const projects = allProjects.sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 ---
 
@@ -28,7 +28,7 @@ const projects = allProjects.sort(
             description={project.data.description}
             slug={project.slug}
             tags={project.data.tags}
-            image={project.data.image}
+            image={project.data.images?.[0]}
           />
         ))
       }
