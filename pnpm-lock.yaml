@@ -26,10 +26,6 @@ importers:
       tailwindcss:
         specifier: 4.1.14
         version: 4.1.14
-    devDependencies:
-      sass:
-        specifier: ^1.94.2
-        version: 1.94.2
 
 packages:
 
@@ -3164,7 +3160,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  immutable@5.1.4: {}
+  immutable@5.1.4:
+    optional: true
 
   import-meta-resolve@4.2.0: {}
 
@@ -3864,6 +3861,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   semver@7.7.2: {}
 
