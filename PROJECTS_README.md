@@ -21,6 +21,7 @@ featured: true
 tags: ["Tag1", "Tag2", "Tag3"]
 url: "https://example.com/live-project"
 github: "https://github.com/username/project"
+images: ["image1.png", "image2.png"]
 ---
 
 ## Project Overview

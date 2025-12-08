@@ -14,7 +14,7 @@ tags:
     "Open Source",
   ]
 github: "https://github.com/ARKye03/morghulis"
-image: "morghulis.webp"
+images: ["morghulis.webp"]
 ---
 
 ## What This Is (Plain Words)
