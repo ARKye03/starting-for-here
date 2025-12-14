@@ -5,7 +5,7 @@ date: 2025-12-05
 featured: true
 tags: ["Laravel", "ReactJS","PHP", "Full Stack", "E-Commerce"]
 github: "https://github.com/ARKye03/larasdelitesse"
-images: ["larasdelitesseDashboard.webp", "larasdelitesseShopping.webp"]
+images: ["larasImages/laras1.webp", "larasImages/laras2.webp", "larasImages/laras3.webp", "larasImages/laras4.webp", "larasImages/laras5.webp"]
 ---
 
 ## Project Overview
