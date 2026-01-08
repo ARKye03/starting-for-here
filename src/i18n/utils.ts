@@ -31,3 +31,9 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   return path;
 }
+
+export function getAlternateLangUrl(url: URL, targetLang: Language): string {
+  const currentLang = getLangFromUrl(url);
+  const path = url.pathname.replace(`/${currentLang}`, '');
+  return `/${targetLang}${path || '/'}`;
+}
