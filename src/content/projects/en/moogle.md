@@ -6,6 +6,7 @@ featured: true
 tags: ["ReactJS", ".NET", "Information Retrieval", "Full Stack", "Search Engine", "Cosine Similarity"]
 github: "https://github.com/ARKye03/Moogle"
 images: ["moogle.webp"]
+lang: "en"
 ---
 
 ## Project Overview

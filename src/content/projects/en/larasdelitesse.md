@@ -6,6 +6,7 @@ featured: true
 tags: ["Laravel", "ReactJS","PHP", "Full Stack", "E-Commerce"]
 github: "https://github.com/ARKye03/larasdelitesse"
 images: ["larasImages/laras1.webp", "larasImages/laras2.webp", "larasImages/laras3.webp", "larasImages/laras4.webp", "larasImages/laras5.webp"]
+lang: "en"
 ---
 
 ## Project Overview
@@ -14,7 +15,6 @@ images: ["larasImages/laras1.webp", "larasImages/laras2.webp", "larasImages/lara
 
 ## Key Features
 
-- Project content managed via Markdown files
 - Automatic page generation and listing per project
 - Frontmatter for rich project metadata (tags, images, URLs, etc.)
 - Integration with ReactJS for dynamic content

@@ -15,9 +15,13 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const allProjects = await getCollection("projects");
-const projects = allProjects.sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+const projects = allProjects
+    .filter((project) => project.id.startsWith(`${lang}/`))
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .map((project) => ({
+        ...project,
+        slug: project.id.split("/").slice(1).join("/"),
+    }));
 ---
 
 <Layout title={t("page.projects.title")} currentPage="projects" lang={lang}>

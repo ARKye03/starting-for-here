@@ -6,6 +6,7 @@ featured: true
 tags: ["Astro", "Tailwind CSS", "Web Design"]
 url: "https://buildwitharkye.me/"
 images: ["portfolio.webp"]
+lang: "en"
 ---
 
 ## Overview

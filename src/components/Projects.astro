@@ -6,13 +6,19 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Define pinned projects in desired order
+// Define pinned projects in desired order (without lang prefix)
 const pinnedProjectSlugs = ["larasdelitesse", "morghulis", "portfolio"];
 
 const allProjects = await getCollection("projects");
 const projects = pinnedProjectSlugs
-  .map((slug) => allProjects.find((project) => project.slug === slug))
-  .filter((project) => project !== undefined);
+  .map((slug) =>
+    allProjects.find((project) => project.id === `${lang}/${slug}`),
+  )
+  .filter((project) => project !== undefined)
+  .map((project) => ({
+    ...project,
+    slug: project.id.split("/").slice(1).join("/"),
+  }));
 ---
 
 <section>

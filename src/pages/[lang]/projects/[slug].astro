@@ -7,14 +7,17 @@ import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
-    const langs = Object.keys(languages);
 
-    return langs.flatMap((lang) =>
-        projects.map((project) => ({
-            params: { lang, slug: project.slug },
+    return projects.map((project) => {
+        // ID is like "en/slug" or "es/slug"
+        const [lang, ...slugParts] = project.id.split("/");
+        const slug = slugParts.join("/");
+
+        return {
+            params: { lang, slug },
             props: { project },
-        })),
-    );
+        };
+    });
 }
 
 const lang = getLangFromUrl(Astro.url);

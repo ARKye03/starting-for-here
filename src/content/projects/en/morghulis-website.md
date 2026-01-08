@@ -7,6 +7,7 @@ tags: ["Astro", "GSAP", "TailwindCSS"]
 url: "https://morghulis.vercel.app"
 github: "https://github.com/ARKye03/morghulis-website"
 images: ["morghulisWeb.webp"]
+lang: "en"
 ---
 
 ## Project Overview
