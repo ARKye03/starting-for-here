@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AboutHero from "@components/AboutHero.astro";
+import Journey from "@components/Journey.astro";
+import Skills from "@components/Skills.astro";
+import Philosophy from "@components/Philosophy.astro";
+import CallToAction from "@components/CallToAction.astro";
+import { languages } from "../../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang },
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t("page.about.title")} currentPage="about" lang={lang}>
+    <AboutHero />
+    <Philosophy />
+    <Journey />
+    <Skills />
+    <CallToAction />
+</Layout>
