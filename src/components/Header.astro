@@ -24,7 +24,7 @@ const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
 ---
 
 <header
-  class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#302938] px-4 md:px-10 py-3"
+  class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#302938] px-4 md:px-10 py-3 backdrop-blur-md"
 >
   <a href={getUrl("/")} class="flex items-center gap-4 group">
     <div class="size-6 text-primary">
