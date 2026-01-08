@@ -1,8 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+// Detect language from URL, fallback to 'en' if not found
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Helper function to generate language-aware URLs
+const getUrl = (path: string) => `/${lang}${path}`;
 ---
 
-<Layout title="Page Not Found - Portfolio">
+<Layout title={t("404.title")} lang={lang}>
   <div
     class="flex flex-col items-center justify-center min-h-[80vh] text-center px-4"
   >
@@ -13,51 +21,50 @@ import Layout from "../layouts/Layout.astro";
         <h1
           class="text-4xl font-black leading-tight tracking-[-0.033em] text-gray-900 dark:text-white"
         >
-          Page Not Found
+          {t("404.title")}
         </h1>
         <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-          Oops! The page you're looking for seems to have wandered off. Don't
-          worry, even the best designs sometimes take unexpected turns.
+          {t("404.message")}
         </p>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="/"
+          href={getUrl("/")}
           class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
         >
-          <span class="truncate">Back to Home</span>
+          <span class="truncate">{t("404.backHome")}</span>
         </a>
         <a
-          href="/about"
+          href={getUrl("/about")}
           class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary-20 text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-30 transition-colors"
         >
-          <span class="truncate">Learn About Me</span>
+          <span class="truncate">{t("404.learnAbout")}</span>
         </a>
       </div>
 
       <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Looking for something specific?
+          {t("404.lookingFor")}
         </p>
         <div class="flex flex-wrap justify-center gap-4 text-sm">
           <a
-            href="/"
+            href={getUrl("/projects")}
             class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
           >
-            Projects
+            {t("nav.projects")}
           </a>
           <a
-            href="/about"
+            href={getUrl("/about")}
             class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
           >
-            About
+            {t("nav.about")}
           </a>
           <a
-            href="/get-in-touch"
+            href={getUrl("/get-in-touch")}
             class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
           >
-            Contact
+            {t("nav.contact")}
           </a>
         </div>
       </div>
