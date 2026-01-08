@@ -1,17 +1,23 @@
 ---
 import Logo from "@assets/logo.svg";
+import { useTranslations, type Language } from "../i18n/utils";
 
 export interface Props {
   currentPage?: "home" | "about" | "projects" | "contact";
+  lang?: Language;
 }
 
-const { currentPage = "home" } = Astro.props;
+const { currentPage = "home", lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+
+// Helper function to generate language-aware URLs
+const getUrl = (path: string) => `/${lang}${path}`;
 ---
 
 <header
   class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#302938] px-4 md:px-10 py-3"
 >
-  <a href="/" class="flex items-center gap-4 group">
+  <a href={getUrl("/")} class="flex items-center gap-4 group">
     <div class="size-6 text-primary">
       <!-- I don't like this bottom/right thing, but hey, looks fine on mobile and web so 11/10 -->
       <Logo class="relative w-10 h-10 bottom-2 right-3" />
@@ -35,32 +41,32 @@ const { currentPage = "home" } = Astro.props;
         class={`text-sm font-medium leading-normal transition-colors ${
           currentPage === "home" ? "text-primary" : "hover:text-primary"
         }`}
-        href="/"
+        href={getUrl("/")}
       >
-        Home
+        {t("nav.home")}
       </a>
       <a
         class={`text-sm font-medium leading-normal transition-colors ${
           currentPage === "about" ? "text-primary" : "hover:text-primary"
         }`}
-        href="/about"
+        href={getUrl("/about")}
       >
-        About
+        {t("nav.about")}
       </a>
       <a
         class={`text-sm font-medium leading-normal transition-colors ${
           currentPage === "projects" ? "text-primary" : "hover:text-primary"
         }`}
-        href="/projects"
+        href={getUrl("/projects")}
       >
-        Projects
+        {t("nav.projects")}
       </a>
     </div>
     <a
       class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
-      href="/get-in-touch"
+      href={getUrl("/get-in-touch")}
     >
-      <span class="truncate">Get in Touch</span>
+      <span class="truncate">{t("nav.contact")}</span>
     </a>
   </div>
   <details class="md:hidden relative group">
@@ -77,31 +83,31 @@ const { currentPage = "home" } = Astro.props;
           class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
             currentPage === "home" ? "text-primary" : ""
           }`}
-          href="/"
+          href={getUrl("/")}
         >
-          Home
+          {t("nav.home")}
         </a>
         <a
           class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
             currentPage === "about" ? "text-primary" : ""
           }`}
-          href="/about"
+          href={getUrl("/about")}
         >
-          About
+          {t("nav.about")}
         </a>
         <a
           class={`px-4 py-3 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${
             currentPage === "projects" ? "text-primary" : ""
           }`}
-          href="/projects"
+          href={getUrl("/projects")}
         >
-          Projects
+          {t("nav.projects")}
         </a>
         <a
           class="mx-2 my-2 flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
-          href="/get-in-touch"
+          href={getUrl("/get-in-touch")}
         >
-          Get in Touch
+          {t("nav.contact")}
         </a>
       </div>
     </nav>
