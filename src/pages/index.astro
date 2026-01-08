@@ -1,10 +1,6 @@
 ---
-import Hero from "@components/Hero.astro";
-import Projects from "@components/Projects.astro";
-import Layout from "../layouts/Layout.astro";
----
+import { defaultLang } from "../i18n/ui";
 
-<Layout title="Rafael Sanchez - Software Developer" currentPage="home">
-  <Hero />
-  <Projects />
-</Layout>
+// Redirect root to default language
+return Astro.redirect(`/${defaultLang}/`);
+---

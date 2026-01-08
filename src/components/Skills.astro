@@ -13,43 +13,53 @@ import gitSvg from "@assets/aboutSVGs/brand-git.svg";
 import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
 import cfSvg from "@assets/aboutSVGs/brand-cloudflare.svg";
 import gnomeSvg from "@assets/aboutSVGs/brand-gnome.svg";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section>
   <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
-    My Skills
+    {t("about.skills.title")}
   </h2>
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4 px-4 py-8">
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">🎨</span>
-      <p class="text-white text-base font-medium">UI/UX Design</p>
+      <p class="text-white text-base font-medium">{t("about.skills.uiux")}</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">🐧</span>
-      <p class="text-white text-base font-medium">Linux</p>
+      <p class="text-white text-base font-medium">{t("about.skills.linux")}</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">💻</span>
-      <p class="text-white text-base font-medium">Prototyping</p>
+      <p class="text-white text-base font-medium">
+        {t("about.skills.prototype")}
+      </p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">👥</span>
-      <p class="text-white text-base font-medium">User Research</p>
+      <p class="text-white text-base font-medium">
+        {t("about.skills.research")}
+      </p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">🗣️</span>
-      <p class="text-white text-base font-medium">Communication</p>
+      <p class="text-white text-base font-medium">{t("about.skills.comm")}</p>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
       <span class="text-primary text-2xl">💡</span>
-      <p class="text-white text-base font-medium">Problem Solving</p>
+      <p class="text-white text-base font-medium">
+        {t("about.skills.problem")}
+      </p>
     </div>
   </div>
 </section>
 
 <section>
   <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
-    My Tech Stack
+    {t("about.skills.stack")}
   </h2>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-8">
     <div class="bg-[#191121] p-4 rounded-lg flex items-center gap-3">
@@ -102,26 +112,26 @@ import gnomeSvg from "@assets/aboutSVGs/brand-gnome.svg";
     </div>
   </div>
   <h2 class="text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
-    Languages
+    {t("about.skills.languages")}
   </h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 py-8">
     <div class="bg-[#191121] p-4 rounded-lg flex flex-col items-start gap-2">
-      <p class="text-white text-lg font-medium">Spanish</p>
-      <p class="text-slate-300 text-sm">Native</p>
+      <p class="text-white text-lg font-medium">{t("about.skills.spanish")}</p>
+      <p class="text-slate-300 text-sm">{t("about.skills.native")}</p>
       <div class="w-full bg-[#302938] rounded-full h-2 mt-1">
         <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
       </div>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex flex-col items-start gap-2">
-      <p class="text-white text-lg font-medium">English</p>
-      <p class="text-slate-300 text-sm">Fluent</p>
+      <p class="text-white text-lg font-medium">{t("about.skills.english")}</p>
+      <p class="text-slate-300 text-sm">{t("about.skills.fluent")}</p>
       <div class="w-full bg-[#302938] rounded-full h-2 mt-1">
         <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
       </div>
     </div>
     <div class="bg-[#191121] p-4 rounded-lg flex flex-col items-start gap-2">
-      <p class="text-white text-lg font-medium">German</p>
-      <p class="text-slate-300 text-sm">Basic</p>
+      <p class="text-white text-lg font-medium">{t("about.skills.german")}</p>
+      <p class="text-slate-300 text-sm">{t("about.skills.basic")}</p>
       <div class="w-full bg-[#302938] rounded-full h-2 mt-1">
         <div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
       </div>
