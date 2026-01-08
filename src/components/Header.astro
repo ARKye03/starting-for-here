@@ -1,6 +1,11 @@
 ---
 import Logo from "@assets/logo.svg";
-import { useTranslations, type Language } from "../i18n/utils";
+import {
+  useTranslations,
+  getAlternateLangUrl,
+  type Language,
+} from "../i18n/utils";
+import { languages } from "../i18n/ui";
 
 export interface Props {
   currentPage?: "home" | "about" | "projects" | "contact";
@@ -12,6 +17,10 @@ const t = useTranslations(lang);
 
 // Helper function to generate language-aware URLs
 const getUrl = (path: string) => `/${lang}${path}`;
+
+// Get alternate language (switch between en/es)
+const alternateLang = lang === "en" ? "es" : "en";
+const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
 ---
 
 <header
@@ -68,6 +77,18 @@ const getUrl = (path: string) => `/${lang}${path}`;
     >
       <span class="truncate">{t("nav.contact")}</span>
     </a>
+    <!-- Language Switcher -->
+    <div
+      class="flex items-center border-l border-gray-200 dark:border-[#302938] ml-2 pl-6"
+    >
+      <a
+        href={alternateLangUrl}
+        class="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary transition-colors"
+        title={`Switch to ${languages[alternateLang]}`}
+      >
+        {alternateLang}
+      </a>
+    </div>
   </div>
   <details class="md:hidden relative group">
     <summary class="p-2 cursor-pointer list-none" aria-label="Toggle menu">
@@ -109,6 +130,18 @@ const getUrl = (path: string) => `/${lang}${path}`;
         >
           {t("nav.contact")}
         </a>
+        <!-- Language Switcher -->
+        <div
+          class="px-4 py-3 mt-2 border-t border-gray-100 dark:border-gray-800"
+        >
+          <a
+            href={alternateLangUrl}
+            class="text-sm font-medium text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors flex items-center gap-2"
+          >
+            <span>🌐</span>
+            <span class="uppercase">{languages[alternateLang]}</span>
+          </a>
+        </div>
       </div>
     </nav>
   </details>
