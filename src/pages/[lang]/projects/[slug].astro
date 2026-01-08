@@ -9,9 +9,9 @@ export async function getStaticPaths() {
     const projects = await getCollection("projects");
 
     return projects.map((project) => {
-        // ID is like "en/slug" or "es/slug"
+        // ID is like "en/slug.md" or "es/slug.md"
         const [lang, ...slugParts] = project.id.split("/");
-        const slug = slugParts.join("/");
+        const slug = slugParts.join("/").replace(/\.[^/.]+$/, "");
 
         return {
             params: { lang, slug },
