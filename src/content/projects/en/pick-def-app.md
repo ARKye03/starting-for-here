@@ -6,6 +6,7 @@ featured: false
 tags: ["Rust", "GTK4", "Libadwaita", "Linux", "Desktop"]
 github: "https://github.com/ARKye03/pick_def_app"
 images: ["pick-def-app.webp"]
+lang: "en"
 ---
 
 ## Overview

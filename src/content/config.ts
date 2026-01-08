@@ -11,6 +11,7 @@ const projects = defineCollection({
     github: z.string().url().optional(),
     featured: z.boolean().default(false),
     date: z.date(),
+    lang: z.enum(["en", "es"]).default("en"),
   }),
 });
 

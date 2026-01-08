@@ -15,6 +15,7 @@ tags:
   ]
 github: "https://github.com/ARKye03/morghulis"
 images: ["morghulis.webp"]
+lang: "en"
 ---
 
 ## What This Is (Plain Words)
