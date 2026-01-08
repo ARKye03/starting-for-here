@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import myProfilePic from "@assets/profile.webp";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="@container">
@@ -14,30 +18,28 @@ import myProfilePic from "@assets/profile.webp";
         <h1
           class="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl"
         >
-          Software Developer
+          {t("hero.title")}
         </h1>
         <h2
           class="text-sm font-normal leading-normal @[480px]:text-base text-gray-600 dark:text-gray-300"
         >
-          I design and code beautifully simple things, and I love what I do. I'm
-          a passionate developer with a knack for creating elegant and effective
-          solutions.
+          {t("hero.subtitle")}
         </h2>
       </div>
       <div
         class="flex flex-col @[480px]:flex-row gap-4 justify-center @[864px]:justify-start"
       >
         <a
-          href="/projects"
+          href={`/${lang}/projects`}
           class="flex min-w-[84px] w-full @[480px]:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
         >
-          <span class="truncate">View All Projects</span>
+          <span class="truncate">{t("hero.viewProjects")}</span>
         </a>
         <a
-          href="/about"
+          href={`/${lang}/about`}
           class="flex min-w-[84px] w-full @[480px]:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary-20 text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-30 transition-colors"
         >
-          <span class="truncate">About Me</span>
+          <span class="truncate">{t("hero.aboutMe")}</span>
         </a>
       </div>
     </div>

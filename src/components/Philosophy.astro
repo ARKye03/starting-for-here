@@ -1,29 +1,26 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <section>
   <h2 class="dark:text-white text-3xl font-bold leading-tight px-4 pb-3 pt-10">
-    Who I Am
+    {t("about.philosophy.title")}
   </h2>
   <div class="px-4 py-8 space-y-4">
     <p class="dark:text-slate-300 text-lg leading-relaxed">
-      I am a software developer committed to building scalable, efficient
-      solutions. I embrace challenges as opportunities to expand my capabilities
-      and deliver measurable impact.
+      {t("about.philosophy.p1")}
     </p>
     <p class="dark:text-slate-300 text-lg leading-relaxed">
-      I excel in collaborative environments where rigorous problem-solving,
-      knowledge sharing, and innovation drive results. I stay current with
-      emerging technologies and industry best practices, applying them
-      strategically to solve complex challenges.
+      {t("about.philosophy.p2")}
     </p>
     <p class="dark:text-slate-300 text-lg leading-relaxed">
-      I'm seeking a role where I can contribute to a team that prioritizes
-      technical excellence, continuous improvement, and professional growth. My
-      foundation in computer science and hands-on experience through personal
-      projects and freelance work has equipped me to make immediate
-      contributions.
+      {t("about.philosophy.p3")}
     </p>
     <p class="dark:text-slate-300 text-lg leading-relaxed">
-      I'm driven by the opportunity to create meaningful solutions and grow as
-      an engineer in a dynamic, forward-thinking environment.
+      {t("about.philosophy.p4")}
     </p>
   </div>
 </section>
