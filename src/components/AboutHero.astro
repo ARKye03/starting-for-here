@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import myProfilePic from "@assets/profile.webp";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="@container">
@@ -25,14 +29,14 @@ import myProfilePic from "@assets/profile.webp";
         <h1
           class="dark:text-white text-4xl font-bold leading-tight @[480px]:text-5xl"
         >
-          Designing with purpose and passion.
+          {t("about.hero.title")}
         </h1>
       </div>
       <a
         class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors mx-auto @[864px]:mx-0"
-        href="/projects"
+        href={`/${lang}/projects`}
       >
-        <span class="truncate">View My Work</span>
+        <span class="truncate">{t("hero.viewProjects")}</span>
       </a>
     </div>
   </div>

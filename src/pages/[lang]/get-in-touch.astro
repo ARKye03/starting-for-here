@@ -22,11 +22,10 @@ let email = "rafa03-dev@proton.me";
                     <h1
                         class="text-4xl font-black tracking-tighter sm:text-5xl text-gray-900 dark:text-white mb-4"
                     >
-                        Get in Touch
+                        {t("contact.heading")}
                     </h1>
                     <p class="text-lg text-gray-600 dark:text-gray-400">
-                        I'm currently available for freelance work. Got a
-                        project in mind? Let's talk.
+                        {t("contact.description")}
                     </p>
                 </div>
 
@@ -38,7 +37,7 @@ let email = "rafa03-dev@proton.me";
                     </div>
                     <div>
                         <p class="font-semibold text-gray-900 dark:text-white">
-                            Email
+                            {t("contact.email")}
                         </p>
                         <a
                             class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
@@ -55,7 +54,7 @@ let email = "rafa03-dev@proton.me";
                     </div>
                     <div>
                         <p class="font-semibold text-gray-900 dark:text-white">
-                            Social
+                            {t("contact.social")}
                         </p>
                         <div class="flex gap-4">
                             <a
@@ -81,6 +80,11 @@ let email = "rafa03-dev@proton.me";
                 class="lg:w-3/5 space-y-6"
                 action="/api/contact"
                 method="POST"
+                data-msg-sending={t("contact.form.sending")}
+                data-msg-submit={t("contact.form.submit")}
+                data-msg-success={t("contact.form.success")}
+                data-msg-error={t("contact.form.error")}
+                data-msg-network={t("contact.form.networkError")}
             >
                 <!-- Status messages -->
                 <div id="form-status" class="hidden rounded-lg p-4"></div>
@@ -88,14 +92,14 @@ let email = "rafa03-dev@proton.me";
                 <div>
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="name">Name</label
+                        for="name">{t("contact.form.name")}</label
                     >
                     <input
                         autocomplete="name"
                         class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
                         id="name"
                         name="name"
-                        placeholder="Enter your name"
+                        placeholder={t("contact.form.namePlaceholder")}
                         type="text"
                         required
                     />
@@ -103,14 +107,14 @@ let email = "rafa03-dev@proton.me";
                 <div>
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="email">Email</label
+                        for="email">{t("contact.form.email")}</label
                     >
                     <input
                         autocomplete="email"
                         class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
                         id="email"
                         name="email"
-                        placeholder="Enter your email"
+                        placeholder={t("contact.form.emailPlaceholder")}
                         type="email"
                         required
                     />
@@ -118,13 +122,13 @@ let email = "rafa03-dev@proton.me";
                 <div>
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="subject">Subject</label
+                        for="subject">{t("contact.form.subject")}</label
                     >
                     <input
                         class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
                         id="subject"
                         name="subject"
-                        placeholder="What is this about?"
+                        placeholder={t("contact.form.subjectPlaceholder")}
                         type="text"
                         required
                     />
@@ -132,13 +136,13 @@ let email = "rafa03-dev@proton.me";
                 <div>
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="message">Message</label
+                        for="message">{t("contact.form.message")}</label
                     >
                     <textarea
                         class="form-textarea block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
                         id="message"
                         name="message"
-                        placeholder="Your message..."
+                        placeholder={t("contact.form.messagePlaceholder")}
                         rows="4"
                         required></textarea>
                 </div>
@@ -147,7 +151,7 @@ let email = "rafa03-dev@proton.me";
                     class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     type="submit"
                 >
-                    <span id="btn-text">Send Message</span>
+                    <span id="btn-text">{t("contact.form.submit")}</span>
                 </button>
             </form>
         </div>
@@ -167,7 +171,8 @@ let email = "rafa03-dev@proton.me";
             e.preventDefault();
 
             submitBtn.disabled = true;
-            if (btnText) btnText.textContent = "Sending...";
+            if (btnText)
+                btnText.textContent = form.dataset.msgSending || "Sending...";
 
             try {
                 const formData = new FormData(form);
@@ -183,7 +188,7 @@ let email = "rafa03-dev@proton.me";
                         statusDiv.className =
                             "rounded-lg p-4 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200";
                         statusDiv.textContent =
-                            "✓ Message sent successfully! I'll get back to you soon.";
+                            form.dataset.msgSuccess || "✓ Success";
                         statusDiv.classList.remove("hidden");
                     }
                     form.reset();
@@ -191,7 +196,7 @@ let email = "rafa03-dev@proton.me";
                     if (statusDiv) {
                         statusDiv.className =
                             "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
-                        statusDiv.textContent = `✗ ${result.error || "Failed to send message. Please try again."}`;
+                        statusDiv.textContent = `✗ ${result.error || form.dataset.msgError || "Error"}`;
                         statusDiv.classList.remove("hidden");
                     }
                 }
@@ -200,12 +205,14 @@ let email = "rafa03-dev@proton.me";
                     statusDiv.className =
                         "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
                     statusDiv.textContent =
-                        "✗ Network error. Please check your connection and try again.";
+                        form.dataset.msgNetwork || "✗ Network error";
                     statusDiv.classList.remove("hidden");
                 }
             } finally {
                 submitBtn.disabled = false;
-                if (btnText) btnText.textContent = "Send Message";
+                if (btnText)
+                    btnText.textContent =
+                        form.dataset.msgSubmit || "Send Message";
 
                 setTimeout(() => {
                     statusDiv?.classList.add("hidden");
