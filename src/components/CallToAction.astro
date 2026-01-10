@@ -1,19 +1,21 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { buttonVariants } from "@assets/components/ui/button";
+import { cn } from "@assets/lib/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <section class="flex flex-col items-center text-center px-4 py-16 gap-4">
-  <h3 class="text-white text-3xl font-bold">
+  <h3 class="text-foreground text-3xl font-bold">
     {t("cta.title")}
   </h3>
-  <p class="text-slate-300 text-lg max-w-xl">
+  <p class="text-muted-foreground text-lg max-w-xl">
     {t("cta.subtitle")}
   </p>
   <a
-    class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] mt-4 hover:bg-primary-90 transition-colors"
+    class={cn(buttonVariants({ variant: "default", size: "lg" }), "mt-4 min-w-[84px] max-w-[240px]")}
     href={`/${lang}/get-in-touch`}
   >
     <span class="truncate">{t("nav.contact")}</span>

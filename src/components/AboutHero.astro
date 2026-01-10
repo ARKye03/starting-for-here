@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import myProfilePic from "@assets/profile.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { buttonVariants } from "@assets/components/ui/button";
+import { cn } from "@assets/lib/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,7 +15,7 @@ const t = useTranslations(lang);
   >
     <div class="w-full @[864px]:w-1/2 flex justify-center">
       <div
-        class="w-64 h-64 @[480px]:w-80 @[480px]:h-80 bg-center bg-no-repeat aspect-square bg-cover rounded-full bg-gray-300 dark:bg-gray-700"
+        class="w-64 h-64 @[480px]:w-80 @[480px]:h-80 bg-center bg-no-repeat aspect-square bg-cover rounded-full bg-muted"
       >
         <Image
           src={myProfilePic}
@@ -27,13 +29,13 @@ const t = useTranslations(lang);
     <div class="flex flex-col gap-6 @[864px]:w-1/2 @[864px]:justify-center">
       <div class="flex flex-col gap-4 text-left">
         <h1
-          class="dark:text-white text-4xl font-bold leading-tight @[480px]:text-5xl"
+          class="text-foreground text-4xl font-bold leading-tight @[480px]:text-5xl"
         >
           {t("about.hero.title")}
         </h1>
       </div>
       <a
-        class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors mx-auto @[864px]:mx-0"
+        class={cn(buttonVariants({ variant: "default", size: "lg" }), "min-w-[84px] max-w-[240px] mx-auto @[864px]:mx-0")}
         href={`/${lang}/projects`}
       >
         <span class="truncate">{t("hero.viewProjects")}</span>
