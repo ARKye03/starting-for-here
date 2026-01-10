@@ -8,6 +8,7 @@ import {
 import { languages } from "../i18n/ui";
 import { buttonVariants } from "@assets/components/ui/button";
 import { cn } from "@assets/lib/utils";
+import { Languages } from "lucide-react";
 
 export interface Props {
   currentPage?: "home" | "about" | "projects" | "contact";
@@ -139,7 +140,7 @@ const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
             href={alternateLangUrl}
             class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
           >
-            <span>🌐</span>
+            <Languages />
             <span class="uppercase">{languages[alternateLang]}</span>
           </a>
         </div>
