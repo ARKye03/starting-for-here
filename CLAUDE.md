@@ -40,6 +40,7 @@ Default language (en) has no URL prefix. Spanish uses `/es` prefix.
 Manual internationalization with static generation per language:
 
 **Configuration** (`astro.config.mjs`):
+
 ```javascript
 i18n: {
   locales: ["en", "es"],
@@ -49,6 +50,7 @@ i18n: {
 ```
 
 **Key files**:
+
 - `/src/i18n/ui.ts` - Translation dictionary (100+ keys organized by feature)
 - `/src/i18n/utils.ts` - Helper functions:
   - `getLangFromUrl(url)` - Extract language from URL
@@ -56,6 +58,7 @@ i18n: {
   - `getAlternateLangUrl(url, targetLang)` - Generate language-switched URLs
 
 **Usage pattern**:
+
 ```astro
 ---
 const lang = getLangFromUrl(Astro.url);
@@ -71,11 +74,13 @@ All language-aware routes must use `getStaticPaths()` to generate pages per lang
 Markdown-based content system with schema validation:
 
 **Schema** (`/src/content/config.ts`):
+
 - Collection: `projects`
 - Fields: title, description, images, tags, url, github, featured, date, lang
 - Content organized by language: `/src/content/projects/en/` and `/src/content/projects/es/`
 
 **Usage**:
+
 - Query with `getCollection("projects")` and filter by language
 - Render markdown with `const { Content } = await project.render()`
 - Images stored in `/public/projects/` and referenced relatively in frontmatter
@@ -107,8 +112,11 @@ All components extract language from URL and use translation helpers.
 - Dark mode as default with Catppuccin Mauve (#8839ef) as primary color
 - Design tokens: Montserrat (sans), Georgia (serif), Fira Code (mono)
 - Responsive: mobile-first with container queries (`@container`)
+- Components: uses shadcn ui with catppuccin theme
+- Icons: uses lucide icons
 
 **Path aliases** (tsconfig.json):
+
 - `@assets/*` → `./src/assets/*`
 - `@components/*` → `./src/components/*`
 
@@ -117,11 +125,13 @@ All components extract language from URL and use translation helpers.
 Single server endpoint: `/api/contact` (POST)
 
 **Configuration**:
+
 ```typescript
 export const prerender = false;  // Required for server routes
 ```
 
 **Functionality**:
+
 - Validates form data (name, email, subject, message)
 - Sends email via Resend service (requires `RESEND_API_KEY` env var)
 - Returns JSON response with success/error status
@@ -130,12 +140,14 @@ export const prerender = false;  // Required for server routes
 ### Build & Deployment
 
 **Build configuration**:
+
 - Output: `static` (full SSG)
 - Adapter: Vercel (`@astrojs/vercel`)
 - All routes pre-rendered except API endpoints
 - Images optimized with Sharp
 
 **Deployment**:
+
 - Platform: Vercel
 - Environment variable: `RESEND_API_KEY` (contact form)
 - Asset caching: 1 year for `/_astro/*` files
@@ -146,6 +158,7 @@ export const prerender = false;  // Required for server routes
 
 1. Create file in `/src/pages/[lang]/your-page.astro`
 2. Implement `getStaticPaths()` to generate per language:
+
    ```javascript
    export async function getStaticPaths() {
      return Object.keys(languages).map((lang) => ({
@@ -153,6 +166,7 @@ export const prerender = false;  // Required for server routes
      }));
    }
    ```
+
 3. Extract language: `const lang = getLangFromUrl(Astro.url);`
 4. Use translations: `const t = useTranslations(lang);`
 5. Add translations to `/src/i18n/ui.ts` for both languages
@@ -167,6 +181,7 @@ export const prerender = false;  // Required for server routes
 ### Modifying Translations
 
 Edit `/src/i18n/ui.ts` - translations organized by feature:
+
 - Navigation: `nav.*`
 - Pages: `page.[pagename].*`
 - Common: `common.*`
