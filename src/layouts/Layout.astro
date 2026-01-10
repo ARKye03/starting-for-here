@@ -23,9 +23,25 @@ const { title = "Portfolio", currentPage = "home", lang = "en" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      // Function to apply theme based on system preference
+      const applyTheme = () => {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', isDark);
+      };
+
+      // Apply theme immediately on initial load
+      applyTheme();
+
+      // Apply theme after each view transition
+      document.addEventListener('astro:page-load', applyTheme);
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+    </script>
     <ClientRouter />
   </head>
-  <body class={"min-h-screen dark:bg-background dark:text-white"}>
+  <body>
     <main class="max-w-[960px] mx-auto px-4 md:px-10 py-5">
       <Header currentPage={currentPage} lang={lang} />
       <div>

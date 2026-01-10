@@ -2,6 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import { languages } from "../../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { buttonVariants } from "@assets/components/ui/button";
+import { cn } from "@assets/lib/utils";
+import { Mail, MessagesSquare } from "lucide-react";
 
 export async function getStaticPaths() {
     return Object.keys(languages).map((lang) => ({
@@ -12,6 +15,15 @@ export async function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 let email = "rafa03-dev@proton.me";
+
+// Shadcn input styles
+const inputClasses =
+    "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-10 w-full min-w-0 rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive";
+
+const textareaClasses =
+    "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-24 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm";
+
+const labelClasses = "text-sm font-medium leading-none pb-2";
 ---
 
 <Layout title={t("page.contact.title")} currentPage="contact" lang={lang}>
@@ -20,27 +32,27 @@ let email = "rafa03-dev@proton.me";
             <div class="lg:w-2/5 space-y-8">
                 <div>
                     <h1
-                        class="text-4xl font-black tracking-tighter sm:text-5xl text-gray-900 dark:text-white mb-4"
+                        class="text-4xl font-black tracking-tighter sm:text-5xl text-foreground mb-4"
                     >
                         {t("contact.heading")}
                     </h1>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                    <p class="text-lg text-muted-foreground">
                         {t("contact.description")}
                     </p>
                 </div>
 
                 <div class="flex items-start gap-4">
                     <div
-                        class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-10 text-primary"
+                        class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"
                     >
-                        <span class="text-xl">✉</span>
+                        <Mail />
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">
+                        <p class="font-semibold text-foreground">
                             {t("contact.email")}
                         </p>
                         <a
-                            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                            class="text-muted-foreground hover:text-primary transition-colors"
                             href={`mailto:${email}`}>{email}</a
                         >
                     </div>
@@ -48,26 +60,26 @@ let email = "rafa03-dev@proton.me";
 
                 <div class="flex items-start gap-4">
                     <div
-                        class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-10 text-primary"
+                        class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"
                     >
-                        <span class="text-xl">🌐</span>
+                        <MessagesSquare />
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">
+                        <p class="font-semibold text-foreground">
                             {t("contact.social")}
                         </p>
                         <div class="flex gap-4">
                             <a
-                                class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                class="text-muted-foreground hover:text-primary transition-colors"
                                 href="https://www.linkedin.com/in/rafa03-dev"
                                 >LinkedIn</a
                             >
                             <a
-                                class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                class="text-muted-foreground hover:text-primary transition-colors"
                                 href="https://github.com/ARKye03">GitHub</a
                             >
                             <a
-                                class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                                class="text-muted-foreground hover:text-primary transition-colors"
                                 href="https://x.com/RafaelzSanchez">Twitter</a
                             >
                         </div>
@@ -90,13 +102,12 @@ let email = "rafa03-dev@proton.me";
                 <div id="form-status" class="hidden rounded-lg p-4"></div>
 
                 <div>
-                    <label
-                        class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="name">{t("contact.form.name")}</label
+                    <label class={labelClasses} for="name"
+                        >{t("contact.form.name")}</label
                     >
                     <input
                         autocomplete="name"
-                        class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                        class={inputClasses}
                         id="name"
                         name="name"
                         placeholder={t("contact.form.namePlaceholder")}
@@ -105,13 +116,12 @@ let email = "rafa03-dev@proton.me";
                     />
                 </div>
                 <div>
-                    <label
-                        class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="email">{t("contact.form.email")}</label
+                    <label class={labelClasses} for="email"
+                        >{t("contact.form.email")}</label
                     >
                     <input
                         autocomplete="email"
-                        class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                        class={inputClasses}
                         id="email"
                         name="email"
                         placeholder={t("contact.form.emailPlaceholder")}
@@ -120,12 +130,11 @@ let email = "rafa03-dev@proton.me";
                     />
                 </div>
                 <div>
-                    <label
-                        class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="subject">{t("contact.form.subject")}</label
+                    <label class={labelClasses} for="subject"
+                        >{t("contact.form.subject")}</label
                     >
                     <input
-                        class="form-input block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                        class={inputClasses}
                         id="subject"
                         name="subject"
                         placeholder={t("contact.form.subjectPlaceholder")}
@@ -134,12 +143,11 @@ let email = "rafa03-dev@proton.me";
                     />
                 </div>
                 <div>
-                    <label
-                        class="block text-sm font-medium leading-6 text-gray-900 dark:text-white pb-2"
-                        for="message">{t("contact.form.message")}</label
+                    <label class={labelClasses} for="message"
+                        >{t("contact.form.message")}</label
                     >
                     <textarea
-                        class="form-textarea block w-full rounded-lg border-0 bg-gray-200 dark:bg-[#211c26] px-4 py-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-[#473c53] placeholder:text-gray-400 dark:placeholder:text-[#ab9db8] focus:ring-2 focus:ring-inset focus:ring-primary"
+                        class={textareaClasses}
                         id="message"
                         name="message"
                         placeholder={t("contact.form.messagePlaceholder")}
@@ -148,7 +156,10 @@ let email = "rafa03-dev@proton.me";
                 </div>
                 <button
                     id="submit-btn"
-                    class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    class={cn(
+                        buttonVariants({ variant: "default", size: "default" }),
+                        "w-full",
+                    )}
                     type="submit"
                 >
                     <span id="btn-text">{t("contact.form.submit")}</span>
@@ -186,7 +197,7 @@ let email = "rafa03-dev@proton.me";
                 if (response.ok) {
                     if (statusDiv) {
                         statusDiv.className =
-                            "rounded-lg p-4 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200";
+                            "rounded-lg p-4 bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20";
                         statusDiv.textContent =
                             form.dataset.msgSuccess || "✓ Success";
                         statusDiv.classList.remove("hidden");
@@ -195,7 +206,7 @@ let email = "rafa03-dev@proton.me";
                 } else {
                     if (statusDiv) {
                         statusDiv.className =
-                            "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
+                            "rounded-lg p-4 bg-destructive/10 text-destructive border border-destructive/20";
                         statusDiv.textContent = `✗ ${result.error || form.dataset.msgError || "Error"}`;
                         statusDiv.classList.remove("hidden");
                     }
@@ -203,7 +214,7 @@ let email = "rafa03-dev@proton.me";
             } catch (error) {
                 if (statusDiv) {
                     statusDiv.className =
-                        "rounded-lg p-4 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200";
+                        "rounded-lg p-4 bg-destructive/10 text-destructive border border-destructive/20";
                     statusDiv.textContent =
                         form.dataset.msgNetwork || "✗ Network error";
                     statusDiv.classList.remove("hidden");
