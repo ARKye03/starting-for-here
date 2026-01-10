@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { buttonVariants } from "@assets/components/ui/button";
+import { cn } from "@assets/lib/utils";
 
 // Detect language from URL, fallback to 'en' if not found
 const lang = getLangFromUrl(Astro.url);
@@ -19,11 +21,11 @@ const getUrl = (path: string) => `/${lang}${path}`;
 
       <div class="flex flex-col gap-4">
         <h1
-          class="text-4xl font-black leading-tight tracking-[-0.033em] text-gray-900 dark:text-white"
+          class="text-4xl font-black leading-tight tracking-[-0.033em] text-foreground"
         >
           {t("404.title")}
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p class="text-lg text-muted-foreground leading-relaxed">
           {t("404.message")}
         </p>
       </div>
@@ -31,38 +33,38 @@ const getUrl = (path: string) => `/${lang}${path}`;
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href={getUrl("/")}
-          class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
+          class={cn(buttonVariants({ variant: "default", size: "lg" }), "min-w-[84px] max-w-[240px]")}
         >
           <span class="truncate">{t("404.backHome")}</span>
         </a>
         <a
           href={getUrl("/about")}
-          class="flex min-w-[84px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary-20 text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-30 transition-colors"
+          class={cn(buttonVariants({ variant: "secondary", size: "lg" }), "min-w-[84px] max-w-[240px]")}
         >
           <span class="truncate">{t("404.learnAbout")}</span>
         </a>
       </div>
 
-      <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+      <div class="pt-8 border-t">
+        <p class="text-sm text-muted-foreground mb-4">
           {t("404.lookingFor")}
         </p>
         <div class="flex flex-wrap justify-center gap-4 text-sm">
           <a
             href={getUrl("/projects")}
-            class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+            class="text-muted-foreground hover:text-primary transition-colors"
           >
             {t("nav.projects")}
           </a>
           <a
             href={getUrl("/about")}
-            class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+            class="text-muted-foreground hover:text-primary transition-colors"
           >
             {t("nav.about")}
           </a>
           <a
             href={getUrl("/get-in-touch")}
-            class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+            class="text-muted-foreground hover:text-primary transition-colors"
           >
             {t("nav.contact")}
           </a>
