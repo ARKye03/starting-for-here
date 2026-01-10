@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import myProfilePic from "@assets/profile.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { buttonVariants } from "@assets/components/ui/button";
+import { cn } from "@assets/lib/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -21,7 +23,7 @@ const t = useTranslations(lang);
           {t("hero.title")}
         </h1>
         <h2
-          class="text-sm font-normal leading-normal @[480px]:text-base text-gray-600 dark:text-gray-300"
+          class="text-sm font-normal leading-normal @[480px]:text-base text-muted-foreground"
         >
           {t("hero.subtitle")}
         </h2>
@@ -31,20 +33,20 @@ const t = useTranslations(lang);
       >
         <a
           href={`/${lang}/projects`}
-          class="flex min-w-[84px] w-full @[480px]:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-90 transition-colors"
+          class={cn(buttonVariants({ variant: "default", size: "lg" }), "min-w-[84px] w-full @[480px]:w-auto")}
         >
           <span class="truncate">{t("hero.viewProjects")}</span>
         </a>
         <a
           href={`/${lang}/about`}
-          class="flex min-w-[84px] w-full @[480px]:w-auto max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary-20 text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary-30 transition-colors"
+          class={cn(buttonVariants({ variant: "secondary", size: "lg" }), "min-w-[84px] w-full @[480px]:w-auto")}
         >
           <span class="truncate">{t("hero.aboutMe")}</span>
         </a>
       </div>
     </div>
     <div
-      class="w-full max-w-[300px] @[864px]:max-w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full bg-gray-300 dark:bg-gray-700"
+      class="w-full max-w-[300px] @[864px]:max-w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full bg-muted"
     >
       <Image
         src={myProfilePic}
