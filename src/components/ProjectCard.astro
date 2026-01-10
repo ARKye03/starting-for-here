@@ -26,14 +26,14 @@ const transitionName = `project-${slug}`;
     : ""}
   transition:name={transitionName}
 >
-  <p class="text-white text-base font-bold leading-tight line-clamp-2">
+  <p class="text-white dark:text-white text-base font-bold leading-tight line-clamp-2 relative z-10">
     {title}
   </p>
   {
     tags && tags.length > 0 && (
-      <div class="flex gap-2 flex-wrap">
+      <div class="flex gap-2 flex-wrap relative z-10">
         {tags.slice(0, 2).map((tag) => (
-          <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">
+          <span class="text-xs bg-primary/20 backdrop-blur-sm text-white dark:text-white px-2 py-1 rounded border border-white/20">
             {tag}
           </span>
         ))}
@@ -41,9 +41,8 @@ const transitionName = `project-${slug}`;
     )
   }
   <div
-    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-    style="background-color: rgba(0, 0, 0, 0.6);"
+    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60"
   >
-    <span class="text-white font-bold text-lg">{t("common.viewProject")}</span>
+    <span class="text-white dark:text-white font-bold text-lg">{t("common.viewProject")}</span>
   </div>
 </a>
