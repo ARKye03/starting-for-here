@@ -56,7 +56,7 @@ const projectImages = project.data.images || [];
                                 <div class="min-w-full snap-center relative">
                                     <Image
                                         src={`/projects/${img}`}
-                                        alt={`${project.data.title} - Image ${index + 1}`}
+                                        alt={`${project.data.title} screenshot ${index + 1} of ${projectImages.length}`}
                                         class="w-full h-auto object-cover max-h-[500px] image-fade-mask"
                                         width={800}
                                         height={450}
@@ -121,7 +121,7 @@ const projectImages = project.data.images || [];
                     <div class="mb-6 rounded-lg overflow-hidden">
                         <Image
                             src={`/projects/${projectImages[0]}`}
-                            alt={project.data.title}
+                            alt={`${project.data.title} screenshot`}
                             class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300 image-fade-mask"
                             transition:name={transitionName}
                             width={800}
