@@ -57,7 +57,7 @@ const projectImages = project.data.images || [];
                                     <Image
                                         src={`/projects/${img}`}
                                         alt={`${project.data.title} - Image ${index + 1}`}
-                                        class="w-full h-auto object-cover max-h-[500px]"
+                                        class="w-full h-auto object-cover max-h-[500px] image-fade-mask"
                                         width={800}
                                         height={450}
                                         loading={index === 0 ? "eager" : "lazy"}
