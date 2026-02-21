@@ -177,6 +177,33 @@
 
 /* Code Blocks - Terminal-Refined Aesthetic */
 @layer components {
+  .avatar-circle {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    isolation: isolate;
+    transform: translateZ(0);
+    -webkit-mask-image: radial-gradient(circle, #000 99.2%, transparent 100%);
+    mask-image: radial-gradient(circle, #000 99.2%, transparent 100%);
+  }
+
+  .avatar-circle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklch, var(--background) 36%, transparent),
+      inset 0 0 0 2px color-mix(in oklch, black 8%, transparent);
+  }
+
+  .avatar-circle :where(img, picture, canvas, video) {
+    border-radius: inherit;
+    backface-visibility: hidden;
+    transform: translateZ(0) scale(1.001);
+  }
+
   /* Inline code */
   .prose code {
     background: color-mix(in oklch, var(--primary) 12%, transparent);
