@@ -5,7 +5,12 @@ date: 2026-01-10
 featured: true
 tags: ["Rust", "Iced", "CLI", "Corrector Gramatical", "Turso", "Harper"]
 github: "https://github.com/ARKye03/aella"
-images: ["aella/mainExpanded.webp", "aella/mainCollapsed.webp", "aella/trashView.webp"]
+images:
+  [
+    "aella/mainExpanded.webp",
+    "aella/mainCollapsed.webp",
+    "aella/trashView.webp",
+  ]
 lang: "es"
 ---
 
@@ -20,6 +25,7 @@ A diferencia de los correctores gramaticales tradicionales, Aella funciona compl
 Como desarrollador escribiendo múltiples descripciones de PR diariamente, saltar a ChatGPT para revisiones gramaticales rápidas se vuelve ineficiente. No necesitas reescrituras de IA—solo necesitas atrapar ese apóstrofo o coma faltante mientras escribes rápido. Aella proporciona correcciones instantáneas offline que mantienen tus ideas y tono intactos.
 
 **Ejemplo de flujo de trabajo:**
+
 ```bash
 # Copiar descripción de PR, corregir gramática, copiar de vuelta
 echo "$pbpaste" | aella check | pbcopy

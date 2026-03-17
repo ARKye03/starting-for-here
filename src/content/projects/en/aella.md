@@ -5,7 +5,12 @@ date: 2026-01-10
 featured: true
 tags: ["Rust", "Iced", "CLI", "Grammar Checker", "Turso", "Harper"]
 github: "https://github.com/ARKye03/aella"
-images: ["aella/mainExpanded.webp", "aella/mainCollapsed.webp", "aella/trashView.webp"]
+images:
+  [
+    "aella/mainExpanded.webp",
+    "aella/mainCollapsed.webp",
+    "aella/trashView.webp",
+  ]
 lang: "en"
 ---
 
@@ -20,6 +25,7 @@ Unlike traditional grammar checkers, Aella works completely offline, is lightnin
 As a developer writing multiple PR descriptions daily, jumping to ChatGPT for quick grammar checks becomes inefficient. You don't need AI rewrites—you just need to catch that missing apostrophe or comma while typing fast. Aella provides instant, offline corrections that keep your ideas and tone intact.
 
 **Workflow example:**
+
 ```bash
 # Copy PR description, fix grammar, copy back
 echo "$pbpaste" | aella check | pbcopy

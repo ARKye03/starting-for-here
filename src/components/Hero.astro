@@ -11,47 +11,53 @@ const t = useTranslations(lang);
 
 <section class="@container">
   <div
-    class="flex flex-col-reverse gap-6 px-4 py-8 @[480px]:gap-8 @[864px]:flex-row items-center"
+    class="flex flex-col-reverse items-center gap-6 px-4 py-8 @[480px]:gap-8 @[864px]:flex-row"
   >
     <div
-      class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center text-center @[864px]:text-left"
+      class="flex flex-col gap-6 text-center @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center @[864px]:text-left"
     >
       <div class="flex flex-col gap-2">
         <h1
-          class="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl"
+          class="text-4xl leading-tight font-black tracking-[-0.033em] @[480px]:text-5xl"
         >
           {t("hero.title")}
         </h1>
         <h2
-          class="text-sm font-normal leading-normal @[480px]:text-base text-muted-foreground"
+          class="text-muted-foreground text-sm leading-normal font-normal @[480px]:text-base"
         >
           {t("hero.subtitle")}
         </h2>
       </div>
       <div
-        class="flex flex-col @[480px]:flex-row gap-4 justify-center @[864px]:justify-start"
+        class="flex flex-col justify-center gap-4 @[480px]:flex-row @[864px]:justify-start"
       >
         <a
           href={`/${lang}/projects`}
-          class={cn(buttonVariants({ variant: "default", size: "lg" }), "min-w-[84px] w-full @[480px]:w-auto")}
+          class={cn(
+            buttonVariants({ variant: "default", size: "lg" }),
+            "min-w-[84px] w-full @[480px]:w-auto",
+          )}
         >
           <span class="truncate">{t("hero.viewProjects")}</span>
         </a>
         <a
           href={`/${lang}/about`}
-          class={cn(buttonVariants({ variant: "secondary", size: "lg" }), "min-w-[84px] w-full @[480px]:w-auto")}
+          class={cn(
+            buttonVariants({ variant: "secondary", size: "lg" }),
+            "min-w-[84px] w-full @[480px]:w-auto",
+          )}
         >
           <span class="truncate">{t("hero.aboutMe")}</span>
         </a>
       </div>
     </div>
     <div
-      class="avatar-circle w-full max-w-[300px] @[864px]:max-w-full bg-center bg-no-repeat aspect-square bg-cover @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full"
+      class="avatar-circle aspect-square w-full max-w-[300px] bg-cover bg-center bg-no-repeat @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full @[864px]:max-w-full"
     >
       <Image
         src={myProfilePic}
         alt="Profile"
-        class="w-full h-full object-cover"
+        class="h-full w-full object-cover"
         loading="eager"
         transition:name="myProfilePic"
       />

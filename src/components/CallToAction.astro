@@ -7,15 +7,18 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="flex flex-col items-center text-center px-4 py-16 gap-4">
+<section class="flex flex-col items-center gap-4 px-4 py-16 text-center">
   <h3 class="text-foreground text-3xl font-bold">
     {t("cta.title")}
   </h3>
-  <p class="text-muted-foreground text-lg max-w-xl">
+  <p class="text-muted-foreground max-w-xl text-lg">
     {t("cta.subtitle")}
   </p>
   <a
-    class={cn(buttonVariants({ variant: "default", size: "lg" }), "mt-4 min-w-[84px] max-w-[240px]")}
+    class={cn(
+      buttonVariants({ variant: "default", size: "lg" }),
+      "mt-4 min-w-[84px] max-w-[240px]",
+    )}
     href={`/${lang}/get-in-touch`}
   >
     <span class="truncate">{t("nav.contact")}</span>
