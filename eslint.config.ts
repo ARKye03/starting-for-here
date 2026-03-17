@@ -17,6 +17,7 @@ export default defineConfig([
       ".claude/**",
       "dist/**",
       ".astro/**",
+      ".vercel/**",
       "node_modules/**",
       ".wrangler/**",
     ],
@@ -33,6 +34,9 @@ export default defineConfig([
     ignores: ["package.json", "package-lock.json", "tsconfig.json"],
     plugins: { json: jsonPlugin },
     language: "json/json",
+    rules: {
+      "no-irregular-whitespace": "off",
+    },
   },
   {
     files: ["**/*.css"],

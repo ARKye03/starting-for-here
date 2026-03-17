@@ -1,315 +1,310 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { languages } from "../../../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 export async function getStaticPaths() {
-    const projects = await getCollection("projects");
+  const projects = await getCollection("projects");
 
-    return projects.map((project) => {
-        // ID is like "en/slug.md" or "es/slug.md"
-        const [lang, ...slugParts] = project.id.split("/");
-        const slug = slugParts.join("/").replace(/\.[^/.]+$/, "");
+  return projects.map((project) => {
+    // ID is like "en/slug.md" or "es/slug.md"
+    const [lang, ...slugParts] = project.id.split("/");
+    const slug = slugParts.join("/").replace(/\.[^/.]+$/, "");
 
-        return {
-            params: { lang, slug },
-            props: { project },
-        };
-    });
+    return {
+      params: { lang, slug },
+      props: { project },
+    };
+  });
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { project } = Astro.props;
-const { Content } = await project.render();
-const transitionName = `project-${project.slug}`;
+const { Content } = await render(project);
+const transitionName = `project-${Astro.params.slug ?? ""}`;
 const projectImages = project.data.images || [];
 ---
 
 <Layout
-    title={`${project.data.title} - Portfolio`}
-    currentPage="projects"
-    lang={lang}
+  title={`${project.data.title} - Portfolio`}
+  currentPage="projects"
+  lang={lang}
 >
-    <article class="py-10 max-w-4xl mx-auto">
-        <header class="mb-12">
-            <h1
-                class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
+  <article class="mx-auto max-w-4xl py-10">
+    <header class="mb-12">
+      <h1
+        class="mb-4 text-4xl leading-tight font-black tracking-[-0.033em] md:text-5xl"
+      >
+        {project.data.title}
+      </h1>
+      <p class="mb-6 text-xl text-gray-600 dark:text-gray-300">
+        {project.data.description}
+      </p>
+
+      {
+        projectImages.length > 1 ? (
+          <div class="group relative mb-6">
+            {/* Carousel Container */}
+            <div
+              id="image-carousel"
+              class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-lg"
             >
-                {project.data.title}
-            </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
-                {project.data.description}
-            </p>
-
-            {
-                projectImages.length > 1 ? (
-                    <div class="mb-6 relative group">
-                        {/* Carousel Container */}
-                        <div
-                            id="image-carousel"
-                            class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar rounded-lg"
-                        >
-                            {projectImages.map((img, index) => (
-                                <div class="min-w-full snap-center relative">
-                                    <Image
-                                        src={`/projects/${img}`}
-                                        alt={`${project.data.title} screenshot ${index + 1} of ${projectImages.length}`}
-                                        class="w-full h-auto object-cover max-h-[500px] image-fade-mask"
-                                        width={800}
-                                        height={450}
-                                        loading={index === 0 ? "eager" : "lazy"}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Navigation Buttons */}
-                        <button
-                            id="prev-slide"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0"
-                            aria-label="Previous image"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="m15 18-6-6 6-6" />
-                            </svg>
-                        </button>
-                        <button
-                            id="next-slide"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0"
-                            aria-label="Next image"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="m9 18 6-6-6-6" />
-                            </svg>
-                        </button>
-
-                        {/* Pagination Dots */}
-                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                            {projectImages.map((_, index) => (
-                                <button
-                                    class="carousel-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/90 transition-colors"
-                                    data-index={index}
-                                    aria-label={`Go to slide ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                ) : projectImages.length === 1 ? (
-                    <div class="mb-6 rounded-lg overflow-hidden">
-                        <Image
-                            src={`/projects/${projectImages[0]}`}
-                            alt={`${project.data.title} screenshot`}
-                            class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300 image-fade-mask"
-                            transition:name={transitionName}
-                            width={800}
-                            height={400}
-                            loading="eager"
-                        />
-                    </div>
-                ) : null
-            }
-
-            {
-                project.data.tags && project.data.tags.length > 0 && (
-                    <div class="flex gap-2 flex-wrap mb-6">
-                        {project.data.tags.map((tag) => (
-                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )
-            }
-
-            <div class="flex gap-4">
-                {
-                    project.data.url && (
-                        <a
-                            href={project.data.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-                        >
-                            <span>🔗</span>
-                            {t("project.viewLive")}
-                        </a>
-                    )
-                }
-                {
-                    project.data.github && (
-                        <a
-                            href={project.data.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-                        >
-                            <span>💻</span>
-                            {t("project.viewGitHub")}
-                        </a>
-                    )
-                }
+              {projectImages.map((img, index) => (
+                <div class="relative min-w-full snap-center">
+                  <Image
+                    src={`/projects/${img}`}
+                    alt={`${project.data.title} screenshot ${index + 1} of ${projectImages.length}`}
+                    class="image-fade-mask h-auto max-h-[500px] w-full object-cover"
+                    width={800}
+                    height={450}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))}
             </div>
-        </header>
 
-        <div class="prose prose-lg dark:prose-invert max-w-none">
-            <Content />
-        </div>
-
-        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <a
-                href={`/${lang}/projects`}
-                class="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+            {/* Navigation Buttons */}
+            <button
+              id="prev-slide"
+              class="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
+              aria-label="Previous image"
             >
-                <span>←</span>
-                {t("project.backToProjects")}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              id="next-slide"
+              class="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
+              aria-label="Next image"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+
+            {/* Pagination Dots */}
+            <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+              {projectImages.map((_, index) => (
+                <button
+                  class="carousel-dot h-2 w-2 rounded-full bg-white/50 transition-colors hover:bg-white/90"
+                  data-index={index}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : projectImages.length === 1 ? (
+          <div class="mb-6 overflow-hidden rounded-lg">
+            <Image
+              src={`/projects/${projectImages[0]}`}
+              alt={`${project.data.title} screenshot`}
+              class="image-fade-mask h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
+              transition:name={transitionName}
+              width={800}
+              height={400}
+              loading="eager"
+            />
+          </div>
+        ) : null
+      }
+
+      {
+        project.data.tags && project.data.tags.length > 0 && (
+          <div class="mb-6 flex flex-wrap gap-2">
+            {project.data.tags.map((tag) => (
+              <span class="bg-primary/10 text-primary rounded-full px-3 py-1 text-sm">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+
+      <div class="flex gap-4">
+        {
+          project.data.url && (
+            <a
+              href={project.data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary flex items-center gap-2 text-sm font-medium hover:underline"
+            >
+              <span>🔗</span>
+              {t("project.viewLive")}
             </a>
-        </div>
-    </article>
+          )
+        }
+        {
+          project.data.github && (
+            <a
+              href={project.data.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary flex items-center gap-2 text-sm font-medium hover:underline"
+            >
+              <span>💻</span>
+              {t("project.viewGitHub")}
+            </a>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+      <a
+        href={`/${lang}/projects`}
+        class="text-primary inline-flex items-center gap-2 font-medium hover:underline"
+      >
+        <span>←</span>
+        {t("project.backToProjects")}
+      </a>
+    </div>
+  </article>
 </Layout>
 
 <script>
-    function setupCarousel() {
-        const container = document.getElementById("image-carousel");
-        if (!container) return;
+  function setupCarousel() {
+    const container = document.getElementById("image-carousel");
+    if (!container) return;
 
-        const prevBtn = document.getElementById("prev-slide");
-        const nextBtn = document.getElementById("next-slide");
-        const dots = document.querySelectorAll(".carousel-dot");
+    const prevBtn = document.getElementById("prev-slide");
+    const nextBtn = document.getElementById("next-slide");
+    const dots = document.querySelectorAll(".carousel-dot");
 
-        // Scroll to previous slide
-        prevBtn?.addEventListener("click", () => {
-            container.scrollBy({
-                left: -container.clientWidth,
-                behavior: "smooth",
-            });
-        });
+    // Scroll to previous slide
+    prevBtn?.addEventListener("click", () => {
+      container.scrollBy({
+        left: -container.clientWidth,
+        behavior: "smooth",
+      });
+    });
 
-        // Scroll to next slide
-        nextBtn?.addEventListener("click", () => {
-            container.scrollBy({
-                left: container.clientWidth,
-                behavior: "smooth",
-            });
-        });
+    // Scroll to next slide
+    nextBtn?.addEventListener("click", () => {
+      container.scrollBy({
+        left: container.clientWidth,
+        behavior: "smooth",
+      });
+    });
 
-        // Pagination dots
-        dots.forEach((dot) => {
-            dot.addEventListener("click", (e) => {
-                const index = parseInt(
-                    (e.target as HTMLElement).dataset.index || "0",
-                );
-                const scrollAmount = index * container.clientWidth;
-                container.scrollTo({ left: scrollAmount, behavior: "smooth" });
-            });
-        });
+    // Pagination dots
+    dots.forEach((dot) => {
+      dot.addEventListener("click", (e) => {
+        const index = parseInt((e.target as HTMLElement).dataset.index || "0");
+        const scrollAmount = index * container.clientWidth;
+        container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+      });
+    });
 
-        // Update active dot and button state on scroll
-        const updateState = () => {
-            const index = Math.round(
-                container.scrollLeft / container.clientWidth,
-            );
+    // Update active dot and button state on scroll
+    const updateState = () => {
+      const index = Math.round(container.scrollLeft / container.clientWidth);
 
-            // Update dots
-            dots.forEach((dot, i) => {
-                if (i === index) {
-                    dot.classList.remove("bg-white/50");
-                    dot.classList.add("bg-white");
-                } else {
-                    dot.classList.add("bg-white/50");
-                    dot.classList.remove("bg-white");
-                }
-            });
-        };
+      // Update dots
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove("bg-white/50");
+          dot.classList.add("bg-white");
+        } else {
+          dot.classList.add("bg-white/50");
+          dot.classList.remove("bg-white");
+        }
+      });
+    };
 
-        container.addEventListener("scroll", updateState);
+    container.addEventListener("scroll", updateState);
 
-        // Initial update
-        updateState();
-    }
+    // Initial update
+    updateState();
+  }
 
-    // Run on initial load and after view transitions
-    document.addEventListener("astro:page-load", setupCarousel);
+  // Run on initial load and after view transitions
+  document.addEventListener("astro:page-load", setupCarousel);
 </script>
 
 <style>
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .no-scrollbar {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-    }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-    .image-fade-mask {
-        mask-image: linear-gradient(to top, transparent 0%, black 20%);
-        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
-    }
+  .image-fade-mask {
+    mask-image: linear-gradient(to top, transparent 0%, black 20%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+  }
 
-    /* Prose styles for markdown content */
-    :global(.prose) {
-        color: inherit;
+  /* Prose styles for markdown content */
+  :global(.prose) {
+    color: inherit;
+  }
+  :global(.prose h2) {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  :global(.prose h3) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  :global(.prose p) {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+  :global(.prose ul, .prose ol) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  :global(.prose li) {
+    margin-bottom: 0.5rem;
+  }
+  :global(.prose strong) {
+    font-weight: 600;
+  }
+  .grow {
+    display: inline-block;
+    transition-duration: 200ms;
+    transition-property: transform;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    &:hover {
+      transform: scale(1.1);
     }
-    :global(.prose h2) {
-        font-size: 1.875rem;
-        font-weight: 700;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    :global(.prose h3) {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-    }
-    :global(.prose p) {
-        margin-bottom: 1rem;
-        line-height: 1.75;
-    }
-    :global(.prose ul, .prose ol) {
-        margin-bottom: 1rem;
-        padding-left: 1.5rem;
-    }
-    :global(.prose li) {
-        margin-bottom: 0.5rem;
-    }
-    :global(.prose strong) {
-        font-weight: 600;
-    }
-    .grow {
-        display: inline-block;
-        transition-duration: 200ms;
-        transition-property: transform;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        transform: translateZ(0);
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
+  }
 </style>

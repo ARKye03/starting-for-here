@@ -3,7 +3,15 @@ title: "Moogle"
 description: "A web-based tool combining a ReactJS frontend and server-side search engine for document retrieval."
 date: 2023-03-06
 featured: true
-tags: ["ReactJS", ".NET", "Information Retrieval", "Full Stack", "Search Engine", "Cosine Similarity"]
+tags:
+  [
+    "ReactJS",
+    ".NET",
+    "Information Retrieval",
+    "Full Stack",
+    "Search Engine",
+    "Cosine Similarity",
+  ]
 github: "https://github.com/ARKye03/Moogle"
 images: ["moogle.webp"]
 lang: "en"
