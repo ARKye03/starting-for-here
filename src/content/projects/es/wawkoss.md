@@ -5,7 +5,14 @@ date: 2026-01-05
 featured: true
 tags: ["Astro", "AlpineJS", "TailwindCSS", "DaisyUI", "OAuth", "SoundCloud"]
 github: "https://github.com/ARKye03/wawkoss"
-images: ["wawkoss/wawkossRoot.webp", "wawkoss/wawkossSearch.webp", "wawkoss/artistPage.webp", "wawkoss/trackPage.webp", "wawkoss/profilePage.webp"]
+images:
+  [
+    "wawkoss/wawkossRoot.webp",
+    "wawkoss/wawkossSearch.webp",
+    "wawkoss/artistPage.webp",
+    "wawkoss/trackPage.webp",
+    "wawkoss/profilePage.webp",
+  ]
 lang: "es"
 ---
 

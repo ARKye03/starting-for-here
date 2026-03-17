@@ -3,7 +3,15 @@ title: "Moogle"
 description: "Una herramienta web que combina un frontend en ReactJS y un motor de búsqueda del lado del servidor para la recuperación de documentos."
 date: 2023-03-06
 featured: true
-tags: ["ReactJS", ".NET", "Recuperación de Información", "Full Stack", "Motor de Búsqueda", "Similitud de Coseno"]
+tags:
+  [
+    "ReactJS",
+    ".NET",
+    "Recuperación de Información",
+    "Full Stack",
+    "Motor de Búsqueda",
+    "Similitud de Coseno",
+  ]
 github: "https://github.com/ARKye03/Moogle"
 images: ["moogle.webp"]
 lang: "es"

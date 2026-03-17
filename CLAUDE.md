@@ -64,6 +64,7 @@ i18n: {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <h1>{t("page.home.title")}</h1>
 ```
 
@@ -127,7 +128,7 @@ Single server endpoint: `/api/contact` (POST)
 **Configuration**:
 
 ```typescript
-export const prerender = false;  // Required for server routes
+export const prerender = false; // Required for server routes
 ```
 
 **Functionality**:

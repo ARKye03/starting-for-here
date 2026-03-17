@@ -3,7 +3,18 @@ title: "Noxt"
 description: "A fast and modern note-taking application built with Next.js 16, featuring a responsive design and full Markdown support."
 date: 2026-01-11
 featured: true
-tags: ["Next.js", "SQLite", "Bun", "shadcn/ui", "Tailwind CSS", "Prisma", "Lucia Auth", "Vitest", "Google OAuth"]
+tags:
+  [
+    "Next.js",
+    "SQLite",
+    "Bun",
+    "shadcn/ui",
+    "Tailwind CSS",
+    "Prisma",
+    "Lucia Auth",
+    "Vitest",
+    "Google OAuth",
+  ]
 github: "https://github.com/ARKye03/noxt"
 images: ["noxt/myNotes.webp", "noxt/newNote.webp", "noxt/rustNote.webp"]
 lang: "en"
