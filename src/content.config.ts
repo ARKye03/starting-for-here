@@ -12,8 +12,8 @@ const projects = defineCollection({
     description: z.string(),
     images: z.array(z.string()).optional(), // Array of paths relative to /public/projects/
     tags: z.array(z.string()).optional(),
-    url: z.string().url().optional(),
-    github: z.string().url().optional(),
+    url: z.url().optional(),
+    github: z.url().optional(),
     featured: z.boolean().default(false),
     date: z.date(),
     lang: z.enum(["en", "es"]).default("en"),
