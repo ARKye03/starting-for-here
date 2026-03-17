@@ -13,14 +13,14 @@ const t = useTranslations(lang);
   <div
     class="flex flex-col gap-6 px-4 py-16 @[864px]:flex-row-reverse @[864px]:items-center"
   >
-    <div class="w-full @[864px]:w-1/2 flex justify-center">
+    <div class="flex w-full justify-center @[864px]:w-1/2">
       <div
-        class="avatar-circle w-64 h-64 @[480px]:w-80 @[480px]:h-80 bg-center bg-no-repeat aspect-square bg-cover"
+        class="avatar-circle aspect-square h-64 w-64 bg-cover bg-center bg-no-repeat @[480px]:h-80 @[480px]:w-80"
       >
         <Image
           src={myProfilePic}
           alt="Design Illustration"
-          class="w-full h-full object-cover"
+          class="h-full w-full object-cover"
           loading="eager"
           transition:name="myProfilePic"
         />
@@ -29,13 +29,16 @@ const t = useTranslations(lang);
     <div class="flex flex-col gap-6 @[864px]:w-1/2 @[864px]:justify-center">
       <div class="flex flex-col gap-4 text-left">
         <h1
-          class="text-foreground text-4xl font-bold leading-tight @[480px]:text-5xl"
+          class="text-foreground text-4xl leading-tight font-bold @[480px]:text-5xl"
         >
           {t("about.hero.title")}
         </h1>
       </div>
       <a
-        class={cn(buttonVariants({ variant: "default", size: "lg" }), "min-w-[84px] max-w-[240px] mx-auto @[864px]:mx-0")}
+        class={cn(
+          buttonVariants({ variant: "default", size: "lg" }),
+          "min-w-[84px] max-w-[240px] mx-auto @[864px]:mx-0",
+        )}
         href={`/${lang}/projects`}
       >
         <span class="truncate">{t("hero.viewProjects")}</span>

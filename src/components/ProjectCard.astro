@@ -12,7 +12,7 @@ export interface Props {
   image?: string;
 }
 
-const { title, description, slug, tags, image } = Astro.props;
+const { title, slug, tags, image } = Astro.props;
 const projectUrl = slug ? `/${lang}/projects/${slug}` : "#";
 const backgroundImage = image ? `/projects/${image}` : "";
 const transitionName = `project-${slug}`;
@@ -20,20 +20,22 @@ const transitionName = `project-${slug}`;
 
 <a
   href={projectUrl}
-  class="group relative bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-video overflow-hidden bg-gradient-to-t from-black/60 to-transparent no-underline project-card"
+  class="group project-card relative flex aspect-video flex-col justify-end gap-3 overflow-hidden rounded-lg bg-gradient-to-t from-black/60 to-transparent bg-cover bg-center p-4 no-underline"
   style={backgroundImage
     ? `background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${backgroundImage}'); view-transition-name: ${transitionName};`
     : ""}
   transition:name={transitionName}
 >
-  <p class="text-white dark:text-white text-base font-bold leading-tight line-clamp-2 relative z-10">
+  <p
+    class="relative z-10 line-clamp-2 text-base leading-tight font-bold text-white dark:text-white"
+  >
     {title}
   </p>
   {
     tags && tags.length > 0 && (
-      <div class="flex gap-2 flex-wrap relative z-10">
+      <div class="relative z-10 flex flex-wrap gap-2">
         {tags.slice(0, 2).map((tag) => (
-          <span class="text-xs bg-primary/20 backdrop-blur-sm text-white dark:text-white px-2 py-1 rounded border border-white/20">
+          <span class="bg-primary/20 rounded border border-white/20 px-2 py-1 text-xs text-white backdrop-blur-sm dark:text-white">
             {tag}
           </span>
         ))}
@@ -41,8 +43,10 @@ const transitionName = `project-${slug}`;
     )
   }
   <div
-    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60"
+    class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
   >
-    <span class="text-white dark:text-white font-bold text-lg">{t("common.viewProject")}</span>
+    <span class="text-lg font-bold text-white dark:text-white"
+      >{t("common.viewProject")}</span
+    >
   </div>
 </a>

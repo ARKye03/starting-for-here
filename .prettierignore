@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+.claude
+.githooks
+.astro
+dist
+pnpm-lock.yaml
+src/content/blog/
