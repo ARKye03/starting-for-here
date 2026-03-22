@@ -8,11 +8,12 @@ import type { Language } from "../i18n/utils";
 
 export interface Props {
   title?: string;
+  description?: string;
   currentPage?: "home" | "about" | "projects" | "contact";
   lang?: Language;
 }
 
-const { title = "Portfolio", currentPage = "home", lang = "en" } = Astro.props;
+const { title = "Portfolio", description, currentPage = "home", lang = "en" } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,6 +23,7 @@ const { title = "Portfolio", currentPage = "home", lang = "en" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
     <title>{title}</title>
     <script is:inline>
       // Function to apply theme based on system preference
