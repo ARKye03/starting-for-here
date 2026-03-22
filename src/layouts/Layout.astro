@@ -13,7 +13,12 @@ export interface Props {
   lang?: Language;
 }
 
-const { title = "Portfolio", description, currentPage = "home", lang = "en" } = Astro.props;
+const {
+  title = "Portfolio",
+  description,
+  currentPage = "home",
+  lang = "en",
+} = Astro.props;
 ---
 
 <!doctype html>
