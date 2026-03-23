@@ -1,7 +1,5 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { buttonVariants } from "@assets/components/ui/button";
-import { cn } from "@assets/lib/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,10 +13,7 @@ const t = useTranslations(lang);
     {t("cta.subtitle")}
   </p>
   <a
-    class={cn(
-      buttonVariants({ variant: "default", size: "lg" }),
-      "mt-4 min-w-[84px] max-w-[240px]",
-    )}
+    class="btn btn-primary btn-lg mt-4 min-w-[84px] max-w-[240px]"
     href={`/${lang}/get-in-touch`}
   >
     <span class="truncate">{t("nav.contact")}</span>

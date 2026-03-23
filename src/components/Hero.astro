@@ -2,8 +2,6 @@
 import { Image } from "astro:assets";
 import myProfilePic from "@assets/profile.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { buttonVariants } from "@assets/components/ui/button";
-import { cn } from "@assets/lib/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -33,19 +31,13 @@ const t = useTranslations(lang);
       >
         <a
           href={`/${lang}/projects`}
-          class={cn(
-            buttonVariants({ variant: "default", size: "lg" }),
-            "min-w-[84px] w-full @[480px]:w-auto",
-          )}
+          class="btn btn-primary btn-lg min-w-[84px] w-full @[480px]:w-auto"
         >
           <span class="truncate">{t("hero.viewProjects")}</span>
         </a>
         <a
           href={`/${lang}/about`}
-          class={cn(
-            buttonVariants({ variant: "secondary", size: "lg" }),
-            "min-w-[84px] w-full @[480px]:w-auto",
-          )}
+          class="btn btn-secondary btn-lg min-w-[84px] w-full @[480px]:w-auto"
         >
           <span class="truncate">{t("hero.aboutMe")}</span>
         </a>
