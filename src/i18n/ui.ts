@@ -16,7 +16,7 @@ export const ui = {
     // Page titles
     "page.home.title": "Rafael Sanchez - Software Developer",
     "page.home.description":
-      "Rafael Sanchez — software developer crafting elegant web experiences. Explore my projects, skills, and story.",
+      "Rafael Sanchez, software developer crafting elegant web experiences. Explore my projects, skills, and story.",
     "page.about.title": "About Me - Portfolio",
     "page.about.description":
       "Learn about Rafael Sanchez, a software developer passionate about creating elegant and effective digital solutions.",
@@ -127,7 +127,7 @@ export const ui = {
     // Page titles
     "page.home.title": "Rafael Sanchez - Desarrollador de Software",
     "page.home.description":
-      "Rafael Sanchez — desarrollador de software creando experiencias web elegantes. Explora mis proyectos, habilidades e historia.",
+      "Rafael Sanchez, desarrollador de software creando experiencias web elegantes. Explora mis proyectos, habilidades e historia.",
     "page.about.title": "Acerca de Mí - Portafolio",
     "page.about.description":
       "Conoce a Rafael Sanchez, un desarrollador de software apasionado por crear soluciones digitales elegantes y efectivas.",

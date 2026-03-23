@@ -116,7 +116,7 @@ All components extract language from URL and use translation helpers.
 - Design tokens: Montserrat (sans), Georgia (serif), Fira Code (mono)
 - Responsive: mobile-first with container queries (`@container`)
 - Components: DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
-- Icons: **astro-icon** with local SVGs in `src/icons/` — **NO inline SVG**
+- Icons: **astro-icon** with local SVGs in `src/icons/`, **NO inline SVG**
 
 **Icon usage**:
 
