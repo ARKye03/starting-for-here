@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 export async function getStaticPaths() {
@@ -71,38 +72,14 @@ const projectImages = project.data.images || [];
               class="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
               aria-label="Previous image"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m15 18-6-6 6-6" />
-              </svg>
+              <Icon name="chevron-left" class="h-6 w-6" />
             </button>
             <button
               id="next-slide"
               class="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
               aria-label="Next image"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <Icon name="chevron-right" class="h-6 w-6" />
             </button>
 
             {/* Pagination Dots */}
@@ -250,61 +227,15 @@ const projectImages = project.data.images || [];
 </script>
 
 <style>
-  /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
   .image-fade-mask {
     mask-image: linear-gradient(to top, transparent 0%, black 20%);
     -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
-  }
-
-  /* Prose styles for markdown content */
-  :global(.prose) {
-    color: inherit;
-  }
-  :global(.prose h2) {
-    font-size: 1.875rem;
-    font-weight: 700;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  :global(.prose h3) {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-  :global(.prose p) {
-    margin-bottom: 1rem;
-    line-height: 1.75;
-  }
-  :global(.prose ul, .prose ol) {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
-  }
-  :global(.prose li) {
-    margin-bottom: 0.5rem;
-  }
-  :global(.prose strong) {
-    font-weight: 600;
-  }
-  .grow {
-    display: inline-block;
-    transition-duration: 200ms;
-    transition-property: transform;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 </style>

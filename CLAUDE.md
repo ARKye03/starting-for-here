@@ -105,16 +105,36 @@ All components extract language from URL and use translation helpers.
 
 ### Styling System
 
-**Tailwind CSS v4** with custom theming:
+**Tailwind CSS v4** + **DaisyUI 5** with custom theming:
 
 - Integrated via `@tailwindcss/vite` plugin
 - Global CSS: `/src/styles/global.css`
 - Color system uses OKLch color space for precise theming
-- Dark mode as default with Catppuccin Mauve (#8839ef) as primary color
+- Dark mode via `prefers-color-scheme` (CSS-only, no JS toggle)
+- Two custom DaisyUI themes: `catppuccin` (light default) and `catppuccin-dark` (dark, prefersdark)
+- Catppuccin Mauve as primary color in both themes
 - Design tokens: Montserrat (sans), Georgia (serif), Fira Code (mono)
 - Responsive: mobile-first with container queries (`@container`)
-- Components: uses shadcn ui with catppuccin theme
-- Icons: uses lucide icons
+- Components: DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
+- Icons: **astro-icon** with local SVGs in `src/icons/`, **NO inline SVG**
+
+**Icon usage**:
+
+```astro
+---
+import { Icon } from "astro-icon/components";
+---
+
+<Icon name="icon-name" class="h-5 w-5" />
+```
+
+Add new icons as SVG files in `src/icons/`. Name matches filename (e.g., `src/icons/mail.svg` → `name="mail"`).
+
+**Button classes** (DaisyUI):
+
+- Primary: `btn btn-primary`
+- Secondary: `btn btn-secondary`
+- Large: add `btn-lg`
 
 **Path aliases** (tsconfig.json):
 
@@ -197,11 +217,10 @@ Pages use Astro's `<ClientRouter>` for SPA-like navigation. Use `transition:name
 
 ## Technology Stack
 
-- **Framework**: Astro 5.15.1 (static site generation)
-- **Styling**: Tailwind CSS 4.1.14 with Vite plugin
-- **Email**: Resend 6.1.2
+- **Framework**: Astro 6.0.5 (static site generation)
+- **Styling**: Tailwind CSS 4.1.18 with Vite plugin + DaisyUI 5.5.19
+- **Email**: Resend 6.1.3
 - **Image Processing**: Sharp 0.34.4
-- **Icons**: lucide-react 0.562.0
-- **Utilities**: clsx, tailwind-merge, class-variance-authority
-- **Deployment**: Vercel (@astrojs/vercel 9.0.0)
+- **Icons**: astro-icon 1.1.5 (local SVGs in `src/icons/`)
+- **Deployment**: Vercel (@astrojs/vercel 10.0.1)
 - **Package Manager**: pnpm

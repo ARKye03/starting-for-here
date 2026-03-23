@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { buttonVariants } from "@assets/components/ui/button";
-import { cn } from "@assets/lib/utils";
 
 // Detect language from URL, fallback to 'en' if not found
 const lang = getLangFromUrl(Astro.url);
@@ -33,19 +31,13 @@ const getUrl = (path: string) => `/${lang}${path}`;
       <div class="flex flex-col justify-center gap-4 sm:flex-row">
         <a
           href={getUrl("/")}
-          class={cn(
-            buttonVariants({ variant: "default", size: "lg" }),
-            "min-w-[84px] max-w-[240px]",
-          )}
+          class="btn btn-primary btn-lg max-w-[240px] min-w-[84px]"
         >
           <span class="truncate">{t("404.backHome")}</span>
         </a>
         <a
           href={getUrl("/about")}
-          class={cn(
-            buttonVariants({ variant: "secondary", size: "lg" }),
-            "min-w-[84px] max-w-[240px]",
-          )}
+          class="btn btn-secondary btn-lg max-w-[240px] min-w-[84px]"
         >
           <span class="truncate">{t("404.learnAbout")}</span>
         </a>

@@ -20,7 +20,7 @@ Pick Default App lets you quickly look up any file type (MIME type) on your syst
 - Shows all matching desktop applications
 - One-click change of the default app
 - Writes directly to your `~/.config/mimeapps.list`
-- Live updates—changes are immediate
+- Live updates, changes are immediate
 
 ## How It Works
 

@@ -30,26 +30,6 @@ const {
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
-    <script is:inline>
-      // Function to apply theme based on system preference
-      const applyTheme = () => {
-        const isDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-        document.documentElement.classList.toggle("dark", isDark);
-      };
-
-      // Apply theme immediately on initial load
-      applyTheme();
-
-      // Apply theme after each view transition
-      document.addEventListener("astro:page-load", applyTheme);
-
-      // Listen for system theme changes
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", applyTheme);
-    </script>
     <ClientRouter />
   </head>
   <body>

@@ -1,6 +1,6 @@
 ---
 title: "Hathor"
-description: "Una interfaz de escritorio para FFmpeg — codifica, recorta, fusiona y normaliza sin memorizar un solo comando."
+description: "Una interfaz de escritorio para FFmpeg, codifica, recorta, fusiona y normaliza sin memorizar un solo comando."
 date: 2025-06-01
 featured: true
 tags: ["Tauri", "SvelteKit", "Rust", "Svelte 5", "FFmpeg", "Bun", "TypeScript"]
