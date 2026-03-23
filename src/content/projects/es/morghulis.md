@@ -88,4 +88,4 @@ Sé pequeño. Añade pulido. Nunca te poseerá.
 
 ## Licencia
 
-MIT — haz cosas geniales, comparte las mejoras.
+MIT, haz cosas geniales, comparte las mejoras.

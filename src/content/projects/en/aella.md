@@ -22,7 +22,7 @@ Unlike traditional grammar checkers, Aella works completely offline, is lightnin
 
 ## The Problem It Solves
 
-As a developer writing multiple PR descriptions daily, jumping to ChatGPT for quick grammar checks becomes inefficient. You don't need AI rewrites—you just need to catch that missing apostrophe or comma while typing fast. Aella provides instant, offline corrections that keep your ideas and tone intact.
+As a developer writing multiple PR descriptions daily, jumping to ChatGPT for quick grammar checks becomes inefficient. You don't need AI rewrites, you just need to catch that missing apostrophe or comma while typing fast. Aella provides instant, offline corrections that keep your ideas and tone intact.
 
 **Workflow example:**
 

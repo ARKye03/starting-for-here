@@ -6,9 +6,7 @@ import {
   type Language,
 } from "../i18n/utils";
 import { languages } from "../i18n/ui";
-import { buttonVariants } from "@assets/components/ui/button";
-import { cn } from "@assets/lib/utils";
-import { Languages } from "lucide-react";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   currentPage?: "home" | "about" | "projects" | "contact";
@@ -74,10 +72,7 @@ const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
         {t("nav.projects")}
       </a>
     </div>
-    <a
-      class={cn(buttonVariants({ variant: "default" }), "min-w-[84px]")}
-      href={getUrl("/get-in-touch")}
-    >
+    <a class="btn btn-primary min-w-[84px]" href={getUrl("/get-in-touch")}>
       <span class="truncate">{t("nav.contact")}</span>
     </a>
     <!-- Language Switcher -->
@@ -102,36 +97,24 @@ const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
     >
       <div class="flex flex-col py-2">
         <a
-          class={cn(
-            "px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md",
-            currentPage === "home" && "text-primary",
-          )}
+          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "home" ? "text-primary" : ""}`}
           href={getUrl("/")}
         >
           {t("nav.home")}
         </a>
         <a
-          class={cn(
-            "px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md",
-            currentPage === "about" && "text-primary",
-          )}
+          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "about" ? "text-primary" : ""}`}
           href={getUrl("/about")}
         >
           {t("nav.about")}
         </a>
         <a
-          class={cn(
-            "px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md",
-            currentPage === "projects" && "text-primary",
-          )}
+          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "projects" ? "text-primary" : ""}`}
           href={getUrl("/projects")}
         >
           {t("nav.projects")}
         </a>
-        <a
-          class={cn(buttonVariants({ variant: "default" }), "mx-2 my-2")}
-          href={getUrl("/get-in-touch")}
-        >
+        <a class="btn btn-primary mx-2 my-2" href={getUrl("/get-in-touch")}>
           {t("nav.contact")}
         </a>
         <!-- Language Switcher -->
@@ -140,7 +123,7 @@ const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
             href={alternateLangUrl}
             class="text-muted-foreground hover:text-primary flex items-center gap-2 text-sm font-medium transition-colors"
           >
-            <Languages />
+            <Icon name="languages" class="h-4 w-4" />
             <span class="uppercase">{languages[alternateLang]}</span>
           </a>
         </div>

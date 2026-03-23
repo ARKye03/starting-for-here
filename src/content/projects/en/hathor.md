@@ -1,6 +1,6 @@
 ---
 title: "Hathor"
-description: "A desktop GUI for FFmpeg — encode, trim, merge, and normalize without memorizing a single command."
+description: "A desktop GUI for FFmpeg, encode, trim, merge, and normalize without memorizing a single command."
 date: 2025-06-01
 featured: true
 tags: ["Tauri", "SvelteKit", "Rust", "Svelte 5", "FFmpeg", "Bun", "TypeScript"]

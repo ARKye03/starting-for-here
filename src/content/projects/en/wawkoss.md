@@ -20,7 +20,7 @@ lang: "en"
 
 **Wawkoss** is a modern SoundCloud API wrapper and music streaming interface that brings the power of SoundCloud to a clean, performant web application. Built with Astro 5 (the best framework to date, by the way), it combines server-side security with client-side smoothness for an authentic music streaming experience.
 
-The name? It's from the iconic line: **W**hat **A**re **W**e? some **K**ind **O**f **S**uicide **S**quad?—because every side project needs a memorable backstory.
+The name? It's from the iconic line: **W**hat **A**re **W**e? some **K**ind **O**f **S**uicide **S**quad?, because every side project needs a memorable backstory.
 
 This project serves as a foundation for a future desktop application (ideally a LibAdwaita app), proving that modern web technologies can deliver desktop-quality experiences.
 
@@ -70,7 +70,7 @@ Astro's View Transitions create smooth, SPA-like navigation:
 - No full page reloads between routes
 - Shared elements animate seamlessly
 - Instant perceived performance
-- Progressive enhancement—works without JavaScript
+- Progressive enhancement, works without JavaScript
 
 ### AlpineJS Integration
 

@@ -22,7 +22,7 @@ A diferencia de los correctores gramaticales tradicionales, Aella funciona compl
 
 ## El Problema que Resuelve
 
-Como desarrollador escribiendo múltiples descripciones de PR diariamente, saltar a ChatGPT para revisiones gramaticales rápidas se vuelve ineficiente. No necesitas reescrituras de IA—solo necesitas atrapar ese apóstrofo o coma faltante mientras escribes rápido. Aella proporciona correcciones instantáneas offline que mantienen tus ideas y tono intactos.
+Como desarrollador escribiendo múltiples descripciones de PR diariamente, saltar a ChatGPT para revisiones gramaticales rápidas se vuelve ineficiente. No necesitas reescrituras de IA, solo necesitas atrapar ese apóstrofo o coma faltante mientras escribes rápido. Aella proporciona correcciones instantáneas offline que mantienen tus ideas y tono intactos.
 
 **Ejemplo de flujo de trabajo:**
 
