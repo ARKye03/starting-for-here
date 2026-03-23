@@ -124,12 +124,14 @@ All components extract language from URL and use translation helpers.
 ---
 import { Icon } from "astro-icon/components";
 ---
+
 <Icon name="icon-name" class="h-5 w-5" />
 ```
 
 Add new icons as SVG files in `src/icons/`. Name matches filename (e.g., `src/icons/mail.svg` → `name="mail"`).
 
 **Button classes** (DaisyUI):
+
 - Primary: `btn btn-primary`
 - Secondary: `btn btn-secondary`
 - Large: add `btn-lg`
