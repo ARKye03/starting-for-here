@@ -20,20 +20,25 @@ const transitionName = `project-${slug}`;
 
 <a
   href={projectUrl}
-  class="group relative flex aspect-video flex-col justify-end gap-3 overflow-hidden rounded-lg p-4 no-underline bg-base-200"
+  class="group bg-base-200 relative flex aspect-video flex-col justify-end gap-3 overflow-hidden rounded-lg p-4 no-underline"
   transition:name={transitionName}
 >
-  {image && (
-    <Image
-      src={`/projects/${image}`}
-      alt={title}
-      class="absolute inset-0 h-full w-full object-cover"
-      width={600}
-      height={338}
-    />
-  )}
-  <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30" />
-  <p class="relative z-10 line-clamp-2 text-base leading-tight font-bold text-white">
+  {
+    image && (
+      <Image
+        src={`/projects/${image}`}
+        alt={title}
+        class="absolute inset-0 h-full w-full object-cover"
+        width={600}
+        height={338}
+      />
+    )
+  }
+  <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30">
+  </div>
+  <p
+    class="relative z-10 line-clamp-2 text-base leading-tight font-bold text-white"
+  >
     {title}
   </p>
   {
@@ -47,7 +52,9 @@ const transitionName = `project-${slug}`;
       </div>
     )
   }
-  <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+  <div
+    class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+  >
     <span class="text-lg font-bold text-white">{t("common.viewProject")}</span>
   </div>
 </a>
