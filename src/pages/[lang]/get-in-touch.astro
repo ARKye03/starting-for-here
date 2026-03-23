@@ -13,10 +13,6 @@ export async function getStaticPaths() {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 let email = "rafa03-dev@proton.me";
-
-const inputClasses = "input input-bordered w-full";
-const textareaClasses = "textarea textarea-bordered w-full min-h-24";
-const labelClasses = "text-sm font-medium leading-none pb-2";
 ---
 
 <Layout
@@ -25,68 +21,58 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
   currentPage="contact"
   lang={lang}
 >
-  <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
-    <div class="flex flex-col gap-16 lg:flex-row lg:gap-24">
-      <div class="space-y-8 lg:w-2/5">
+  <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+    <div class="flex flex-col gap-16 lg:flex-row lg:gap-20">
+
+      <!-- Left: contact info -->
+      <aside class="flex flex-col gap-8 lg:w-2/5">
         <div>
-          <h1
-            class="text-foreground mb-4 text-4xl font-black tracking-tighter sm:text-5xl"
-          >
+          <h1 class="text-foreground mb-3 text-4xl font-black tracking-tighter sm:text-5xl">
             {t("contact.heading")}
           </h1>
-          <p class="text-muted-foreground text-lg">
+          <p class="text-muted-foreground text-base leading-relaxed">
             {t("contact.description")}
           </p>
         </div>
 
-        <div class="flex items-start gap-4">
-          <div
-            class="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-lg"
-          >
-            <Icon name="mail" class="h-6 w-6" />
-          </div>
-          <div>
-            <p class="text-foreground font-semibold">
-              {t("contact.email")}
-            </p>
-            <a
-              class="text-muted-foreground hover:text-primary transition-colors"
-              href={`mailto:${email}`}>{email}</a
-            >
-          </div>
-        </div>
-
-        <div class="flex items-start gap-4">
-          <div
-            class="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-lg"
-          >
-            <Icon name="messages-square" class="h-6 w-6" />
-          </div>
-          <div>
-            <p class="text-foreground font-semibold">
-              {t("contact.social")}
-            </p>
-            <div class="flex gap-4">
+        <div class="flex flex-col gap-5">
+          <div class="flex items-start gap-4">
+            <div class="bg-primary/10 text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-primary/20">
+              <Icon name="mail" class="h-5 w-5" />
+            </div>
+            <div>
+              <p class="text-foreground text-sm font-semibold uppercase tracking-widest">
+                {t("contact.email")}
+              </p>
               <a
-                class="text-muted-foreground hover:text-primary transition-colors"
-                href="https://www.linkedin.com/in/rafa03-dev">LinkedIn</a
-              >
-              <a
-                class="text-muted-foreground hover:text-primary transition-colors"
-                href="https://github.com/ARKye03">GitHub</a
-              >
-              <a
-                class="text-muted-foreground hover:text-primary transition-colors"
-                href="https://x.com/RafaelzSanchez">Twitter</a
+                class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                href={`mailto:${email}`}>{email}</a
               >
             </div>
           </div>
-        </div>
-      </div>
 
+          <div class="flex items-start gap-4">
+            <div class="bg-primary/10 text-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-primary/20">
+              <Icon name="messages-square" class="h-5 w-5" />
+            </div>
+            <div>
+              <p class="text-foreground text-sm font-semibold uppercase tracking-widest">
+                {t("contact.social")}
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <a class="text-muted-foreground hover:text-primary text-sm transition-colors" href="https://www.linkedin.com/in/rafa03-dev">LinkedIn</a>
+                <a class="text-muted-foreground hover:text-primary text-sm transition-colors" href="https://github.com/ARKye03">GitHub</a>
+                <a class="text-muted-foreground hover:text-primary text-sm transition-colors" href="https://x.com/RafaelzSanchez">Twitter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right: form -->
       <form
         id="contact-form"
-        class="space-y-6 lg:w-3/5"
+        class="flex flex-col gap-4 lg:w-3/5"
         action="/api/contact"
         method="POST"
         data-msg-sending={t("contact.form.sending")}
@@ -95,67 +81,75 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
         data-msg-error={t("contact.form.error")}
         data-msg-network={t("contact.form.networkError")}
       >
-        <!-- Status messages -->
-        <div id="form-status" class="hidden rounded-lg p-4"></div>
+        <div id="form-status" class="hidden rounded-lg p-3 text-sm"></div>
 
-        <div>
-          <label class={labelClasses} for="name">{t("contact.form.name")}</label
-          >
-          <input
-            autocomplete="name"
-            class={inputClasses}
-            id="name"
-            name="name"
-            placeholder={t("contact.form.namePlaceholder")}
-            type="text"
-            required
-          />
+        <!-- Name + Email row -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">{t("contact.form.name")}</legend>
+            <label class="input input-neutral w-full bg-base-200 border-base-300">
+              <Icon name="user" class="h-[1em] opacity-50" />
+              <input
+                autocomplete="name"
+                class="grow"
+                id="name"
+                name="name"
+                placeholder={t("contact.form.namePlaceholder")}
+                type="text"
+                required
+              />
+            </label>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">{t("contact.form.email")}</legend>
+            <label class="input input-neutral w-full bg-base-200 border-base-300">
+              <Icon name="mail" class="h-[1em] opacity-50" />
+              <input
+                autocomplete="email"
+                class="grow"
+                id="email"
+                name="email"
+                placeholder={t("contact.form.emailPlaceholder")}
+                type="email"
+                required
+              />
+            </label>
+          </fieldset>
         </div>
-        <div>
-          <label class={labelClasses} for="email"
-            >{t("contact.form.email")}</label
-          >
-          <input
-            autocomplete="email"
-            class={inputClasses}
-            id="email"
-            name="email"
-            placeholder={t("contact.form.emailPlaceholder")}
-            type="email"
-            required
-          />
-        </div>
-        <div>
-          <label class={labelClasses} for="subject"
-            >{t("contact.form.subject")}</label
-          >
-          <input
-            class={inputClasses}
-            id="subject"
-            name="subject"
-            placeholder={t("contact.form.subjectPlaceholder")}
-            type="text"
-            required
-          />
-        </div>
-        <div>
-          <label class={labelClasses} for="message"
-            >{t("contact.form.message")}</label
-          >
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">{t("contact.form.subject")}</legend>
+          <label class="input input-neutral w-full bg-base-200 border-base-300">
+            <Icon name="tag" class="h-[1em] opacity-50" />
+            <input
+              class="grow"
+              id="subject"
+              name="subject"
+              placeholder={t("contact.form.subjectPlaceholder")}
+              type="text"
+              required
+            />
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">{t("contact.form.message")}</legend>
           <textarea
-            class={textareaClasses}
+            class="textarea textarea-neutral w-full min-h-32 resize-y bg-base-200 border-base-300"
             id="message"
             name="message"
             placeholder={t("contact.form.messagePlaceholder")}
-            rows="4"
             required></textarea>
-        </div>
+        </fieldset>
+
         <button
           id="submit-btn"
-          class="btn btn-primary w-full"
+          class="btn btn-primary self-start gap-2 px-8"
           type="submit"
         >
           <span id="btn-text">{t("contact.form.submit")}</span>
+          <Icon name="mail" class="h-4 w-4" />
         </button>
       </form>
     </div>
@@ -166,57 +160,41 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
   document.addEventListener("astro:page-load", () => {
     const form = document.getElementById("contact-form") as HTMLFormElement;
     const statusDiv = document.getElementById("form-status");
-    const submitBtn = document.getElementById(
-      "submit-btn",
-    ) as HTMLButtonElement;
+    const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
     const btnText = document.getElementById("btn-text");
 
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       submitBtn.disabled = true;
-      if (btnText)
-        btnText.textContent = form.dataset.msgSending || "Sending...";
+      if (btnText) btnText.textContent = form.dataset.msgSending || "Sending...";
 
       try {
-        const formData = new FormData(form);
         const response = await fetch("/api/contact", {
           method: "POST",
-          body: formData,
+          body: new FormData(form),
         });
-
         const result = await response.json();
 
-        if (response.ok) {
-          if (statusDiv) {
-            statusDiv.className =
-              "rounded-lg p-4 bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20";
-            statusDiv.textContent = form.dataset.msgSuccess || "✓ Success";
-            statusDiv.classList.remove("hidden");
-          }
-          form.reset();
-        } else {
-          if (statusDiv) {
-            statusDiv.className =
-              "rounded-lg p-4 bg-destructive/10 text-destructive border border-destructive/20";
+        if (statusDiv) {
+          if (response.ok) {
+            statusDiv.className = "rounded-lg p-3 text-sm bg-success/10 text-success border border-success/20";
+            statusDiv.textContent = form.dataset.msgSuccess || "✓ Sent!";
+            form.reset();
+          } else {
+            statusDiv.className = "rounded-lg p-3 text-sm bg-error/10 text-error border border-error/20";
             statusDiv.textContent = `✗ ${result.error || form.dataset.msgError || "Error"}`;
-            statusDiv.classList.remove("hidden");
           }
         }
       } catch {
         if (statusDiv) {
-          statusDiv.className =
-            "rounded-lg p-4 bg-destructive/10 text-destructive border border-destructive/20";
+          statusDiv.className = "rounded-lg p-3 text-sm bg-error/10 text-error border border-error/20";
           statusDiv.textContent = form.dataset.msgNetwork || "✗ Network error";
-          statusDiv.classList.remove("hidden");
         }
       } finally {
         submitBtn.disabled = false;
-        if (btnText)
-          btnText.textContent = form.dataset.msgSubmit || "Send Message";
-
+        if (btnText) btnText.textContent = form.dataset.msgSubmit || "Send Message";
         setTimeout(() => {
-          statusDiv?.classList.add("hidden");
+          if (statusDiv) statusDiv.className = "hidden rounded-lg p-3 text-sm";
         }, 5000);
       }
     });
