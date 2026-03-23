@@ -14,7 +14,7 @@ lang: "en"
 
 **FEROX** (Functional Expression Runtime for Operations and eXecution) is an educational interpreter for a functional programming language built entirely in Rust. This project represents a complete rewrite and modernization of a college project, demonstrating core interpreter implementation concepts while remaining easy to learn and use.
 
-The language combines functional programming concepts with imperative features, offering strong typing, lexical scoping, recursion support, and built-in mathematical functions—all implemented without external dependencies in the core library.
+The language combines functional programming concepts with imperative features, offering strong typing, lexical scoping, recursion support, and built-in mathematical functions, all implemented without external dependencies in the core library.
 
 ## Key Features
 
