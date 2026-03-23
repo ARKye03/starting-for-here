@@ -88,4 +88,4 @@ Stay small. Add polish. Never own you.
 
 ## License
 
-MIT — do cool things, share improvements.
+MIT, do cool things, share improvements.
