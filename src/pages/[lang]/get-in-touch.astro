@@ -2,9 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { languages } from "../../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { buttonVariants } from "@assets/components/ui/button";
-import { cn } from "@assets/lib/utils";
-import { Mail, MessagesSquare } from "lucide-react";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
@@ -16,13 +14,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 let email = "rafa03-dev@proton.me";
 
-// Shadcn input styles
-const inputClasses =
-  "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-10 w-full min-w-0 rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive";
-
-const textareaClasses =
-  "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-24 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm";
-
+const inputClasses = "input input-bordered w-full";
+const textareaClasses = "textarea textarea-bordered w-full min-h-24";
 const labelClasses = "text-sm font-medium leading-none pb-2";
 ---
 
@@ -50,7 +43,7 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
           <div
             class="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-lg"
           >
-            <Mail />
+            <Icon name="mail" class="h-6 w-6" />
           </div>
           <div>
             <p class="text-foreground font-semibold">
@@ -67,7 +60,7 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
           <div
             class="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-lg"
           >
-            <MessagesSquare />
+            <Icon name="messages-square" class="h-6 w-6" />
           </div>
           <div>
             <p class="text-foreground font-semibold">
@@ -159,10 +152,7 @@ const labelClasses = "text-sm font-medium leading-none pb-2";
         </div>
         <button
           id="submit-btn"
-          class={cn(
-            buttonVariants({ variant: "default", size: "default" }),
-            "w-full",
-          )}
+          class="btn btn-primary w-full"
           type="submit"
         >
           <span id="btn-text">{t("contact.form.submit")}</span>
