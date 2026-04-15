@@ -2,6 +2,7 @@
 build
 coverage
 .claude
+CLAUDE.md
 .githooks
 .astro
 dist
