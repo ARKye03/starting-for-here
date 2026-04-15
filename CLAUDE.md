@@ -1,10 +1,10 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (claude.ai/code) in this repo.
 
 ## Project Overview
 
-ARKye03's Portfolio - A multilingual Astro-based portfolio site with English and Spanish support, deployed on Vercel. Built with static site generation for maximum performance.
+ARKye03's Portfolio — multilingual Astro portfolio, EN+ES, Vercel-deployed. Full SSG for max performance.
 
 ## Development Commands
 
@@ -26,18 +26,18 @@ pnpm astro [command]
 
 ### Routing Strategy
 
-File-based routing with language-first architecture:
+File-based, language-first routing:
 
-- **Root routes**: `/src/pages/*.astro` - Top-level pages (index redirects to /en)
-- **Localized routes**: `/src/pages/[lang]/*.astro` - Language-scoped pages
-- **Dynamic routes**: `/src/pages/[lang]/projects/[slug].astro` - Project details
-- **API routes**: `/src/pages/api/*.ts` - Server endpoints (prerender: false)
+- **Root routes**: `/src/pages/*.astro` — top-level (index redirects to /en)
+- **Localized routes**: `/src/pages/[lang]/*.astro` — language-scoped
+- **Dynamic routes**: `/src/pages/[lang]/projects/[slug].astro` — project details
+- **API routes**: `/src/pages/api/*.ts` — server endpoints (prerender: false)
 
-Default language (en) has no URL prefix. Spanish uses `/es` prefix.
+EN default, no URL prefix. ES uses `/es` prefix.
 
 ### I18n System
 
-Manual internationalization with static generation per language:
+Manual i18n, static generation per language:
 
 **Configuration** (`astro.config.mjs`):
 
@@ -51,13 +51,13 @@ i18n: {
 
 **Key files**:
 
-- `/src/i18n/ui.ts` - Translation dictionary (100+ keys organized by feature)
-- `/src/i18n/utils.ts` - Helper functions:
-  - `getLangFromUrl(url)` - Extract language from URL
-  - `useTranslations(lang)` - Get translation function with fallback
-  - `getAlternateLangUrl(url, targetLang)` - Generate language-switched URLs
+- `/src/i18n/ui.ts` — translation dict (100+ keys by feature)
+- `/src/i18n/utils.ts` — helpers:
+  - `getLangFromUrl(url)` — extract lang from URL
+  - `useTranslations(lang)` — get t() with fallback
+  - `getAlternateLangUrl(url, targetLang)` — generate lang-switch URLs
 
-**Usage pattern**:
+**Usage**:
 
 ```astro
 ---
@@ -68,54 +68,54 @@ const t = useTranslations(lang);
 <h1>{t("page.home.title")}</h1>
 ```
 
-All language-aware routes must use `getStaticPaths()` to generate pages per language.
+All lang-aware routes need `getStaticPaths()` per language.
 
 ### Content Collections
 
-Markdown-based content system with schema validation:
+Markdown content with schema validation:
 
 **Schema** (`/src/content/config.ts`):
 
 - Collection: `projects`
 - Fields: title, description, images, tags, url, github, featured, date, lang
-- Content organized by language: `/src/content/projects/en/` and `/src/content/projects/es/`
+- Content by lang: `/src/content/projects/en/` and `/src/content/projects/es/`
 
 **Usage**:
 
-- Query with `getCollection("projects")` and filter by language
-- Render markdown with `const { Content } = await project.render()`
-- Images stored in `/public/projects/` and referenced relatively in frontmatter
+- Query with `getCollection("projects")`, filter by lang
+- Render with `const { Content } = await project.render()`
+- Images in `/public/projects/`, referenced in frontmatter
 
 ### Component Architecture
 
 10 reusable Astro components in `/src/components/`:
 
-- **Layout.astro** - Base HTML wrapper with Header/Footer
-- **Header.astro** - Sticky navigation with language switcher
-- **Hero.astro** - Homepage banner
-- **Projects.astro** - Featured projects grid (pins 3 by slug)
-- **ProjectCard.astro** - Project thumbnail with hover effects
-- **Philosophy.astro** - About page biography section
-- **Journey.astro** - About page timeline
-- **Skills.astro** - About page skills showcase
-- **CallToAction.astro** - CTA section
-- **Footer.astro** - Global footer with social links
+- **Layout.astro** — base HTML wrapper with Header/Footer
+- **Header.astro** — sticky nav with lang switcher
+- **Hero.astro** — homepage banner
+- **Projects.astro** — featured projects grid (pins 3 by slug)
+- **ProjectCard.astro** — project thumbnail, hover effects
+- **Philosophy.astro** — about page bio section
+- **Journey.astro** — about page timeline
+- **Skills.astro** — about page skills showcase
+- **CallToAction.astro** — CTA section
+- **Footer.astro** — global footer, social links
 
-All components extract language from URL and use translation helpers.
+All components extract lang from URL, use translation helpers.
 
 ### Styling System
 
-**Tailwind CSS v4** + **DaisyUI 5** with custom theming:
+**Tailwind CSS v4** + **DaisyUI 5**, custom theming:
 
 - Integrated via `@tailwindcss/vite` plugin
 - Global CSS: `/src/styles/global.css`
-- Color system uses OKLch color space for precise theming
+- OKLch color space
 - Dark mode via `prefers-color-scheme` (CSS-only, no JS toggle)
-- Two custom DaisyUI themes: `catppuccin` (light default) and `catppuccin-dark` (dark, prefersdark)
-- Catppuccin Mauve as primary color in both themes
-- Design tokens: Montserrat (sans), Georgia (serif), Fira Code (mono)
-- Responsive: mobile-first with container queries (`@container`)
-- Components: DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
+- Two DaisyUI themes: `catppuccin` (light default), `catppuccin-dark` (dark, prefersdark)
+- Catppuccin Mauve as primary in both themes
+- Fonts: Montserrat (sans), Georgia (serif), Fira Code (mono)
+- Mobile-first, container queries (`@container`)
+- DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
 - Icons: **astro-icon** with local SVGs in `src/icons/`, **NO inline SVG**
 
 **Icon usage**:
@@ -128,7 +128,7 @@ import { Icon } from "astro-icon/components";
 <Icon name="icon-name" class="h-5 w-5" />
 ```
 
-Add new icons as SVG files in `src/icons/`. Name matches filename (e.g., `src/icons/mail.svg` → `name="mail"`).
+Add icons as SVG in `src/icons/`. Name = filename (e.g., `src/icons/mail.svg` → `name="mail"`).
 
 **Button classes** (DaisyUI):
 
@@ -154,31 +154,31 @@ export const prerender = false; // Required for server routes
 **Functionality**:
 
 - Validates form data (name, email, subject, message)
-- Sends email via Resend service (requires `RESEND_API_KEY` env var)
-- Returns JSON response with success/error status
-- Client-side AJAX submission with status messages
+- Sends email via Resend (`RESEND_API_KEY` env var required)
+- Returns JSON success/error
+- Client-side AJAX with status messages
 
 ### Build & Deployment
 
-**Build configuration**:
+**Build config**:
 
 - Output: `static` (full SSG)
 - Adapter: Vercel (`@astrojs/vercel`)
-- All routes pre-rendered except API endpoints
+- All routes pre-rendered except API
 - Images optimized with Sharp
 
 **Deployment**:
 
 - Platform: Vercel
-- Environment variable: `RESEND_API_KEY` (contact form)
-- Asset caching: 1 year for `/_astro/*` files
+- Env var: `RESEND_API_KEY` (contact form)
+- Asset cache: 1 year for `/_astro/*`
 
 ## Important Patterns
 
 ### Adding New Pages
 
-1. Create file in `/src/pages/[lang]/your-page.astro`
-2. Implement `getStaticPaths()` to generate per language:
+1. Create `/src/pages/[lang]/your-page.astro`
+2. Implement `getStaticPaths()`:
 
    ```javascript
    export async function getStaticPaths() {
@@ -188,20 +188,20 @@ export const prerender = false; // Required for server routes
    }
    ```
 
-3. Extract language: `const lang = getLangFromUrl(Astro.url);`
+3. Extract lang: `const lang = getLangFromUrl(Astro.url);`
 4. Use translations: `const t = useTranslations(lang);`
-5. Add translations to `/src/i18n/ui.ts` for both languages
+5. Add keys to `/src/i18n/ui.ts` for both langs
 
 ### Adding New Projects
 
-1. Create markdown files in `/src/content/projects/en/` and `/src/content/projects/es/`
-2. Follow schema: title, description, date, tags, images (optional), url (optional), github (optional), featured (boolean), lang
-3. Add images to `/public/projects/[project-name]/`
-4. Projects auto-appear in listing, sorted by date descending
+1. Create markdown in `/src/content/projects/en/` and `/src/content/projects/es/`
+2. Schema: title, description, date, tags, images (optional), url (optional), github (optional), featured (boolean), lang
+3. Images in `/public/projects/[project-name]/`
+4. Auto-appear in listing, sorted by date desc
 
 ### Modifying Translations
 
-Edit `/src/i18n/ui.ts` - translations organized by feature:
+Edit `/src/i18n/ui.ts` — organized by feature:
 
 - Navigation: `nav.*`
 - Pages: `page.[pagename].*`
@@ -209,16 +209,16 @@ Edit `/src/i18n/ui.ts` - translations organized by feature:
 - Projects: `projects.*`
 - Contact: `contact.*`
 
-Always update both `en` and `es` dictionaries.
+Always update both `en` and `es`.
 
 ### View Transitions
 
-Pages use Astro's `<ClientRouter>` for SPA-like navigation. Use `transition:name` directives for shared elements across pages.
+Pages use Astro's `<ClientRouter>` for SPA-like nav. Use `transition:name` for shared elements across pages.
 
 ## Technology Stack
 
-- **Framework**: Astro 6.0.5 (static site generation)
-- **Styling**: Tailwind CSS 4.1.18 with Vite plugin + DaisyUI 5.5.19
+- **Framework**: Astro 6.0.5 (SSG)
+- **Styling**: Tailwind CSS 4.1.18 (Vite plugin) + DaisyUI 5.5.19
 - **Email**: Resend 6.1.3
 - **Image Processing**: Sharp 0.34.4
 - **Icons**: astro-icon 1.1.5 (local SVGs in `src/icons/`)
