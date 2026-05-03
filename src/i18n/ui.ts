@@ -40,8 +40,19 @@ export const ui = {
     "404.backHome": "Back to Home",
     "404.learnAbout": "Learn About Me",
     "404.lookingFor": "Looking for something specific?",
+    "404.terminal": "> ERROR: path not found in the system...",
+
+    // Footer
+    "footer.tagline": "Built with passion",
+    "footer.copyright": "Rafael Sanchez",
+
+    // Section labels
+    "section.about": "About",
+    "section.contact": "Contact",
+    "section.work": "Selected Work",
 
     // Hero Section
+    "hero.intro": "Rafael Sanchez",
     "hero.title": "Software Developer",
     "hero.subtitle":
       "I design and code beautifully simple things, and I love what I do. I'm a passionate developer with a knack for creating elegant and effective solutions.",
@@ -49,7 +60,12 @@ export const ui = {
     "hero.aboutMe": "About Me",
 
     // Projects Section
-    "projects.bestProjects": "My Best Projects",
+    "projects.bestProjects": "Featured Projects",
+    "projects.viewAll": "View All Projects",
+    "projects.filter.all": "All",
+    "projects.filter.featured": "Featured",
+    "projects.count": "projects",
+    "projects.portfolioLabel": "Portfolio",
 
     // About Page Sections
     "about.hero.title": "Designing with purpose and passion.",
@@ -151,8 +167,19 @@ export const ui = {
     "404.backHome": "Volver al Inicio",
     "404.learnAbout": "Conoce Más Sobre Mí",
     "404.lookingFor": "¿Buscas algo específico?",
+    "404.terminal": "> ERROR: ruta no encontrada en el sistema...",
+
+    // Footer
+    "footer.tagline": "Hecho con pasión",
+    "footer.copyright": "Rafael Sanchez",
+
+    // Section labels
+    "section.about": "Acerca de",
+    "section.contact": "Contacto",
+    "section.work": "Trabajo Seleccionado",
 
     // Hero Section
+    "hero.intro": "Rafael Sanchez",
     "hero.title": "Desarrollador de Software",
     "hero.subtitle":
       "Diseño y programo cosas maravillosamente simples, y amo lo que hago. Soy un desarrollador apasionado con talento para crear soluciones elegantes y efectivas.",
@@ -161,6 +188,11 @@ export const ui = {
 
     // Projects Section
     "projects.bestProjects": "Mis Mejores Proyectos",
+    "projects.viewAll": "Ver Todos los Proyectos",
+    "projects.filter.all": "Todos",
+    "projects.filter.featured": "Destacados",
+    "projects.count": "proyectos",
+    "projects.portfolioLabel": "Portafolio",
 
     // About Page Sections
     "about.hero.title": "Diseñando con propósito y pasión.",

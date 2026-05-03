@@ -1,152 +1,118 @@
 ---
-import { Image } from "astro:assets";
-
-import angularSvg from "@assets/aboutSVGs/brand-angular.svg";
-import astroSvg from "@assets/aboutSVGs/brand-astro.svg";
-import reactSvg from "@assets/aboutSVGs/brand-react.svg";
-import dotnetSvg from "@assets/aboutSVGs/dotnet-tile.svg";
-import sqlSvg from "@assets/aboutSVGs/sql.svg";
-import javascriptSvg from "@assets/aboutSVGs/brand-javascript.svg";
-import typescriptSvg from "@assets/aboutSVGs/brand-typescript.svg";
-import desktopSvg from "@assets/aboutSVGs/device-imac.svg";
-import gitSvg from "@assets/aboutSVGs/brand-git.svg";
-import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
-import cfSvg from "@assets/aboutSVGs/brand-cloudflare.svg";
-import gnomeSvg from "@assets/aboutSVGs/brand-gnome.svg";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const softSkills = [
+  t("about.skills.uiux"),
+  t("about.skills.linux"),
+  t("about.skills.prototype"),
+  t("about.skills.research"),
+  t("about.skills.comm"),
+  t("about.skills.problem"),
+];
+
+const techStack = [
+  { name: "TypeScript", icon: "TS" },
+  { name: "React", icon: "Re" },
+  { name: "Astro", icon: "As" },
+  { name: ".NET", icon: ".N" },
+  { name: "JavaScript", icon: "JS" },
+  { name: "Angular", icon: "Ng" },
+  { name: "Git", icon: "Gt" },
+  { name: "AWS", icon: "AW" },
+  { name: "Cloudflare", icon: "CF" },
+  { name: "SQL", icon: "SQ" },
+  { name: "GNOME", icon: "GN" },
+  { name: "Vala", icon: "Va" },
+];
+
+const langs = [
+  { name: t("about.skills.spanish"), level: t("about.skills.native"), pct: 100 },
+  { name: t("about.skills.english"), level: t("about.skills.fluent"), pct: 85 },
+  { name: t("about.skills.german"), level: t("about.skills.basic"), pct: 30 },
+];
 ---
 
-<section>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.title")}
-  </h2>
-  <div class="grid grid-cols-2 gap-4 px-4 py-8 md:grid-cols-3">
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🎨</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.uiux")}
-      </p>
+<section class="px-6 py-16 md:py-20">
+  <div class="mx-auto max-w-[1120px]">
+    <h2 class="display-h3 mb-6 text-xl">{t("about.skills.title")}</h2>
+    <div
+      class="mb-12 grid gap-3"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr))"
+    >
+      {
+        softSkills.map((s) => (
+          <div
+            class="rounded-[var(--radius)] border px-5 py-4 text-[14px] transition-colors hover:border-[var(--primary)]"
+            style="background: var(--card); border-color: var(--border); color: var(--foreground); font-family: var(--font-body)"
+          >
+            {s}
+          </div>
+        ))
+      }
     </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🐧</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.linux")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">💻</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.prototype")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">👥</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.research")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🗣️</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.comm")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">💡</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.problem")}
-      </p>
-    </div>
-  </div>
-</section>
 
-<section>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.stack")}
-  </h2>
-  <div class="grid grid-cols-2 gap-4 px-4 py-8 md:grid-cols-3 lg:grid-cols-4">
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={cfSvg} alt="Cloudflare" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Cloudflare</p>
+    <h3 class="display-h3 mb-5 text-lg">{t("about.skills.stack")}</h3>
+    <div
+      class="mb-12 grid gap-2.5"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr))"
+    >
+      {
+        techStack.map((tech) => (
+          <div
+            class="rounded-[var(--radius)] border px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
+            style="background: var(--card); border-color: var(--border)"
+          >
+            <div
+              class="mb-1.5 font-mono text-lg font-bold"
+              style="color: var(--primary)"
+            >
+              {tech.icon}
+            </div>
+            <div
+              class="text-[11px]"
+              style="color: var(--muted-foreground); font-family: var(--font-body)"
+            >
+              {tech.name}
+            </div>
+          </div>
+        ))
+      }
     </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={awsSvg} alt="AWS" loading="lazy" />
-      <p class="text-foreground text-base font-medium">AWS</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={angularSvg} alt="Angular" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Angular</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={astroSvg} alt="Astro" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Astro</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={reactSvg} alt="React" loading="lazy" />
-      <p class="text-foreground text-base font-medium">React</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={dotnetSvg} alt=".NET" loading="lazy" />
-      <p class="text-foreground text-base font-medium">.NET</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={sqlSvg} alt="SQL" loading="lazy" />
-      <p class="text-foreground text-base font-medium">SQL Databases</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={javascriptSvg} alt="JavaScript" loading="lazy" />
-      <p class="text-foreground text-base font-medium">JavaScript</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={typescriptSvg} alt="TypeScript" loading="lazy" />
-      <p class="text-foreground text-base font-medium">TypeScript</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={gnomeSvg} alt="Gnome Tools" loading="lazy" width={24} />
-      <p class="text-foreground text-base font-medium">Gnome Tools</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={desktopSvg} alt="Desktop Apps" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Desktop Apps</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={gitSvg} alt="Git" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Git</p>
-    </div>
-  </div>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.languages")}
-  </h2>
-  <div class="grid grid-cols-1 gap-4 px-4 py-8 md:grid-cols-3">
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.spanish")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.native")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
-      </div>
-    </div>
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.english")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.fluent")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
-      </div>
-    </div>
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.german")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.basic")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
-      </div>
+
+    <h3 class="display-h3 mb-5 text-lg">{t("about.skills.languages")}</h3>
+    <div class="flex max-w-[480px] flex-col gap-4">
+      {
+        langs.map((l) => (
+          <div>
+            <div class="mb-1.5 flex items-center justify-between">
+              <span
+                class="text-[14px]"
+                style="color: var(--foreground); font-family: var(--font-body)"
+              >
+                {l.name}
+              </span>
+              <span
+                class="font-mono text-xs"
+                style="color: var(--muted-foreground)"
+              >
+                {l.level}
+              </span>
+            </div>
+            <div
+              class="h-1 overflow-hidden rounded"
+              style="background: var(--border)"
+            >
+              <div
+                class="h-full rounded"
+                style={`width: ${l.pct}%; background: var(--primary); animation: lang-bar-fill 1s cubic-bezier(.22,1,.36,1) both`}
+              />
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
