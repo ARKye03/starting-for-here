@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,18 +15,22 @@ const softSkills = [
 ];
 
 const techStack = [
-  { name: "TypeScript", icon: "TS" },
-  { name: "React", icon: "Re" },
-  { name: "Astro", icon: "As" },
-  { name: ".NET", icon: ".N" },
-  { name: "JavaScript", icon: "JS" },
-  { name: "Angular", icon: "Ng" },
-  { name: "Git", icon: "Gt" },
-  { name: "AWS", icon: "AW" },
-  { name: "Cloudflare", icon: "CF" },
-  { name: "SQL", icon: "SQ" },
-  { name: "GNOME", icon: "GN" },
-  { name: "Vala", icon: "Va" },
+  { name: "TypeScript", icon: "skills/typescript" },
+  { name: "JavaScript", icon: "skills/javascript" },
+  { name: "React", icon: "skills/react" },
+  { name: "Next.js", icon: "skills/nextdotjs", themed: true },
+  { name: "Astro", icon: "skills/astro" },
+  { name: "Angular", icon: "skills/angular" },
+  { name: ".NET", icon: "skills/dotnet-tile", wide: true },
+  { name: "Vala", icon: "skills/vala" },
+  { name: "Rust", icon: "skills/rust" },
+  { name: "SQL", icon: "skills/sql" },
+  { name: "Git", icon: "skills/git" },
+  { name: "Bun", icon: "skills/bun" },
+  { name: "AWS", icon: "skills/aws" },
+  { name: "Cloudflare", icon: "skills/cloudflare" },
+  { name: "Terraform", icon: "skills/terraform" },
+  { name: "GNOME", icon: "skills/gnome" },
 ];
 
 const langs = [
@@ -62,15 +67,17 @@ const langs = [
       {
         techStack.map((tech) => (
           <div
-            class="rounded-[var(--radius)] border px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
+            class="flex flex-col items-center justify-center gap-2 rounded-[var(--radius)] border px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
             style="background: var(--card); border-color: var(--border)"
           >
-            <div
-              class="mb-1.5 font-mono text-lg font-bold"
-              style="color: var(--primary)"
-            >
-              {tech.icon}
-            </div>
+            <Icon
+              name={tech.icon}
+              class:list={[
+                "h-7",
+                tech.wide ? "w-12" : "w-7",
+                tech.themed && "themed-icon",
+              ]}
+            />
             <div
               class="text-[11px]"
               style="color: var(--muted-foreground); font-family: var(--font-body)"
@@ -116,3 +123,9 @@ const langs = [
     </div>
   </div>
 </section>
+
+<style>
+  .themed-icon {
+    color: var(--foreground);
+  }
+</style>
