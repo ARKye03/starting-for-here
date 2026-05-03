@@ -1,73 +1,107 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-// Detect language from URL, fallback to 'en' if not found
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Helper function to generate language-aware URLs
 const getUrl = (path: string) => `/${lang}${path}`;
 ---
 
 <Layout title={t("404.title")} lang={lang}>
-  <div
-    class="flex min-h-[80vh] flex-col items-center justify-center px-4 text-center"
+  <section
+    class="relative flex min-h-[calc(100vh-4rem-5rem)] items-center justify-center overflow-hidden px-6 py-20"
   >
-    <div class="flex max-w-md flex-col gap-8">
-      <div class="text-primary text-8xl font-black opacity-20">404</div>
+    <div class="grid-bg"></div>
+    <div
+      class="glow-blob"
+      style="top: 30%; left: 50%; transform: translateX(-50%); width: 400px; height: 400px"
+    >
+    </div>
 
-      <div class="flex flex-col gap-4">
-        <h1
-          class="text-foreground text-4xl leading-tight font-black tracking-[-0.033em]"
-        >
-          {t("404.title")}
-        </h1>
-        <p class="text-muted-foreground text-lg leading-relaxed">
-          {t("404.message")}
-        </p>
+    <div class="relative z-10 max-w-[600px] text-center">
+      <div
+        class="mb-8 font-bold leading-none"
+        style="font-family: var(--font-display); font-size: clamp(6rem, 20vw, 12.5rem); letter-spacing: -0.04em; color: var(--foreground); user-select: none"
+      >
+        404
       </div>
 
-      <div class="flex flex-col justify-center gap-4 sm:flex-row">
+      <div
+        class="mb-6 font-mono text-[13px]"
+        style="color: var(--primary); letter-spacing: 0.02em"
+      >
+        {t("404.terminal")}
+      </div>
+
+      <h1 class="display-h2 mb-3" style="font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 700">
+        {t("404.title")}
+      </h1>
+      <p
+        class="mb-10 text-[15px] leading-[1.6]"
+        style="color: var(--muted-foreground); font-family: var(--font-body)"
+      >
+        {t("404.message")}
+      </p>
+
+      <div class="mb-12 flex flex-wrap justify-center gap-3">
         <a
           href={getUrl("/")}
-          class="btn btn-primary btn-lg max-w-[240px] min-w-[84px]"
+          class="btn btn-primary btn-mono inline-flex items-center"
         >
-          <span class="truncate">{t("404.backHome")}</span>
+          {t("404.backHome")}
         </a>
         <a
           href={getUrl("/about")}
-          class="btn btn-secondary btn-lg max-w-[240px] min-w-[84px]"
+          class="btn btn-outline btn-mono inline-flex items-center"
         >
-          <span class="truncate">{t("404.learnAbout")}</span>
+          {t("404.learnAbout")}
         </a>
       </div>
 
-      <div class="border-t pt-8">
-        <p class="text-muted-foreground mb-4 text-sm">
+      <div>
+        <div
+          class="mb-4 font-mono text-[11px] uppercase tracking-[0.1em]"
+          style="color: var(--muted-foreground); opacity: 0.6"
+        >
           {t("404.lookingFor")}
-        </p>
-        <div class="flex flex-wrap justify-center gap-4 text-sm">
-          <a
-            href={getUrl("/projects")}
-            class="text-muted-foreground hover:text-primary transition-colors"
-          >
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={getUrl("/projects")} class="quick-link">
+            <Icon name="arrow-right" class="h-3 w-3" />
             {t("nav.projects")}
           </a>
-          <a
-            href={getUrl("/about")}
-            class="text-muted-foreground hover:text-primary transition-colors"
-          >
-            {t("nav.about")}
+          <a href={getUrl("/get-in-touch")} class="quick-link">
+            <Icon name="arrow-right" class="h-3 w-3" />
+            {t("nav.contact")}
           </a>
           <a
-            href={getUrl("/get-in-touch")}
-            class="text-muted-foreground hover:text-primary transition-colors"
+            href="https://github.com/ARKye03"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="quick-link"
           >
-            {t("nav.contact")}
+            <Icon name="arrow-up-right" class="h-3 w-3" />
+            GitHub
           </a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </Layout>
+
+<style>
+  .quick-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.2s;
+  }
+  .quick-link:hover {
+    color: var(--primary);
+  }
+</style>

@@ -1,43 +1,14 @@
 ---
-import { Image } from "astro:assets";
-import myProfilePic from "@assets/profile.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="@container">
-  <div
-    class="flex flex-col gap-6 px-4 py-16 @[864px]:flex-row-reverse @[864px]:items-center"
-  >
-    <div class="flex w-full justify-center @[864px]:w-1/2">
-      <div
-        class="avatar-circle aspect-square h-64 w-64 bg-cover bg-center bg-no-repeat @[480px]:h-80 @[480px]:w-80"
-      >
-        <Image
-          src={myProfilePic}
-          alt="Design Illustration"
-          class="h-full w-full object-cover"
-          loading="eager"
-          transition:name="myProfilePic"
-        />
-      </div>
-    </div>
-    <div class="flex flex-col gap-6 @[864px]:w-1/2 @[864px]:justify-center">
-      <div class="flex flex-col gap-4 text-left">
-        <h1
-          class="text-foreground text-4xl leading-tight font-bold @[480px]:text-5xl"
-        >
-          {t("about.hero.title")}
-        </h1>
-      </div>
-      <a
-        class="btn btn-primary btn-lg mx-auto max-w-[240px] min-w-[84px] @[864px]:mx-0"
-        href={`/${lang}/projects`}
-      >
-        <span class="truncate">{t("hero.viewProjects")}</span>
-      </a>
-    </div>
+<section class="relative overflow-hidden px-6 pb-12 pt-24 md:pt-32">
+  <div class="grid-bg"></div>
+  <div class="relative z-10 mx-auto max-w-[1120px]">
+    <div class="section-label mb-4">{t("section.about")}</div>
+    <h1 class="display-h2 max-w-[720px]">{t("about.hero.title")}</h1>
   </div>
 </section>

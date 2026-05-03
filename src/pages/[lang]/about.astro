@@ -25,8 +25,16 @@ const t = useTranslations(lang);
   lang={lang}
 >
   <AboutHero />
-  <Philosophy />
-  <Journey />
+
+  <section class="px-6 py-12 md:py-20">
+    <div
+      class="mx-auto grid max-w-[1120px] gap-12 md:grid-cols-2 md:gap-16"
+    >
+      <Philosophy />
+      <Journey />
+    </div>
+  </section>
+
   <Skills />
   <CallToAction />
 </Layout>

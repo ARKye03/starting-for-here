@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import myProfilePic from "@assets/profile.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
@@ -7,52 +8,62 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="@container">
+<section
+  class="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden px-6 py-20 md:py-28"
+>
+  <div class="grid-bg"></div>
+  <div class="glow-blob right-[10%] top-[15%]"></div>
+
   <div
-    class="flex flex-col-reverse items-center gap-6 px-4 py-8 @[480px]:gap-8 @[864px]:flex-row"
+    class="relative z-10 mx-auto grid w-full max-w-[1120px] items-center gap-12 md:grid-cols-[1fr_auto] md:gap-16"
   >
-    <div
-      class="flex flex-col gap-6 text-center @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center @[864px]:text-left"
-    >
-      <div class="flex flex-col gap-2">
-        <h1
-          class="text-4xl leading-tight font-black tracking-[-0.033em] @[480px]:text-5xl"
-        >
-          {t("hero.title")}
-        </h1>
-        <h2
-          class="text-muted-foreground text-sm leading-normal font-normal @[480px]:text-base"
-        >
-          {t("hero.subtitle")}
-        </h2>
+    <div class="fade-up text-center md:text-left">
+      <div class="section-label mb-4 justify-center md:justify-start">
+        {t("hero.intro")}
       </div>
+      <h1 class="display-h1 mb-6">{t("hero.title")}</h1>
+      <p
+        class="mx-auto mb-10 max-w-[500px] text-[17px] leading-[1.7] md:mx-0"
+        style="color: var(--muted-foreground); font-family: var(--font-body)"
+      >
+        {t("hero.subtitle")}
+      </p>
       <div
-        class="flex flex-col justify-center gap-4 @[480px]:flex-row @[864px]:justify-start"
+        class="flex flex-col flex-wrap justify-center gap-4 sm:flex-row md:justify-start"
       >
         <a
           href={`/${lang}/projects`}
-          class="btn btn-primary btn-lg w-full min-w-[84px] @[480px]:w-auto"
+          class="btn btn-primary btn-mono inline-flex items-center gap-2"
         >
-          <span class="truncate">{t("hero.viewProjects")}</span>
+          {t("hero.viewProjects")}
+          <Icon name="arrow-right" class="h-4 w-4" />
         </a>
         <a
           href={`/${lang}/about`}
-          class="btn btn-secondary btn-lg w-full min-w-[84px] @[480px]:w-auto"
+          class="btn btn-outline btn-mono inline-flex items-center"
         >
-          <span class="truncate">{t("hero.aboutMe")}</span>
+          {t("hero.aboutMe")}
         </a>
       </div>
     </div>
+
     <div
-      class="avatar-circle aspect-square w-full max-w-[300px] bg-cover bg-center bg-no-repeat @[480px]:h-auto @[480px]:min-w-[300px] @[864px]:w-full @[864px]:max-w-full"
+      class="fade-up-delay relative mx-auto md:order-last"
+      style="--ring-pad:16px"
     >
-      <Image
-        src={myProfilePic}
-        alt="Profile"
-        class="h-full w-full object-cover"
-        loading="eager"
-        transition:name="myProfilePic"
-      />
+      <div
+        class="avatar-circle h-[220px] w-[220px] sm:h-[280px] sm:w-[280px]"
+        style="border: 3px solid var(--border); box-shadow: 0 0 60px var(--primary-glow), 0 20px 40px var(--shadow-color)"
+      >
+        <Image
+          src={myProfilePic}
+          alt="Rafael Sanchez"
+          class="h-full w-full object-cover"
+          loading="eager"
+          transition:name="myProfilePic"
+        />
+      </div>
+      <div class="spin-ring"></div>
     </div>
   </div>
 </section>
