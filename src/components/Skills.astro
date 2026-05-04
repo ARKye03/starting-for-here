@@ -42,6 +42,17 @@ const langs = [
   { name: t("about.skills.english"), level: t("about.skills.fluent"), pct: 85 },
   { name: t("about.skills.german"), level: t("about.skills.basic"), pct: 30 },
 ];
+
+const nowRows = [
+  { label: t("about.now.working"), value: t("about.now.workingValue") },
+  { label: t("about.now.learning"), value: t("about.now.learningValue") },
+  {
+    label: t("about.now.status"),
+    value: t("about.now.statusValue"),
+    pulse: true,
+  },
+  { label: t("about.now.location"), value: t("about.now.locationValue") },
+];
 ---
 
 <section class="px-6 py-16 md:py-20">
@@ -94,37 +105,80 @@ const langs = [
       }
     </div>
 
-    <h3 class="display-h3 mb-5 text-lg">{t("about.skills.languages")}</h3>
-    <div class="flex max-w-[480px] flex-col gap-4">
-      {
-        langs.map((l) => (
-          <div>
-            <div class="mb-1.5 flex items-center justify-between">
-              <span
-                class="text-[14px]"
-                style="color: var(--foreground); font-family: var(--font-body)"
-              >
-                {l.name}
-              </span>
-              <span
-                class="font-mono text-xs"
-                style="color: var(--muted-foreground)"
-              >
-                {l.level}
-              </span>
-            </div>
-            <div
-              class="h-1 overflow-hidden rounded"
-              style="background: var(--border)"
-            >
-              <div
-                class="h-full rounded"
-                style={`width: ${l.pct}%; background: var(--primary); animation: lang-bar-fill 1s cubic-bezier(.22,1,.36,1) both`}
-              />
-            </div>
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div>
+        <h3 class="display-h3 mb-5 text-lg">{t("about.skills.languages")}</h3>
+        <div class="flex flex-col gap-4">
+          {
+            langs.map((l) => (
+              <div>
+                <div class="mb-1.5 flex items-center justify-between">
+                  <span
+                    class="text-[14px]"
+                    style="color: var(--foreground); font-family: var(--font-body)"
+                  >
+                    {l.name}
+                  </span>
+                  <span
+                    class="font-mono text-xs"
+                    style="color: var(--muted-foreground)"
+                  >
+                    {l.level}
+                  </span>
+                </div>
+                <div
+                  class="h-1 overflow-hidden rounded"
+                  style="background: var(--border)"
+                >
+                  <div
+                    class="h-full rounded"
+                    style={`width: ${l.pct}%; background: var(--primary); animation: lang-bar-fill 1s cubic-bezier(.22,1,.36,1) both`}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <h3 class="display-h3 mb-5 text-lg">{t("about.now.title")}</h3>
+        <div
+          class="now-card relative overflow-hidden rounded-[var(--radius)] border border-[var(--border)] p-6"
+          style="background: var(--card)"
+        >
+          <div
+            class="mb-5 font-mono text-[11px] uppercase tracking-[0.1em]"
+            style="color: var(--primary)"
+          >
+            {t("about.now.eyebrow")}
           </div>
-        ))
-      }
+          <dl class="grid gap-3.5">
+            {
+              nowRows.map((row) => (
+                <div
+                  class="flex items-baseline gap-3 border-b border-dashed pb-3 last:border-0 last:pb-0"
+                  style="border-color: var(--border)"
+                >
+                  <dt
+                    class="w-28 shrink-0 font-mono text-[10.5px] uppercase tracking-[0.08em]"
+                    style="color: var(--muted-foreground)"
+                  >
+                    {row.label}
+                  </dt>
+                  <dd
+                    class="flex flex-1 items-center gap-2 text-[14px]"
+                    style="color: var(--foreground); font-family: var(--font-body)"
+                  >
+                    {row.pulse && <span class="now-pulse" />}
+                    <span>{row.value}</span>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -139,5 +193,38 @@ const langs = [
   }
   .skill-card:hover .skill-card-icon {
     color: var(--primary);
+  }
+
+  .now-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary),
+      transparent
+    );
+    opacity: 0.7;
+  }
+
+  .now-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 0 var(--primary-glow);
+    animation: now-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes now-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--primary-glow);
+    }
+    50% {
+      box-shadow: 0 0 0 6px transparent;
+    }
   }
 </style>
