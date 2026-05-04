@@ -108,9 +108,9 @@ export const ui = {
     "about.now.learning": "Learning",
     "about.now.learningValue": "Rust · Bun",
     "about.now.status": "Status",
-    "about.now.statusValue": "Open to opportunities",
+    "about.now.statusValue": "Working from home",
     "about.now.location": "Based in",
-    "about.now.locationValue": "Cuba · GMT−4",
+    "about.now.locationValue": "Uruguay · GMT−3",
 
     // CTA Section
     "cta.title": "Let's build something great together.",
@@ -246,9 +246,9 @@ export const ui = {
     "about.now.learning": "Aprendiendo",
     "about.now.learningValue": "Rust · Bun",
     "about.now.status": "Estado",
-    "about.now.statusValue": "Abierto a oportunidades",
+    "about.now.statusValue": "Trabajando desde casa",
     "about.now.location": "Ubicación",
-    "about.now.locationValue": "Cuba · GMT−4",
+    "about.now.locationValue": "Uruguay · GMT−3",
 
     // CTA Section
     "cta.title": "Construyamos algo genial juntos.",
