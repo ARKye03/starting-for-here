@@ -9,7 +9,6 @@ export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
   return projects.map((project) => {
-    // ID is like "en/slug.md" or "es/slug.md"
     const [lang, ...slugParts] = project.id.split("/");
     const slug = slugParts.join("/").replace(/\.[^/.]+$/, "");
 
@@ -26,145 +25,234 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const transitionName = `project-${Astro.params.slug ?? ""}`;
 const projectImages = project.data.images || [];
+const dateStr = project.data.date.toLocaleDateString(
+  lang === "es" ? "es-ES" : "en-US",
+  { year: "numeric", month: "short", timeZone: "UTC" },
+);
 ---
 
 <Layout
   title={`${project.data.title} - Portfolio`}
+  description={project.data.description}
   currentPage="projects"
   lang={lang}
 >
-  <article class="mx-auto max-w-4xl py-10">
-    <header class="mb-12">
-      <h1
-        class="mb-4 text-4xl leading-tight font-black tracking-[-0.033em] md:text-5xl"
+  <article class="relative px-6 pt-24 pb-20 md:pt-28">
+    <div class="mx-auto max-w-[900px]">
+      <a
+        href={`/${lang}/projects`}
+        class="nav-link mb-8 inline-flex items-center gap-1.5"
       >
-        {project.data.title}
-      </h1>
-      <p class="mb-6 text-xl text-gray-600 dark:text-gray-300">
-        {project.data.description}
-      </p>
+        <Icon name="arrow-left" class="h-3.5 w-3.5" />
+        {t("project.backToProjects")}
+      </a>
+
+      <header class="mb-10">
+        <div
+          class="mb-2 font-mono text-[11px] tracking-[0.1em] uppercase"
+          style="color: var(--muted-foreground); opacity: 0.5"
+        >
+          {dateStr}
+        </div>
+        <h1
+          class="display-h1 mb-3"
+          style="font-size: clamp(2rem, 5vw, 3.25rem)"
+          transition:name={transitionName}
+        >
+          {project.data.title}
+        </h1>
+        <p
+          class="mb-6 max-w-[640px] text-[17px] leading-[1.6]"
+          style="color: var(--muted-foreground); font-family: var(--font-body)"
+        >
+          {project.data.description}
+        </p>
+
+        {
+          project.data.tags && project.data.tags.length > 0 && (
+            <div class="mb-6 flex flex-wrap gap-1.5">
+              {project.data.tags.map((tag) => (
+                <span
+                  class="tag"
+                  style="font-size: 0.6875rem; padding: 0.25rem 0.75rem"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+
+        <div class="flex flex-wrap gap-3">
+          {
+            project.data.url && (
+              <a
+                href={project.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline btn-mono inline-flex items-center gap-2"
+              >
+                <Icon name="arrow-up-right" class="h-4 w-4" />
+                {t("project.viewLive")}
+              </a>
+            )
+          }
+          {
+            project.data.github && (
+              <a
+                href={project.data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline btn-mono inline-flex items-center gap-2"
+              >
+                <Icon name="github" class="h-4 w-4" />
+                {t("project.viewGitHub")}
+              </a>
+            )
+          }
+        </div>
+      </header>
 
       {
-        projectImages.length > 1 ? (
-          <div class="group relative mb-6">
-            {/* Carousel Container */}
+        projectImages.length >= 1 && (
+          <div class="carousel-wrap relative mb-12">
             <div
               id="image-carousel"
-              class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-lg"
+              class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
             >
               {projectImages.map((img, index) => (
                 <div class="relative min-w-full snap-center">
                   <Image
-                    src={`/projects/${img}`}
+                    src={img}
                     alt={`${project.data.title} screenshot ${index + 1} of ${projectImages.length}`}
-                    class="image-fade-mask h-auto max-h-[500px] w-full object-cover"
-                    width={800}
-                    height={450}
+                    class="h-auto max-h-[540px] w-full object-cover"
+                    width={900}
+                    height={506}
                     loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
               ))}
             </div>
 
-            {/* Navigation Buttons */}
-            <button
-              id="prev-slide"
-              class="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
-              aria-label="Previous image"
-            >
-              <Icon name="chevron-left" class="h-6 w-6" />
-            </button>
-            <button
-              id="next-slide"
-              class="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 disabled:opacity-0"
-              aria-label="Next image"
-            >
-              <Icon name="chevron-right" class="h-6 w-6" />
-            </button>
-
-            {/* Pagination Dots */}
-            <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-              {projectImages.map((_, index) => (
+            {projectImages.length > 1 && (
+              <>
                 <button
-                  class="carousel-dot h-2 w-2 rounded-full bg-white/50 transition-colors hover:bg-white/90"
-                  data-index={index}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        ) : projectImages.length === 1 ? (
-          <div class="mb-6 overflow-hidden rounded-lg">
-            <Image
-              src={`/projects/${projectImages[0]}`}
-              alt={`${project.data.title} screenshot`}
-              class="image-fade-mask h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
-              transition:name={transitionName}
-              width={800}
-              height={400}
-              loading="eager"
-            />
-          </div>
-        ) : null
-      }
+                  id="prev-slide"
+                  class="carousel-btn prev"
+                  aria-label="Previous image"
+                >
+                  <Icon name="chevron-left" class="h-4 w-4" />
+                </button>
+                <button
+                  id="next-slide"
+                  class="carousel-btn next"
+                  aria-label="Next image"
+                >
+                  <Icon name="chevron-right" class="h-4 w-4" />
+                </button>
 
-      {
-        project.data.tags && project.data.tags.length > 0 && (
-          <div class="mb-6 flex flex-wrap gap-2">
-            {project.data.tags.map((tag) => (
-              <span class="bg-primary/10 text-primary rounded-full px-3 py-1 text-sm">
-                {tag}
-              </span>
-            ))}
+                <div class="carousel-dots">
+                  {projectImages.map((_, index) => (
+                    <button
+                      class:list={[
+                        "carousel-dot",
+                        { "is-active": index === 0 },
+                      ]}
+                      data-index={index}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         )
       }
 
-      <div class="flex gap-4">
-        {
-          project.data.url && (
-            <a
-              href={project.data.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary flex items-center gap-2 text-sm font-medium hover:underline"
-            >
-              <span>🔗</span>
-              {t("project.viewLive")}
-            </a>
-          )
-        }
-        {
-          project.data.github && (
-            <a
-              href={project.data.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary flex items-center gap-2 text-sm font-medium hover:underline"
-            >
-              <span>💻</span>
-              {t("project.viewGitHub")}
-            </a>
-          )
-        }
+      <div class="prose dark:prose-invert max-w-none">
+        <Content />
       </div>
-    </header>
-
-    <div class="prose prose-lg dark:prose-invert max-w-none">
-      <Content />
-    </div>
-
-    <div class="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
-      <a
-        href={`/${lang}/projects`}
-        class="text-primary inline-flex items-center gap-2 font-medium hover:underline"
-      >
-        <span>←</span>
-        {t("project.backToProjects")}
-      </a>
     </div>
   </article>
 </Layout>
+
+<style>
+  .carousel-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--foreground);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+  }
+  .carousel-wrap:hover .carousel-btn {
+    opacity: 1;
+  }
+  .carousel-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .carousel-btn.prev {
+    left: 12px;
+  }
+  .carousel-btn.next {
+    right: 12px;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    background: color-mix(in oklch, var(--background) 70%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s;
+  }
+  .carousel-dot.is-active {
+    background: var(--primary);
+    width: 20px;
+    border-radius: 3px;
+  }
+</style>
 
 <script>
   function setupCarousel() {
@@ -173,69 +261,37 @@ const projectImages = project.data.images || [];
 
     const prevBtn = document.getElementById("prev-slide");
     const nextBtn = document.getElementById("next-slide");
-    const dots = document.querySelectorAll(".carousel-dot");
+    const dots = document.querySelectorAll<HTMLButtonElement>(".carousel-dot");
 
-    // Scroll to previous slide
     prevBtn?.addEventListener("click", () => {
-      container.scrollBy({
-        left: -container.clientWidth,
-        behavior: "smooth",
-      });
+      container.scrollBy({ left: -container.clientWidth, behavior: "smooth" });
     });
 
-    // Scroll to next slide
     nextBtn?.addEventListener("click", () => {
-      container.scrollBy({
-        left: container.clientWidth,
-        behavior: "smooth",
-      });
+      container.scrollBy({ left: container.clientWidth, behavior: "smooth" });
     });
 
-    // Pagination dots
     dots.forEach((dot) => {
       dot.addEventListener("click", (e) => {
-        const index = parseInt((e.target as HTMLElement).dataset.index || "0");
-        const scrollAmount = index * container.clientWidth;
-        container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+        const target = e.currentTarget as HTMLElement;
+        const index = parseInt(target.dataset.index || "0");
+        container.scrollTo({
+          left: index * container.clientWidth,
+          behavior: "smooth",
+        });
       });
     });
 
-    // Update active dot and button state on scroll
     const updateState = () => {
       const index = Math.round(container.scrollLeft / container.clientWidth);
-
-      // Update dots
       dots.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.remove("bg-white/50");
-          dot.classList.add("bg-white");
-        } else {
-          dot.classList.add("bg-white/50");
-          dot.classList.remove("bg-white");
-        }
+        dot.classList.toggle("is-active", i === index);
       });
     };
 
     container.addEventListener("scroll", updateState);
-
-    // Initial update
     updateState();
   }
 
-  // Run on initial load and after view transitions
   document.addEventListener("astro:page-load", setupCarousel);
 </script>
-
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .image-fade-mask {
-    mask-image: linear-gradient(to top, transparent 0%, black 20%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
-  }
-</style>

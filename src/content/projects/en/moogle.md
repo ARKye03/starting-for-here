@@ -2,7 +2,7 @@
 title: "Moogle"
 description: "A web-based tool combining a ReactJS frontend and server-side search engine for document retrieval."
 date: 2023-03-06
-featured: true
+featured: false
 tags:
   [
     "ReactJS",
@@ -13,7 +13,7 @@ tags:
     "Cosine Similarity",
   ]
 github: "https://github.com/ARKye03/Moogle"
-images: ["moogle.webp"]
+images: ["@assets/projects/moogle.webp"]
 lang: "en"
 ---
 

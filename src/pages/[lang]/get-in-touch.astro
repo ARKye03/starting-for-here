@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-let email = "rafa03-dev@proton.me";
+const email = "rafa03-dev@proton.me";
 ---
 
 <Layout
@@ -21,97 +21,45 @@ let email = "rafa03-dev@proton.me";
   currentPage="contact"
   lang={lang}
 >
-  <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-    <div class="flex flex-col gap-16 lg:flex-row lg:gap-20">
-      <!-- Left: contact info -->
-      <aside class="flex flex-col gap-8 lg:w-2/5">
-        <div>
-          <h1
-            class="text-foreground mb-3 text-4xl font-black tracking-tighter sm:text-5xl"
+  <section class="px-6 pt-24 pb-20 md:pt-32">
+    <div class="mx-auto max-w-[1120px]">
+      <div class="mb-12">
+        <div class="section-label mb-3">{t("section.contact")}</div>
+        <h1 class="display-h1 mb-3" style="font-size: clamp(2rem, 5vw, 3rem)">
+          {t("contact.heading")}
+        </h1>
+        <p
+          class="max-w-[640px] text-base"
+          style="color: var(--muted-foreground); font-family: var(--font-body)"
+        >
+          {t("contact.description")}
+        </p>
+      </div>
+
+      <div class="grid gap-12 md:grid-cols-[1fr_320px] md:gap-16">
+        <form
+          id="contact-form"
+          class="flex flex-col gap-5"
+          action="/api/contact"
+          method="POST"
+          data-msg-sending={t("contact.form.sending")}
+          data-msg-submit={t("contact.form.submit")}
+          data-msg-success={t("contact.form.success")}
+          data-msg-error={t("contact.form.error")}
+          data-msg-network={t("contact.form.networkError")}
+        >
+          <div
+            id="form-status"
+            class="hidden rounded-[var(--radius)] p-3 text-sm"
           >
-            {t("contact.heading")}
-          </h1>
-          <p class="text-muted-foreground text-base leading-relaxed">
-            {t("contact.description")}
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-5">
-          <div class="flex items-start gap-4">
-            <div
-              class="bg-primary/10 text-primary border-primary/20 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border"
-            >
-              <Icon name="mail" class="h-5 w-5" />
-            </div>
-            <div>
-              <p
-                class="text-foreground text-sm font-semibold tracking-widest uppercase"
-              >
-                {t("contact.email")}
-              </p>
-              <a
-                class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                href={`mailto:${email}`}>{email}</a
-              >
-            </div>
           </div>
 
-          <div class="flex items-start gap-4">
-            <div
-              class="bg-primary/10 text-primary border-primary/20 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border"
-            >
-              <Icon name="messages-square" class="h-5 w-5" />
-            </div>
-            <div>
-              <p
-                class="text-foreground text-sm font-semibold tracking-widest uppercase"
-              >
-                {t("contact.social")}
-              </p>
-              <div class="flex flex-wrap gap-3">
-                <a
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                  href="https://www.linkedin.com/in/rafa03-dev">LinkedIn</a
-                >
-                <a
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                  href="https://github.com/ARKye03">GitHub</a
-                >
-                <a
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                  href="https://x.com/RafaelzSanchez">Twitter</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Right: form -->
-      <form
-        id="contact-form"
-        class="flex flex-col gap-4 lg:w-3/5"
-        action="/api/contact"
-        method="POST"
-        data-msg-sending={t("contact.form.sending")}
-        data-msg-submit={t("contact.form.submit")}
-        data-msg-success={t("contact.form.success")}
-        data-msg-error={t("contact.form.error")}
-        data-msg-network={t("contact.form.networkError")}
-      >
-        <div id="form-status" class="hidden rounded-lg p-3 text-sm"></div>
-
-        <!-- Name + Email row -->
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">{t("contact.form.name")}</legend>
-            <label
-              class="input input-neutral bg-base-200 border-base-300 w-full"
-            >
-              <Icon name="user" class="h-[1em] opacity-50" />
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="flex flex-col gap-1.5">
+              <span class="form-label">{t("contact.form.name")}</span>
               <input
                 autocomplete="name"
-                class="grow"
+                class="form-input"
                 id="name"
                 name="name"
                 placeholder={t("contact.form.namePlaceholder")}
@@ -119,17 +67,12 @@ let email = "rafa03-dev@proton.me";
                 required
               />
             </label>
-          </fieldset>
 
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">{t("contact.form.email")}</legend>
-            <label
-              class="input input-neutral bg-base-200 border-base-300 w-full"
-            >
-              <Icon name="mail" class="h-[1em] opacity-50" />
+            <label class="flex flex-col gap-1.5">
+              <span class="form-label">{t("contact.form.email")}</span>
               <input
                 autocomplete="email"
-                class="grow"
+                class="form-input"
                 id="email"
                 name="email"
                 placeholder={t("contact.form.emailPlaceholder")}
@@ -137,15 +80,12 @@ let email = "rafa03-dev@proton.me";
                 required
               />
             </label>
-          </fieldset>
-        </div>
+          </div>
 
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">{t("contact.form.subject")}</legend>
-          <label class="input input-neutral bg-base-200 border-base-300 w-full">
-            <Icon name="tag" class="h-[1em] opacity-50" />
+          <label class="flex flex-col gap-1.5">
+            <span class="form-label">{t("contact.form.subject")}</span>
             <input
-              class="grow"
+              class="form-input"
               id="subject"
               name="subject"
               placeholder={t("contact.form.subjectPlaceholder")}
@@ -153,41 +93,136 @@ let email = "rafa03-dev@proton.me";
               required
             />
           </label>
-        </fieldset>
 
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">{t("contact.form.message")}</legend>
-          <textarea
-            class="textarea textarea-neutral bg-base-200 border-base-300 min-h-32 w-full resize-y"
-            id="message"
-            name="message"
-            placeholder={t("contact.form.messagePlaceholder")}
-            required></textarea>
-        </fieldset>
+          <label class="flex flex-col gap-1.5">
+            <span class="form-label">{t("contact.form.message")}</span>
+            <textarea
+              class="form-input"
+              id="message"
+              name="message"
+              placeholder={t("contact.form.messagePlaceholder")}
+              rows="5"
+              required></textarea>
+          </label>
 
-        <button
-          id="submit-btn"
-          class="btn btn-primary gap-2 self-start px-8"
-          type="submit"
-        >
-          <span id="btn-text">{t("contact.form.submit")}</span>
-          <Icon name="mail" class="h-4 w-4" />
-        </button>
-      </form>
+          <button
+            id="submit-btn"
+            class="btn btn-primary btn-mono inline-flex items-center gap-2 self-start"
+            type="submit"
+          >
+            <span id="btn-text">{t("contact.form.submit")}</span>
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </button>
+        </form>
+
+        <aside class="flex flex-col gap-8">
+          <div>
+            <h4 class="form-label mb-3">{t("contact.email")}</h4>
+            <a
+              href={`mailto:${email}`}
+              class="text-[15px] no-underline hover:underline"
+              style="color: var(--primary); font-family: var(--font-body)"
+            >
+              {email}
+            </a>
+          </div>
+          <div>
+            <h4 class="form-label mb-3">{t("contact.social")}</h4>
+            <div class="flex flex-col gap-2.5">
+              <a
+                href="https://github.com/ARKye03"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <Icon name="arrow-up-right" class="h-3.5 w-3.5" />
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/rafa03-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <Icon name="arrow-up-right" class="h-3.5 w-3.5" />
+                LinkedIn
+              </a>
+              <a
+                href="https://x.com/RafaelzSanchez"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <Icon name="arrow-up-right" class="h-3.5 w-3.5" />
+                Twitter
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
-  </div>
+  </section>
 </Layout>
+
+<style>
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .form-input {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--input);
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input:focus {
+    border-color: var(--primary);
+  }
+  .form-input::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.5;
+  }
+  textarea.form-input {
+    resize: vertical;
+    min-height: 8rem;
+  }
+  .contact-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .contact-link:hover {
+    color: var(--primary);
+  }
+</style>
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const form = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement | null;
+    if (!form) return;
     const statusDiv = document.getElementById("form-status");
     const submitBtn = document.getElementById(
       "submit-btn",
     ) as HTMLButtonElement;
     const btnText = document.getElementById("btn-text");
 
-    form?.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
       if (btnText)
@@ -202,20 +237,27 @@ let email = "rafa03-dev@proton.me";
 
         if (statusDiv) {
           if (response.ok) {
-            statusDiv.className =
-              "rounded-lg p-3 text-sm bg-success/10 text-success border border-success/20";
+            statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
+            statusDiv.style.borderColor = "var(--primary)";
+            statusDiv.style.color = "var(--primary)";
+            statusDiv.style.background =
+              "color-mix(in oklch, var(--primary) 8%, transparent)";
             statusDiv.textContent = form.dataset.msgSuccess || "✓ Sent!";
             form.reset();
           } else {
-            statusDiv.className =
-              "rounded-lg p-3 text-sm bg-error/10 text-error border border-error/20";
+            statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
+            statusDiv.style.borderColor = "var(--destructive)";
+            statusDiv.style.color = "var(--destructive)";
+            statusDiv.style.background = "transparent";
             statusDiv.textContent = `✗ ${result.error || form.dataset.msgError || "Error"}`;
           }
         }
       } catch {
         if (statusDiv) {
-          statusDiv.className =
-            "rounded-lg p-3 text-sm bg-error/10 text-error border border-error/20";
+          statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
+          statusDiv.style.borderColor = "var(--destructive)";
+          statusDiv.style.color = "var(--destructive)";
+          statusDiv.style.background = "transparent";
           statusDiv.textContent = form.dataset.msgNetwork || "✗ Network error";
         }
       } finally {
@@ -223,7 +265,9 @@ let email = "rafa03-dev@proton.me";
         if (btnText)
           btnText.textContent = form.dataset.msgSubmit || "Send Message";
         setTimeout(() => {
-          if (statusDiv) statusDiv.className = "hidden rounded-lg p-3 text-sm";
+          if (statusDiv) {
+            statusDiv.className = "hidden rounded-[var(--radius)] p-3 text-sm";
+          }
         }, 5000);
       }
     });

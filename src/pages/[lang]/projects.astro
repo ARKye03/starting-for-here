@@ -26,6 +26,9 @@ const projects = allProjects
       .join("/")
       .replace(/\.[^/.]+$/, ""),
   }));
+
+const totalCount = projects.length;
+const featuredCount = projects.filter((p) => p.data.featured).length;
 ---
 
 <Layout
@@ -34,28 +37,139 @@ const projects = allProjects
   currentPage="projects"
   lang={lang}
 >
-  <div class="py-10">
-    <div class="mb-8">
-      <h1 class="mb-4 text-4xl leading-tight font-black tracking-[-0.033em]">
-        {t("page.projects.heading")}
-      </h1>
-      <p class="text-lg text-gray-600 dark:text-gray-300">
-        {t("page.projects.description")}
-      </p>
-    </div>
+  <div class="grid-bg-fixed"></div>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {
-        projects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            slug={project.slug}
-            tags={project.data.tags}
-            image={project.data.images?.[0]}
-          />
-        ))
-      }
+  <section class="relative px-6 pt-24 pb-20 md:pt-32">
+    <div class="mx-auto max-w-[1120px]">
+      <div class="mb-12">
+        <div class="section-label mb-3">{t("projects.portfolioLabel")}</div>
+        <h1 class="display-h1 mb-3" style="font-size: clamp(2rem, 5vw, 3rem)">
+          {t("page.projects.heading")}
+        </h1>
+        <p
+          class="mb-6 max-w-[640px] text-base"
+          style="color: var(--muted-foreground); font-family: var(--font-body)"
+        >
+          {t("page.projects.description")}
+        </p>
+
+        <div class="flex gap-2" role="tablist" aria-label="Filter projects">
+          <button
+            type="button"
+            class="filter-tab is-active"
+            data-filter="all"
+            role="tab"
+          >
+            {t("projects.filter.all")}
+          </button>
+          <button
+            type="button"
+            class="filter-tab"
+            data-filter="featured"
+            role="tab"
+          >
+            {t("projects.filter.featured")}
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="projects-grid"
+        class="grid gap-5"
+        style="grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr))"
+      >
+        {
+          projects.map((project, i) => (
+            <div
+              class="project-item"
+              data-featured={project.data.featured ? "true" : "false"}
+            >
+              <ProjectCard
+                title={project.data.title}
+                description={project.data.description}
+                slug={project.slug}
+                tags={project.data.tags}
+                date={project.data.date}
+                featured={project.data.featured}
+                index={i}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="mt-10 text-center font-mono text-xs"
+        style="color: var(--muted-foreground); opacity: 0.6"
+      >
+        <span
+          id="projects-count"
+          data-total={totalCount}
+          data-featured={featuredCount}
+        >
+          {totalCount}
+        </span>
+        {" "}{t("projects.count")}
+      </div>
     </div>
-  </div>
+  </section>
 </Layout>
+
+<style>
+  .filter-tab {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.375rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .filter-tab.is-active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  .project-item.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  function setupProjectsFilter() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".filter-tab");
+    const items = document.querySelectorAll<HTMLElement>(".project-item");
+    const countEl = document.getElementById("projects-count");
+    const total = parseInt(countEl?.dataset.total || "0", 10);
+    const featured = parseInt(countEl?.dataset.featured || "0", 10);
+
+    function apply(filter: string) {
+      items.forEach((item) => {
+        const isFeatured = item.dataset.featured === "true";
+        const visible = filter === "all" || isFeatured;
+        item.classList.toggle("is-hidden", !visible);
+      });
+      if (countEl) {
+        countEl.textContent = String(filter === "featured" ? featured : total);
+      }
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        apply(tab.dataset.filter || "all");
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupProjectsFilter);
+</script>

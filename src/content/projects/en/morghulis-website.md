@@ -2,11 +2,11 @@
 title: "Morghulis Website"
 description: "Morghulis Website"
 date: 2025-11-01
-featured: true
+featured: false
 tags: ["Astro", "GSAP", "TailwindCSS"]
 url: "https://morghulis.vercel.app"
 github: "https://github.com/ARKye03/morghulis-website"
-images: ["morghulisWeb.webp"]
+images: ["@assets/projects/morghulisWeb.webp"]
 lang: "en"
 ---
 

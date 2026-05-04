@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 import "../styles/global.css";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -30,16 +31,17 @@ const {
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-mono" />
     <ClientRouter />
   </head>
   <body>
-    <main class="mx-auto max-w-[960px] px-4 py-5 md:px-10">
-      <Header currentPage={currentPage} lang={lang} />
-      <div>
-        <slot />
-      </div>
-      <Footer />
+    <Header currentPage={currentPage} lang={lang} />
+    <main class="pt-16">
+      <slot />
     </main>
+    <Footer />
   </body>
 </html>
 
@@ -48,6 +50,8 @@ const {
   body {
     margin: 0;
     width: 100%;
-    height: 100%;
+  }
+  body {
+    min-height: 100vh;
   }
 </style>

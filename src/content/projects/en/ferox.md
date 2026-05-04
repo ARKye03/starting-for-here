@@ -2,11 +2,11 @@
 title: "Ferox"
 description: "A functional programming language interpreter built from scratch in Rust, featuring an interactive REPL and a modern desktop app with live code evaluation."
 date: 2026-01-15
-featured: true
+featured: false
 tags:
   ["Rust", "Tauri", "Leptos", "Interpreter", "Functional Programming", "REPL"]
 github: "https://github.com/ARKye03/ferox"
-images: ["ferox.webp"]
+images: ["@assets/projects/ferox.webp"]
 lang: "en"
 ---
 

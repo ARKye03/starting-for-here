@@ -2,10 +2,10 @@
 title: "Sitio Web del Portafolio"
 description: "Sitio web del portafolio personal, mostrando mis proyectos y servicios."
 date: 2025-10-01
-featured: true
+featured: false
 tags: ["Astro", "Tailwind CSS", "Diseño Web"]
 url: "https://buildwitharkye.me/"
-images: ["portfolio.webp"]
+images: ["@assets/projects/portfolio.webp"]
 lang: "es"
 ---
 

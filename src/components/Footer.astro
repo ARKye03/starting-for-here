@@ -1,29 +1,51 @@
 ---
 import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
 ---
 
-<footer class="text-muted-foreground mt-10 border-t px-4 py-6 text-center">
-  <div class="mb-4 flex justify-center gap-4">
-    <a
-      class="hover:text-primary transition-colors"
-      href="https://github.com/ARKye03"
-      aria-label="GitHub"
+<footer class="mt-10 border-t px-6 py-8" style="border-color: var(--border)">
+  <div
+    class="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-4"
+  >
+    <div class="font-mono text-xs" style="color: var(--muted-foreground)">
+      © {year}
+      {t("footer.copyright")}
+    </div>
+    <div class="flex items-center gap-4">
+      <a
+        href="https://github.com/ARKye03"
+        aria-label="GitHub"
+        class="transition-colors hover:text-[var(--primary)]"
+        style="color: var(--muted-foreground)"
+      >
+        <Icon name="github" class="h-5 w-5" />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/rafa03-dev"
+        aria-label="LinkedIn"
+        class="transition-colors hover:text-[var(--primary)]"
+        style="color: var(--muted-foreground)"
+      >
+        <Icon name="linkedin" class="h-5 w-5" />
+      </a>
+      <a
+        href="https://x.com/RafaelzSanchez"
+        aria-label="Twitter"
+        class="transition-colors hover:text-[var(--primary)]"
+        style="color: var(--muted-foreground)"
+      >
+        <Icon name="twitter" class="h-5 w-5" />
+      </a>
+    </div>
+    <div
+      class="font-mono text-[11px] opacity-50"
+      style="color: var(--muted-foreground)"
     >
-      <Icon name="github" aria-hidden="true" class="h-6 w-6" />
-    </a>
-    <a
-      class="hover:text-primary transition-colors"
-      href="https://www.linkedin.com/in/rafa03-dev"
-      aria-label="LinkedIn"
-    >
-      <Icon name="linkedin" aria-hidden="true" class="h-6 w-6" />
-    </a>
-    <a
-      class="hover:text-primary transition-colors"
-      href="https://x.com/RafaelzSanchez"
-      aria-label="Twitter"
-    >
-      <Icon name="twitter" aria-hidden="true" class="h-6 w-6" />
-    </a>
+      {t("footer.tagline")}
+    </div>
   </div>
 </footer>
