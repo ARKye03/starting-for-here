@@ -2,9 +2,6 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-/* Catppuccin Mocha palette (frappe/macchiato/mocha available; no latte.css in pkg) */
-@import "@catppuccin/tailwindcss/mocha.css";
-
 @plugin "daisyui" {
   themes:
     catppuccin --default,
