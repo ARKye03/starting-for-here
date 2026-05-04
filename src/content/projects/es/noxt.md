@@ -16,7 +16,12 @@ tags:
     "Google OAuth",
   ]
 github: "https://github.com/ARKye03/noxt"
-images: ["noxt/myNotes.webp", "noxt/newNote.webp", "noxt/rustNote.webp"]
+images:
+  [
+    "@assets/projects/noxt/myNotes.webp",
+    "@assets/projects/noxt/newNote.webp",
+    "@assets/projects/noxt/rustNote.webp",
+  ]
 lang: "es"
 ---
 

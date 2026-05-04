@@ -5,7 +5,11 @@ date: 2025-06-01
 featured: true
 tags: ["Tauri", "SvelteKit", "Rust", "Svelte 5", "FFmpeg", "Bun", "TypeScript"]
 github: "https://github.com/ARKye03/hathor"
-images: ["hathor/main.webp", "hathor/mainOneQueue.webp"]
+images:
+  [
+    "@assets/projects/hathor/main.webp",
+    "@assets/projects/hathor/mainOneQueue.webp",
+  ]
 lang: "es"
 ---
 

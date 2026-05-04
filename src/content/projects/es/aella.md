@@ -7,9 +7,9 @@ tags: ["Rust", "Iced", "CLI", "Corrector Gramatical", "Turso", "Harper"]
 github: "https://github.com/ARKye03/aella"
 images:
   [
-    "aella/mainExpanded.webp",
-    "aella/mainCollapsed.webp",
-    "aella/trashView.webp",
+    "@assets/projects/aella/mainExpanded.webp",
+    "@assets/projects/aella/mainCollapsed.webp",
+    "@assets/projects/aella/trashView.webp",
   ]
 lang: "es"
 ---

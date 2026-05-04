@@ -6,7 +6,7 @@ featured: true
 tags:
   ["Rust", "Tauri", "Leptos", "Interpreter", "Functional Programming", "REPL"]
 github: "https://github.com/ARKye03/ferox"
-images: ["ferox.webp"]
+images: ["@assets/projects/ferox.webp"]
 lang: "en"
 ---
 

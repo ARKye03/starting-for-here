@@ -5,7 +5,12 @@ date: 2026-05-03
 featured: false
 tags: ["C++", "GTK4", "libadwaita", "Desktop App", "DSL", "Cairo", "Meson"]
 github: "https://github.com/ARKye03/g-wallac-e"
-images: ["gwallace/gw1.webp", "gwallace/gw2.webp", "gwallace/gw3.webp"]
+images:
+  [
+    "@assets/projects/gwallace/gw1.webp",
+    "@assets/projects/gwallace/gw2.webp",
+    "@assets/projects/gwallace/gw3.webp",
+  ]
 lang: "en"
 ---
 
