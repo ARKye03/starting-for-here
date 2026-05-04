@@ -2,7 +2,7 @@
 title: "Sitio Web de Morghulis"
 description: "Sitio Web de Morghulis"
 date: 2025-11-01
-featured: true
+featured: false
 tags: ["Astro", "GSAP", "TailwindCSS"]
 url: "https://morghulis.vercel.app"
 github: "https://github.com/ARKye03/morghulis-website"

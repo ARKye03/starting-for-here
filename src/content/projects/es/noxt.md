@@ -2,7 +2,7 @@
 title: "Noxt"
 description: "Una aplicación de toma de notas rápida y moderna construida con Next.js 16, con diseño responsive y soporte completo para Markdown."
 date: 2026-01-11
-featured: true
+featured: false
 tags:
   [
     "Next.js",

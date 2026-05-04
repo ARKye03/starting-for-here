@@ -2,7 +2,7 @@
 title: "Aella"
 description: "Un corrector gramatical offline ultrarrápido construido con Rust, con una elegante aplicación de escritorio y un potente CLI para desarrolladores que escriben rápido y necesitan correcciones instantáneas."
 date: 2026-01-10
-featured: true
+featured: false
 tags: ["Rust", "Iced", "CLI", "Corrector Gramatical", "Turso", "Harper"]
 github: "https://github.com/ARKye03/aella"
 images:
