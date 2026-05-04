@@ -101,6 +101,17 @@ export const ui = {
     "about.skills.fluent": "Fluent",
     "about.skills.basic": "Basic",
 
+    "about.now.title": "Now",
+    "about.now.eyebrow": "// Currently",
+    "about.now.working": "Working on",
+    "about.now.workingValue": "Portfolio rebuild",
+    "about.now.learning": "Learning",
+    "about.now.learningValue": "Rust · Bun",
+    "about.now.status": "Status",
+    "about.now.statusValue": "Open to opportunities",
+    "about.now.location": "Based in",
+    "about.now.locationValue": "Cuba · GMT−4",
+
     // CTA Section
     "cta.title": "Let's build something great together.",
     "cta.subtitle":
@@ -227,6 +238,17 @@ export const ui = {
     "about.skills.native": "Nativo",
     "about.skills.fluent": "Fluido",
     "about.skills.basic": "Básico",
+
+    "about.now.title": "Ahora",
+    "about.now.eyebrow": "// Actualmente",
+    "about.now.working": "Trabajando en",
+    "about.now.workingValue": "Rediseño del portafolio",
+    "about.now.learning": "Aprendiendo",
+    "about.now.learningValue": "Rust · Bun",
+    "about.now.status": "Estado",
+    "about.now.statusValue": "Abierto a oportunidades",
+    "about.now.location": "Ubicación",
+    "about.now.locationValue": "Cuba · GMT−4",
 
     // CTA Section
     "cta.title": "Construyamos algo genial juntos.",

@@ -21,7 +21,7 @@ const email = "rafa03-dev@proton.me";
   currentPage="contact"
   lang={lang}
 >
-  <section class="px-6 pb-20 pt-24 md:pt-32">
+  <section class="px-6 pt-24 pb-20 md:pt-32">
     <div class="mx-auto max-w-[1120px]">
       <div class="mb-12">
         <div class="section-label mb-3">{t("section.contact")}</div>
@@ -48,7 +48,11 @@ const email = "rafa03-dev@proton.me";
           data-msg-error={t("contact.form.error")}
           data-msg-network={t("contact.form.networkError")}
         >
-          <div id="form-status" class="hidden rounded-[var(--radius)] p-3 text-sm"></div>
+          <div
+            id="form-status"
+            class="hidden rounded-[var(--radius)] p-3 text-sm"
+          >
+          </div>
 
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="flex flex-col gap-1.5">
@@ -208,16 +212,21 @@ const email = "rafa03-dev@proton.me";
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const form = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement | null;
     if (!form) return;
     const statusDiv = document.getElementById("form-status");
-    const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+    const submitBtn = document.getElementById(
+      "submit-btn",
+    ) as HTMLButtonElement;
     const btnText = document.getElementById("btn-text");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
-      if (btnText) btnText.textContent = form.dataset.msgSending || "Sending...";
+      if (btnText)
+        btnText.textContent = form.dataset.msgSending || "Sending...";
 
       try {
         const response = await fetch("/api/contact", {
@@ -228,8 +237,7 @@ const email = "rafa03-dev@proton.me";
 
         if (statusDiv) {
           if (response.ok) {
-            statusDiv.className =
-              "rounded-[var(--radius)] p-3 text-sm border";
+            statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
             statusDiv.style.borderColor = "var(--primary)";
             statusDiv.style.color = "var(--primary)";
             statusDiv.style.background =
@@ -237,8 +245,7 @@ const email = "rafa03-dev@proton.me";
             statusDiv.textContent = form.dataset.msgSuccess || "✓ Sent!";
             form.reset();
           } else {
-            statusDiv.className =
-              "rounded-[var(--radius)] p-3 text-sm border";
+            statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
             statusDiv.style.borderColor = "var(--destructive)";
             statusDiv.style.color = "var(--destructive)";
             statusDiv.style.background = "transparent";

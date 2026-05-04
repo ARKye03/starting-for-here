@@ -21,7 +21,7 @@ const getUrl = (path: string) => `/${lang}${path}`;
 
     <div class="relative z-10 max-w-[600px] text-center">
       <div
-        class="mb-8 font-bold leading-none"
+        class="mb-8 leading-none font-bold"
         style="font-family: var(--font-display); font-size: clamp(6rem, 20vw, 12.5rem); letter-spacing: -0.04em; color: var(--foreground); user-select: none"
       >
         404
@@ -34,7 +34,10 @@ const getUrl = (path: string) => `/${lang}${path}`;
         {t("404.terminal")}
       </div>
 
-      <h1 class="display-h2 mb-3" style="font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 700">
+      <h1
+        class="display-h2 mb-3"
+        style="font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 700"
+      >
         {t("404.title")}
       </h1>
       <p
@@ -61,7 +64,7 @@ const getUrl = (path: string) => `/${lang}${path}`;
 
       <div>
         <div
-          class="mb-4 font-mono text-[11px] uppercase tracking-[0.1em]"
+          class="mb-4 font-mono text-[11px] tracking-[0.1em] uppercase"
           style="color: var(--muted-foreground); opacity: 0.6"
         >
           {t("404.lookingFor")}

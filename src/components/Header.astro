@@ -46,10 +46,7 @@ const links = [
         links.map((l) => (
           <a
             href={l.href}
-            class:list={[
-              "nav-link",
-              { "is-active": currentPage === l.id },
-            ]}
+            class:list={["nav-link", { "is-active": currentPage === l.id }]}
           >
             {l.label}
           </a>
@@ -57,7 +54,7 @@ const links = [
       }
       <a
         href={alternateLangUrl}
-        class="font-mono ml-2 rounded-[var(--radius)] border px-3 py-1 text-xs uppercase tracking-wider transition-colors"
+        class="ml-2 rounded-[var(--radius)] border px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors"
         style="color: var(--muted-foreground); border-color: var(--border)"
         title={`Switch to ${languages[alternateLang]}`}
       >
@@ -76,7 +73,7 @@ const links = [
       </summary>
 
       <nav
-        class="absolute right-0 top-full z-50 mt-2 flex w-56 flex-col gap-1 rounded-[var(--radius)] border p-3 shadow-lg"
+        class="absolute top-full right-0 z-50 mt-2 flex w-56 flex-col gap-1 rounded-[var(--radius)] border p-3 shadow-lg"
         style="background: var(--card); border-color: var(--border)"
       >
         {

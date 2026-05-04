@@ -5,7 +5,6 @@
 /* Catppuccin Mocha palette (frappe/macchiato/mocha available; no latte.css in pkg) */
 @import "@catppuccin/tailwindcss/mocha.css";
 
-
 @plugin "daisyui" {
   themes:
     catppuccin --default,
@@ -45,11 +44,11 @@
   --color-base-content: oklch(0.88 0.043 272);
   --color-primary: oklch(0.787 0.119 305);
   --color-primary-content: oklch(0.19 0.025 284);
-  --color-secondary: oklch(0.30 0.03 282);
+  --color-secondary: oklch(0.3 0.03 282);
   --color-secondary-content: oklch(0.88 0.043 272);
   --color-accent: oklch(0.8467 0.0833 210.2545);
   --color-accent-content: oklch(0.19 0.025 284);
-  --color-neutral: oklch(0.30 0.03 282);
+  --color-neutral: oklch(0.3 0.03 282);
   --color-neutral-content: oklch(0.88 0.043 272);
   --color-error: oklch(0.7556 0.1297 2.7642);
   --color-error-content: oklch(0.19 0.025 284);
@@ -127,7 +126,7 @@
     --primary: oklch(0.787 0.119 305);
     --primary-foreground: oklch(0.19 0.025 284);
     --primary-glow: oklch(0.787 0.119 305 / 0.2);
-    --secondary: oklch(0.30 0.03 282);
+    --secondary: oklch(0.3 0.03 282);
     --secondary-foreground: oklch(0.88 0.043 272);
     --muted: oklch(0.22 0.028 284);
     --muted-foreground: oklch(0.65 0.035 274);
@@ -135,10 +134,10 @@
     --accent-foreground: oklch(0.19 0.025 284);
     --destructive: oklch(0.7556 0.1297 2.7642);
     --destructive-foreground: oklch(0.19 0.025 284);
-    --border: oklch(0.30 0.03 282);
+    --border: oklch(0.3 0.03 282);
     --input: oklch(0.22 0.028 284);
     --ring: oklch(0.787 0.119 305);
-    --grid-color: oklch(0.30 0.025 282 / 0.4);
+    --grid-color: oklch(0.3 0.025 282 / 0.4);
     --header-bg: oklch(0.19 0.025 284 / 0.85);
     --shadow-color: oklch(0.1 0.02 280 / 0.3);
     --tag-bg: oklch(0.27 0.03 282);
@@ -539,7 +538,8 @@
   .prose pre::-webkit-scrollbar-thumb {
     background: color-mix(in oklch, var(--primary) 35%, transparent);
     border-radius: 5px;
-    border: 2px solid color-mix(in oklch, var(--background) 95%, var(--primary) 5%);
+    border: 2px solid
+      color-mix(in oklch, var(--background) 95%, var(--primary) 5%);
     transition: background 0.2s ease;
   }
 
@@ -549,7 +549,8 @@
 
   .prose pre {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklch, var(--primary) 35%, transparent) transparent;
+    scrollbar-color: color-mix(in oklch, var(--primary) 35%, transparent)
+      transparent;
   }
 }
 

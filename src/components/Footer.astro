@@ -7,18 +7,13 @@ const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer
-  class="mt-10 border-t px-6 py-8"
-  style="border-color: var(--border)"
->
+<footer class="mt-10 border-t px-6 py-8" style="border-color: var(--border)">
   <div
     class="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-4"
   >
-    <div
-      class="font-mono text-xs"
-      style="color: var(--muted-foreground)"
-    >
-      © {year} {t("footer.copyright")}
+    <div class="font-mono text-xs" style="color: var(--muted-foreground)">
+      © {year}
+      {t("footer.copyright")}
     </div>
     <div class="flex items-center gap-4">
       <a
