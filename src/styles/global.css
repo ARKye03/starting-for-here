@@ -86,11 +86,8 @@
   --shadow-color: oklch(0.3 0.03 280 / 0.08);
   --tag-bg: oklch(0.93 0.01 264);
   --tag-fg: oklch(0.5 0.035 279);
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-sans: var(--font-body);
   --font-serif: Georgia, serif;
-  --font-mono: "JetBrains Mono", monospace;
   --radius: 0.25rem;
   --shadow-2xs: 0px 4px 6px 0px hsl(240 30% 25% / 0.06);
   --shadow-xs: 0px 4px 6px 0px hsl(240 30% 25% / 0.06);

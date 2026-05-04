@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -18,6 +18,33 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
+
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Space Grotesk",
+      cssVariable: "--font-display",
+      weights: [400, 500, 600, 700, 800],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "DM Sans",
+      cssVariable: "--font-body",
+      weights: [400, 500],
+      styles: ["normal", "italic"],
+      subsets: ["latin", "latin-ext"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "JetBrains Mono",
+      cssVariable: "--font-mono",
+      weights: [400, 500, 700],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext"],
+    },
+  ],
 
   vite: {
     plugins: [tailwindcss()],
