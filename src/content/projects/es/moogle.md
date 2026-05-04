@@ -13,7 +13,7 @@ tags:
     "Similitud de Coseno",
   ]
 github: "https://github.com/ARKye03/Moogle"
-images: ["moogle.webp"]
+images: ["@assets/projects/moogle.webp"]
 lang: "es"
 ---
 

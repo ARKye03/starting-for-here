@@ -123,7 +123,7 @@ const dateStr = project.data.date.toLocaleDateString(
               {projectImages.map((img, index) => (
                 <div class="relative min-w-full snap-center">
                   <Image
-                    src={`/projects/${img}`}
+                    src={img}
                     alt={`${project.data.title} screenshot ${index + 1} of ${projectImages.length}`}
                     class="h-auto max-h-[540px] w-full object-cover"
                     width={900}

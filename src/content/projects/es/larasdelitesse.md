@@ -7,11 +7,11 @@ tags: ["Laravel", "ReactJS", "PHP", "Full Stack", "E-Commerce"]
 github: "https://github.com/ARKye03/larasdelitesse"
 images:
   [
-    "larasImages/laras1.webp",
-    "larasImages/laras2.webp",
-    "larasImages/laras3.webp",
-    "larasImages/laras4.webp",
-    "larasImages/laras5.webp",
+    "@assets/projects/larasImages/laras1.webp",
+    "@assets/projects/larasImages/laras2.webp",
+    "@assets/projects/larasImages/laras3.webp",
+    "@assets/projects/larasImages/laras4.webp",
+    "@assets/projects/larasImages/laras5.webp",
   ]
 lang: "es"
 ---

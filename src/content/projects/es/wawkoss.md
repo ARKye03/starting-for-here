@@ -7,11 +7,11 @@ tags: ["Astro", "AlpineJS", "TailwindCSS", "DaisyUI", "OAuth", "SoundCloud"]
 github: "https://github.com/ARKye03/wawkoss"
 images:
   [
-    "wawkoss/wawkossRoot.webp",
-    "wawkoss/wawkossSearch.webp",
-    "wawkoss/artistPage.webp",
-    "wawkoss/trackPage.webp",
-    "wawkoss/profilePage.webp",
+    "@assets/projects/wawkoss/wawkossRoot.webp",
+    "@assets/projects/wawkoss/wawkossSearch.webp",
+    "@assets/projects/wawkoss/artistPage.webp",
+    "@assets/projects/wawkoss/trackPage.webp",
+    "@assets/projects/wawkoss/profilePage.webp",
   ]
 lang: "es"
 ---
