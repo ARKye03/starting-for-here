@@ -39,7 +39,7 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
 >
   <div class="grid-bg-fixed"></div>
 
-  <section class="relative px-6 pb-20 pt-24 md:pt-32">
+  <section class="relative px-6 pt-24 pb-20 md:pt-32">
     <div class="mx-auto max-w-[1120px]">
       <div class="mb-12">
         <div class="section-label mb-3">{t("projects.portfolioLabel")}</div>
@@ -102,7 +102,11 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
         class="mt-10 text-center font-mono text-xs"
         style="color: var(--muted-foreground); opacity: 0.6"
       >
-        <span id="projects-count" data-total={totalCount} data-featured={featuredCount}>
+        <span
+          id="projects-count"
+          data-total={totalCount}
+          data-featured={featuredCount}
+        >
           {totalCount}
         </span>
         {" "}{t("projects.count")}

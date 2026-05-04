@@ -37,7 +37,7 @@ const dateStr = project.data.date.toLocaleDateString(
   currentPage="projects"
   lang={lang}
 >
-  <article class="relative px-6 pb-20 pt-24 md:pt-28">
+  <article class="relative px-6 pt-24 pb-20 md:pt-28">
     <div class="mx-auto max-w-[900px]">
       <a
         href={`/${lang}/projects`}
@@ -49,12 +49,16 @@ const dateStr = project.data.date.toLocaleDateString(
 
       <header class="mb-10">
         <div
-          class="mb-2 font-mono text-[11px] uppercase tracking-[0.1em]"
+          class="mb-2 font-mono text-[11px] tracking-[0.1em] uppercase"
           style="color: var(--muted-foreground); opacity: 0.5"
         >
           {dateStr}
         </div>
-        <h1 class="display-h1 mb-3" style="font-size: clamp(2rem, 5vw, 3.25rem)" transition:name={transitionName}>
+        <h1
+          class="display-h1 mb-3"
+          style="font-size: clamp(2rem, 5vw, 3.25rem)"
+          transition:name={transitionName}
+        >
           {project.data.title}
         </h1>
         <p
@@ -68,7 +72,12 @@ const dateStr = project.data.date.toLocaleDateString(
           project.data.tags && project.data.tags.length > 0 && (
             <div class="mb-6 flex flex-wrap gap-1.5">
               {project.data.tags.map((tag) => (
-                <span class="tag" style="font-size: 0.6875rem; padding: 0.25rem 0.75rem">{tag}</span>
+                <span
+                  class="tag"
+                  style="font-size: 0.6875rem; padding: 0.25rem 0.75rem"
+                >
+                  {tag}
+                </span>
               ))}
             </div>
           )
@@ -160,7 +169,7 @@ const dateStr = project.data.date.toLocaleDateString(
         )
       }
 
-      <div class="prose max-w-none dark:prose-invert">
+      <div class="prose dark:prose-invert max-w-none">
         <Content />
       </div>
     </div>
