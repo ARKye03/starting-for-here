@@ -6,12 +6,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const softSkills = [
-  t("about.skills.uiux"),
-  t("about.skills.linux"),
-  t("about.skills.prototype"),
-  t("about.skills.research"),
-  t("about.skills.comm"),
-  t("about.skills.problem"),
+  { name: t("about.skills.uiux"), icon: "palette" },
+  { name: t("about.skills.linux"), icon: "linux" },
+  { name: t("about.skills.prototype"), icon: "pen-tool" },
+  { name: t("about.skills.research"), icon: "users-round" },
+  { name: t("about.skills.comm"), icon: "message-circle" },
+  { name: t("about.skills.problem"), icon: "lightbulb" },
 ];
 
 const techStack = [
@@ -50,10 +50,11 @@ const langs = [
       {
         softSkills.map((s) => (
           <div
-            class="rounded-[var(--radius)] border px-5 py-4 text-[14px] transition-colors hover:border-[var(--primary)]"
-            style="background: var(--card); border-color: var(--border); color: var(--foreground); font-family: var(--font-body)"
+            class="skill-card flex items-center gap-3 rounded-[var(--radius)] border border-[var(--border)] px-5 py-4 text-[14px] transition-colors hover:border-[var(--primary)]"
+            style="background: var(--card); color: var(--foreground); font-family: var(--font-body)"
           >
-            {s}
+            <Icon name={s.icon} class="skill-card-icon h-5 w-5 shrink-0" />
+            <span>{s.name}</span>
           </div>
         ))
       }
@@ -67,8 +68,8 @@ const langs = [
       {
         techStack.map((tech) => (
           <div
-            class="flex flex-col items-center justify-center gap-2 rounded-[var(--radius)] border px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
-            style="background: var(--card); border-color: var(--border)"
+            class="flex flex-col items-center justify-center gap-2 rounded-[var(--radius)] border border-[var(--border)] px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
+            style="background: var(--card)"
           >
             <Icon
               name={tech.icon}
@@ -127,5 +128,12 @@ const langs = [
 <style>
   .themed-icon {
     color: var(--foreground);
+  }
+  .skill-card-icon {
+    color: var(--muted-foreground);
+    transition: color 0.2s;
+  }
+  .skill-card:hover .skill-card-icon {
+    color: var(--primary);
   }
 </style>
