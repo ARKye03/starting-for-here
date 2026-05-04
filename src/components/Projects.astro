@@ -1,19 +1,18 @@
 ---
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import ProjectCard from "./ProjectCard.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Define pinned projects in desired order (without lang prefix)
-const pinnedProjectSlugs = ["larasdelitesse", "morghulis", "portfolio"];
+const pinnedProjectSlugs = ["morghulis", "larasdelitesse", "wawkoss"];
 
 const allProjects = await getCollection("projects");
 const projects = pinnedProjectSlugs
   .map((slug) =>
     allProjects.find((project) => {
-      // ID might be "en/slug.md", we want to compare against "en/slug"
       const idWithoutExt = project.id.replace(/\.[^/.]+$/, "");
       return idWithoutExt === `${lang}/${slug}`;
     }),
@@ -29,23 +28,40 @@ const projects = pinnedProjectSlugs
   }));
 ---
 
-<section>
-  <h2
-    class="text-foreground px-4 pt-5 pb-3 text-[22px] leading-tight font-bold tracking-[-0.015em]"
-  >
-    {t("projects.bestProjects")}
-  </h2>
-  <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-4">
-    {
-      projects.map((project) => (
-        <ProjectCard
-          title={project.data.title}
-          description={project.data.description}
-          slug={project.slug}
-          tags={project.data.tags}
-          image={project.data.images?.[0]}
-        />
-      ))
-    }
+<section class="px-6 py-24 md:py-28">
+  <div class="mx-auto max-w-[1120px]">
+    <div class="mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <div class="section-label mb-3">{t("projects.portfolioLabel")}</div>
+        <h2 class="display-h2">{t("projects.bestProjects")}</h2>
+      </div>
+      <a
+        href={`/${lang}/projects`}
+        class="nav-link inline-flex items-center gap-1.5 tracking-normal normal-case"
+        style="text-transform: none"
+      >
+        {t("projects.viewAll")}
+        <Icon name="arrow-right" class="h-3.5 w-3.5" />
+      </a>
+    </div>
+
+    <div
+      class="grid gap-5"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr))"
+    >
+      {
+        projects.map((project, i) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            slug={project.slug}
+            tags={project.data.tags}
+            date={project.data.date}
+            featured={project.data.featured}
+            index={i}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>

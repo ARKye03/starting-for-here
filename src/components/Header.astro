@@ -1,12 +1,11 @@
 ---
-import Logo from "@assets/logo.svg";
+import { Icon } from "astro-icon/components";
 import {
   useTranslations,
   getAlternateLangUrl,
   type Language,
 } from "../i18n/utils";
 import { languages } from "../i18n/ui";
-import { Icon } from "astro-icon/components";
 
 export interface Props {
   currentPage?: "home" | "about" | "projects" | "contact";
@@ -16,118 +15,88 @@ export interface Props {
 const { currentPage = "home", lang = "en" } = Astro.props;
 const t = useTranslations(lang);
 
-// Helper function to generate language-aware URLs
 const getUrl = (path: string) => `/${lang}${path}`;
-
-// Get alternate language (switch between en/es)
 const alternateLang = lang === "en" ? "es" : "en";
 const alternateLangUrl = getAlternateLangUrl(Astro.url, alternateLang);
+
+const links = [
+  { id: "home", label: t("nav.home"), href: getUrl("/") },
+  { id: "projects", label: t("nav.projects"), href: getUrl("/projects") },
+  { id: "about", label: t("nav.about"), href: getUrl("/about") },
+  { id: "contact", label: t("nav.contact"), href: getUrl("/get-in-touch") },
+] as const;
 ---
 
-<header
-  class="bg-background/80 sticky top-0 z-50 flex items-center justify-between border-b px-4 py-3 whitespace-nowrap backdrop-blur-md md:px-10"
->
-  <a href={getUrl("/")} class="group flex items-center gap-4">
-    <div class="text-primary size-6">
-      <!-- I don't like this bottom/right thing, but hey, looks fine on mobile and web so 11/10 -->
-      <Logo class="relative right-3 bottom-2 h-10 w-10" />
-    </div>
-    <div class="relative overflow-hidden">
-      <h2
-        class="text-lg leading-tight font-bold tracking-[-0.015em] transition-transform duration-300 group-hover:-translate-y-full"
-      >
-        Rafael Sanchez Martinez
-      </h2>
-      <span
-        class="text-primary absolute top-0 left-0 translate-y-full transform text-lg leading-tight font-bold tracking-[-0.015em] transition-transform duration-300 group-hover:translate-y-0"
-      >
-        aka ARKye03
-      </span>
-    </div>
-  </a>
-  <div class="hidden flex-1 justify-end gap-8 md:flex">
-    <div class="flex items-center gap-9">
-      <a
-        class={`text-sm font-medium leading-normal transition-colors ${
-          currentPage === "home" ? "text-primary" : "hover:text-primary"
-        }`}
-        href={getUrl("/")}
-      >
-        {t("nav.home")}
-      </a>
-      <a
-        class={`text-sm font-medium leading-normal transition-colors ${
-          currentPage === "about" ? "text-primary" : "hover:text-primary"
-        }`}
-        href={getUrl("/about")}
-      >
-        {t("nav.about")}
-      </a>
-      <a
-        class={`text-sm font-medium leading-normal transition-colors ${
-          currentPage === "projects" ? "text-primary" : "hover:text-primary"
-        }`}
-        href={getUrl("/projects")}
-      >
-        {t("nav.projects")}
-      </a>
-    </div>
-    <a class="btn btn-primary min-w-[84px]" href={getUrl("/get-in-touch")}>
-      <span class="truncate">{t("nav.contact")}</span>
+<header class="site-header">
+  <div
+    class="mx-auto flex h-full max-w-[1120px] items-center justify-between px-6"
+  >
+    <a
+      href={getUrl("/")}
+      class="font-display flex items-center gap-1 text-lg font-bold tracking-[-0.02em] no-underline"
+      style="color: var(--foreground)"
+    >
+      <span style="color: var(--primary)">R</span>S
+      <span class="mx-1 opacity-30">/</span>
+      <span class="text-[13px] font-normal opacity-50">dev</span>
     </a>
-    <!-- Language Switcher -->
-    <div class="ml-2 flex items-center border-l pl-6">
+
+    <nav class="hidden items-center gap-8 md:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class:list={["nav-link", { "is-active": currentPage === l.id }]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
       <a
         href={alternateLangUrl}
-        class="text-muted-foreground hover:text-primary text-sm font-bold tracking-widest uppercase transition-colors"
+        class="ml-2 rounded-[var(--radius)] border px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors"
+        style="color: var(--muted-foreground); border-color: var(--border)"
         title={`Switch to ${languages[alternateLang]}`}
       >
         {alternateLang}
       </a>
-    </div>
-  </div>
-  <details class="group relative md:hidden">
-    <summary class="cursor-pointer list-none p-2" aria-label="Toggle menu">
-      <span class="text-xl group-open:hidden">☰</span>
-      <span class="hidden text-xl group-open:inline">✕</span>
-    </summary>
-
-    <nav
-      class="bg-popover absolute top-full right-0 z-50 mt-2 w-48 rounded-lg border shadow-lg"
-    >
-      <div class="flex flex-col py-2">
-        <a
-          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "home" ? "text-primary" : ""}`}
-          href={getUrl("/")}
-        >
-          {t("nav.home")}
-        </a>
-        <a
-          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "about" ? "text-primary" : ""}`}
-          href={getUrl("/about")}
-        >
-          {t("nav.about")}
-        </a>
-        <a
-          class={`px-4 py-3 text-sm font-medium hover:bg-accent transition-colors rounded-md ${currentPage === "projects" ? "text-primary" : ""}`}
-          href={getUrl("/projects")}
-        >
-          {t("nav.projects")}
-        </a>
-        <a class="btn btn-primary mx-2 my-2" href={getUrl("/get-in-touch")}>
-          {t("nav.contact")}
-        </a>
-        <!-- Language Switcher -->
-        <div class="mt-2 border-t px-4 py-3">
-          <a
-            href={alternateLangUrl}
-            class="text-muted-foreground hover:text-primary flex items-center gap-2 text-sm font-medium transition-colors"
-          >
-            <Icon name="languages" class="h-4 w-4" />
-            <span class="uppercase">{languages[alternateLang]}</span>
-          </a>
-        </div>
-      </div>
     </nav>
-  </details>
+
+    <details class="group relative md:hidden">
+      <summary
+        class="cursor-pointer list-none p-2"
+        aria-label="Toggle menu"
+        style="color: var(--foreground)"
+      >
+        <Icon name="menu" class="h-6 w-6 group-open:hidden" />
+        <Icon name="x" class="hidden h-6 w-6 group-open:inline-block" />
+      </summary>
+
+      <nav
+        class="absolute top-full right-0 z-50 mt-2 flex w-56 flex-col gap-1 rounded-[var(--radius)] border p-3 shadow-lg"
+        style="background: var(--card); border-color: var(--border)"
+      >
+        {
+          links.map((l) => (
+            <a
+              href={l.href}
+              class:list={[
+                "nav-link rounded-[var(--radius)] px-3 py-2",
+                { "is-active": currentPage === l.id },
+              ]}
+            >
+              {l.label}
+            </a>
+          ))
+        }
+        <a
+          href={alternateLangUrl}
+          class="nav-link mt-2 rounded-[var(--radius)] border px-3 py-2"
+          style="border-color: var(--border)"
+        >
+          {languages[alternateLang]}
+        </a>
+      </nav>
+    </details>
+  </div>
 </header>

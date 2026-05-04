@@ -1,152 +1,230 @@
 ---
-import { Image } from "astro:assets";
-
-import angularSvg from "@assets/aboutSVGs/brand-angular.svg";
-import astroSvg from "@assets/aboutSVGs/brand-astro.svg";
-import reactSvg from "@assets/aboutSVGs/brand-react.svg";
-import dotnetSvg from "@assets/aboutSVGs/dotnet-tile.svg";
-import sqlSvg from "@assets/aboutSVGs/sql.svg";
-import javascriptSvg from "@assets/aboutSVGs/brand-javascript.svg";
-import typescriptSvg from "@assets/aboutSVGs/brand-typescript.svg";
-import desktopSvg from "@assets/aboutSVGs/device-imac.svg";
-import gitSvg from "@assets/aboutSVGs/brand-git.svg";
-import awsSvg from "@assets/aboutSVGs/brand-aws.svg";
-import cfSvg from "@assets/aboutSVGs/brand-cloudflare.svg";
-import gnomeSvg from "@assets/aboutSVGs/brand-gnome.svg";
+import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const softSkills = [
+  { name: t("about.skills.uiux"), icon: "palette" },
+  { name: t("about.skills.linux"), icon: "linux" },
+  { name: t("about.skills.prototype"), icon: "pen-tool" },
+  { name: t("about.skills.research"), icon: "users-round" },
+  { name: t("about.skills.comm"), icon: "message-circle" },
+  { name: t("about.skills.problem"), icon: "lightbulb" },
+];
+
+const techStack = [
+  { name: "TypeScript", icon: "skills/typescript" },
+  { name: "JavaScript", icon: "skills/javascript" },
+  { name: "React", icon: "skills/react" },
+  { name: "Next.js", icon: "skills/nextdotjs", themed: true },
+  { name: "Astro", icon: "skills/astro" },
+  { name: "Angular", icon: "skills/angular" },
+  { name: ".NET", icon: "skills/dotnet-tile", wide: true },
+  { name: "Vala", icon: "skills/vala" },
+  { name: "Rust", icon: "skills/rust" },
+  { name: "SQL", icon: "skills/sql" },
+  { name: "Git", icon: "skills/git" },
+  { name: "Bun", icon: "skills/bun" },
+  { name: "AWS", icon: "skills/aws" },
+  { name: "Cloudflare", icon: "skills/cloudflare" },
+  { name: "Terraform", icon: "skills/terraform" },
+  { name: "GNOME", icon: "skills/gnome" },
+];
+
+const langs = [
+  {
+    name: t("about.skills.spanish"),
+    level: t("about.skills.native"),
+    pct: 100,
+  },
+  { name: t("about.skills.english"), level: t("about.skills.fluent"), pct: 85 },
+  { name: t("about.skills.german"), level: t("about.skills.basic"), pct: 30 },
+];
+
+const nowRows = [
+  { label: t("about.now.working"), value: t("about.now.workingValue") },
+  { label: t("about.now.learning"), value: t("about.now.learningValue") },
+  {
+    label: t("about.now.status"),
+    value: t("about.now.statusValue"),
+    pulse: true,
+  },
+  { label: t("about.now.location"), value: t("about.now.locationValue") },
+];
 ---
 
-<section>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.title")}
-  </h2>
-  <div class="grid grid-cols-2 gap-4 px-4 py-8 md:grid-cols-3">
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🎨</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.uiux")}
-      </p>
+<section class="px-6 py-16 md:py-20">
+  <div class="mx-auto max-w-[1120px]">
+    <h2 class="display-h3 mb-6 text-xl">{t("about.skills.title")}</h2>
+    <div
+      class="mb-12 grid gap-3"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr))"
+    >
+      {
+        softSkills.map((s) => (
+          <div
+            class="skill-card flex items-center gap-3 rounded-[var(--radius)] border border-[var(--border)] px-5 py-4 text-[14px] transition-colors hover:border-[var(--primary)]"
+            style="background: var(--card); color: var(--foreground); font-family: var(--font-body)"
+          >
+            <Icon name={s.icon} class="skill-card-icon h-5 w-5 shrink-0" />
+            <span>{s.name}</span>
+          </div>
+        ))
+      }
     </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🐧</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.linux")}
-      </p>
+
+    <h3 class="display-h3 mb-5 text-lg">{t("about.skills.stack")}</h3>
+    <div
+      class="mb-12 grid gap-2.5"
+      style="grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr))"
+    >
+      {
+        techStack.map((tech) => (
+          <div
+            class="flex flex-col items-center justify-center gap-2 rounded-[var(--radius)] border border-[var(--border)] px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
+            style="background: var(--card)"
+          >
+            <Icon
+              name={tech.icon}
+              class:list={[
+                "h-7",
+                tech.wide ? "w-12" : "w-7",
+                tech.themed && "themed-icon",
+              ]}
+            />
+            <div
+              class="text-[11px]"
+              style="color: var(--muted-foreground); font-family: var(--font-body)"
+            >
+              {tech.name}
+            </div>
+          </div>
+        ))
+      }
     </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">💻</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.prototype")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">👥</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.research")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">🗣️</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.comm")}
-      </p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <span class="text-primary text-2xl">💡</span>
-      <p class="text-foreground text-base font-medium">
-        {t("about.skills.problem")}
-      </p>
+
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div>
+        <h3 class="display-h3 mb-5 text-lg">{t("about.skills.languages")}</h3>
+        <div class="flex flex-col gap-4">
+          {
+            langs.map((l) => (
+              <div>
+                <div class="mb-1.5 flex items-center justify-between">
+                  <span
+                    class="text-[14px]"
+                    style="color: var(--foreground); font-family: var(--font-body)"
+                  >
+                    {l.name}
+                  </span>
+                  <span
+                    class="font-mono text-xs"
+                    style="color: var(--muted-foreground)"
+                  >
+                    {l.level}
+                  </span>
+                </div>
+                <div
+                  class="h-1 overflow-hidden rounded"
+                  style="background: var(--border)"
+                >
+                  <div
+                    class="h-full rounded"
+                    style={`width: ${l.pct}%; background: var(--primary); animation: lang-bar-fill 1s cubic-bezier(.22,1,.36,1) both`}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <h3 class="display-h3 mb-5 text-lg">{t("about.now.title")}</h3>
+        <div
+          class="now-card relative overflow-hidden rounded-[var(--radius)] border border-[var(--border)] p-6"
+          style="background: var(--card)"
+        >
+          <div
+            class="mb-5 font-mono text-[11px] tracking-[0.1em] uppercase"
+            style="color: var(--primary)"
+          >
+            {t("about.now.eyebrow")}
+          </div>
+          <dl class="grid gap-3.5">
+            {
+              nowRows.map((row) => (
+                <div
+                  class="flex items-baseline gap-3 border-b border-dashed pb-3 last:border-0 last:pb-0"
+                  style="border-color: var(--border)"
+                >
+                  <dt
+                    class="w-28 shrink-0 font-mono text-[10.5px] tracking-[0.08em] uppercase"
+                    style="color: var(--muted-foreground)"
+                  >
+                    {row.label}
+                  </dt>
+                  <dd
+                    class="flex flex-1 items-center gap-2 text-[14px]"
+                    style="color: var(--foreground); font-family: var(--font-body)"
+                  >
+                    {row.pulse && <span class="now-pulse" />}
+                    <span>{row.value}</span>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.stack")}
-  </h2>
-  <div class="grid grid-cols-2 gap-4 px-4 py-8 md:grid-cols-3 lg:grid-cols-4">
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={cfSvg} alt="Cloudflare" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Cloudflare</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={awsSvg} alt="AWS" loading="lazy" />
-      <p class="text-foreground text-base font-medium">AWS</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={angularSvg} alt="Angular" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Angular</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={astroSvg} alt="Astro" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Astro</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={reactSvg} alt="React" loading="lazy" />
-      <p class="text-foreground text-base font-medium">React</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={dotnetSvg} alt=".NET" loading="lazy" />
-      <p class="text-foreground text-base font-medium">.NET</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={sqlSvg} alt="SQL" loading="lazy" />
-      <p class="text-foreground text-base font-medium">SQL Databases</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={javascriptSvg} alt="JavaScript" loading="lazy" />
-      <p class="text-foreground text-base font-medium">JavaScript</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={typescriptSvg} alt="TypeScript" loading="lazy" />
-      <p class="text-foreground text-base font-medium">TypeScript</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={gnomeSvg} alt="Gnome Tools" loading="lazy" width={24} />
-      <p class="text-foreground text-base font-medium">Gnome Tools</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={desktopSvg} alt="Desktop Apps" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Desktop Apps</p>
-    </div>
-    <div class="bg-card flex items-center gap-3 rounded-lg p-4">
-      <Image src={gitSvg} alt="Git" loading="lazy" />
-      <p class="text-foreground text-base font-medium">Git</p>
-    </div>
-  </div>
-  <h2 class="text-foreground px-4 pt-10 pb-3 text-3xl leading-tight font-bold">
-    {t("about.skills.languages")}
-  </h2>
-  <div class="grid grid-cols-1 gap-4 px-4 py-8 md:grid-cols-3">
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.spanish")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.native")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
-      </div>
-    </div>
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.english")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.fluent")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
-      </div>
-    </div>
-    <div class="bg-card flex flex-col items-start gap-2 rounded-lg p-4">
-      <p class="text-foreground text-lg font-medium">
-        {t("about.skills.german")}
-      </p>
-      <p class="text-muted-foreground text-sm">{t("about.skills.basic")}</p>
-      <div class="bg-muted mt-1 h-2 w-full rounded-full">
-        <div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
-      </div>
-    </div>
-  </div>
-</section>
+<style>
+  .themed-icon {
+    color: var(--foreground);
+  }
+  .skill-card-icon {
+    color: var(--muted-foreground);
+    transition: color 0.2s;
+  }
+  .skill-card:hover .skill-card-icon {
+    color: var(--primary);
+  }
+
+  .now-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary),
+      transparent
+    );
+    opacity: 0.7;
+  }
+
+  .now-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 0 var(--primary-glow);
+    animation: now-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes now-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--primary-glow);
+    }
+    50% {
+      box-shadow: 0 0 0 6px transparent;
+    }
+  }
+</style>

@@ -40,8 +40,19 @@ export const ui = {
     "404.backHome": "Back to Home",
     "404.learnAbout": "Learn About Me",
     "404.lookingFor": "Looking for something specific?",
+    "404.terminal": "> ERROR: path not found in the system...",
+
+    // Footer
+    "footer.tagline": "Built with passion",
+    "footer.copyright": "Rafael Sanchez",
+
+    // Section labels
+    "section.about": "About",
+    "section.contact": "Contact",
+    "section.work": "Selected Work",
 
     // Hero Section
+    "hero.intro": "Rafael Sanchez",
     "hero.title": "Software Developer",
     "hero.subtitle":
       "I design and code beautifully simple things, and I love what I do. I'm a passionate developer with a knack for creating elegant and effective solutions.",
@@ -49,7 +60,12 @@ export const ui = {
     "hero.aboutMe": "About Me",
 
     // Projects Section
-    "projects.bestProjects": "My Best Projects",
+    "projects.bestProjects": "Featured Projects",
+    "projects.viewAll": "View All Projects",
+    "projects.filter.all": "All",
+    "projects.filter.featured": "Featured",
+    "projects.count": "projects",
+    "projects.portfolioLabel": "Portfolio",
 
     // About Page Sections
     "about.hero.title": "Designing with purpose and passion.",
@@ -84,6 +100,17 @@ export const ui = {
     "about.skills.native": "Native",
     "about.skills.fluent": "Fluent",
     "about.skills.basic": "Basic",
+
+    "about.now.title": "Now",
+    "about.now.eyebrow": "// Currently",
+    "about.now.working": "Working on",
+    "about.now.workingValue": "Portfolio rebuild",
+    "about.now.learning": "Learning",
+    "about.now.learningValue": "Rust · Bun",
+    "about.now.status": "Status",
+    "about.now.statusValue": "Working from home",
+    "about.now.location": "Based in",
+    "about.now.locationValue": "Uruguay · GMT−3",
 
     // CTA Section
     "cta.title": "Let's build something great together.",
@@ -151,8 +178,19 @@ export const ui = {
     "404.backHome": "Volver al Inicio",
     "404.learnAbout": "Conoce Más Sobre Mí",
     "404.lookingFor": "¿Buscas algo específico?",
+    "404.terminal": "> ERROR: ruta no encontrada en el sistema...",
+
+    // Footer
+    "footer.tagline": "Hecho con pasión",
+    "footer.copyright": "Rafael Sanchez",
+
+    // Section labels
+    "section.about": "Acerca de",
+    "section.contact": "Contacto",
+    "section.work": "Trabajo Seleccionado",
 
     // Hero Section
+    "hero.intro": "Rafael Sanchez",
     "hero.title": "Desarrollador de Software",
     "hero.subtitle":
       "Diseño y programo cosas maravillosamente simples, y amo lo que hago. Soy un desarrollador apasionado con talento para crear soluciones elegantes y efectivas.",
@@ -161,6 +199,11 @@ export const ui = {
 
     // Projects Section
     "projects.bestProjects": "Mis Mejores Proyectos",
+    "projects.viewAll": "Ver Todos los Proyectos",
+    "projects.filter.all": "Todos",
+    "projects.filter.featured": "Destacados",
+    "projects.count": "proyectos",
+    "projects.portfolioLabel": "Portafolio",
 
     // About Page Sections
     "about.hero.title": "Diseñando con propósito y pasión.",
@@ -195,6 +238,17 @@ export const ui = {
     "about.skills.native": "Nativo",
     "about.skills.fluent": "Fluido",
     "about.skills.basic": "Básico",
+
+    "about.now.title": "Ahora",
+    "about.now.eyebrow": "// Actualmente",
+    "about.now.working": "Trabajando en",
+    "about.now.workingValue": "Rediseño del portafolio",
+    "about.now.learning": "Aprendiendo",
+    "about.now.learningValue": "Rust · Bun",
+    "about.now.status": "Estado",
+    "about.now.statusValue": "Trabajando desde casa",
+    "about.now.location": "Ubicación",
+    "about.now.locationValue": "Uruguay · GMT−3",
 
     // CTA Section
     "cta.title": "Construyamos algo genial juntos.",

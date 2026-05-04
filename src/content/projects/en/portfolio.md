@@ -2,10 +2,10 @@
 title: "Portfolio Website"
 description: "Portfolio website for me, showcasing my projects and services."
 date: 2025-10-01
-featured: true
+featured: false
 tags: ["Astro", "Tailwind CSS", "Web Design"]
 url: "https://buildwitharkye.me/"
-images: ["portfolio.webp"]
+images: ["@assets/projects/portfolio.webp"]
 lang: "en"
 ---
 
