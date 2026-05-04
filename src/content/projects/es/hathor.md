@@ -2,7 +2,7 @@
 title: "Hathor"
 description: "Una interfaz de escritorio para FFmpeg, codifica, recorta, fusiona y normaliza sin memorizar un solo comando."
 date: 2025-06-01
-featured: true
+featured: false
 tags: ["Tauri", "SvelteKit", "Rust", "Svelte 5", "FFmpeg", "Bun", "TypeScript"]
 github: "https://github.com/ARKye03/hathor"
 images:

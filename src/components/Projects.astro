@@ -7,7 +7,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const pinnedProjectSlugs = ["wawkoss", "morghulis", "ferox"];
+const pinnedProjectSlugs = ["morghulis", "larasdelitesse", "wawkoss"];
 
 const allProjects = await getCollection("projects");
 const projects = pinnedProjectSlugs

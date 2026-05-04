@@ -2,7 +2,7 @@
 title: "Moogle"
 description: "Una herramienta web que combina un frontend en ReactJS y un motor de búsqueda del lado del servidor para la recuperación de documentos."
 date: 2023-03-06
-featured: true
+featured: false
 tags:
   [
     "ReactJS",

@@ -2,7 +2,7 @@
 title: "Hathor"
 description: "A desktop GUI for FFmpeg, encode, trim, merge, and normalize without memorizing a single command."
 date: 2025-06-01
-featured: true
+featured: false
 tags: ["Tauri", "SvelteKit", "Rust", "Svelte 5", "FFmpeg", "Bun", "TypeScript"]
 github: "https://github.com/ARKye03/hathor"
 images:
