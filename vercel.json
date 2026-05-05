@@ -2,8 +2,32 @@
   "redirects": [
     {
       "source": "/",
+      "has": [{ "type": "cookie", "key": "lang", "value": "es" }],
+      "destination": "/es/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "cookie", "key": "lang", "value": "en" }],
       "destination": "/en/",
-      "permanent": true
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^es(-[A-Z]{2})?(,.*)?$"
+        }
+      ],
+      "destination": "/es/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/en/",
+      "permanent": false
     }
   ]
 }
