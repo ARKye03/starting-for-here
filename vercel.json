@@ -22,7 +22,7 @@
         {
           "type": "header",
           "key": "accept-language",
-          "value": ".*es(-[A-Z]{2})?.*"
+          "value": "^es(-[A-Z]{2})?(,.*)?$"
         }
       ],
       "destination": "/es/",

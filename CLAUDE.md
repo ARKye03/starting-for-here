@@ -28,12 +28,12 @@ pnpm astro [command]
 
 File-based, language-first routing:
 
-- **Root routes**: `/src/pages/*.astro` — top-level (index redirects to /en)
-- **Localized routes**: `/src/pages/[lang]/*.astro` — language-scoped
+- **Localized routes**: `/src/pages/[lang]/*.astro` — language-scoped (all pages live here)
 - **Dynamic routes**: `/src/pages/[lang]/projects/[slug].astro` — project details
 - **API routes**: `/src/pages/api/*.ts` — server endpoints (prerender: false)
+- **404**: `/src/pages/404.astro` — top-level fallback
 
-EN default, no URL prefix. ES uses `/es` prefix.
+Both langs prefixed (`/en/*`, `/es/*`). Root `/` redirected at Vercel edge — see "Root Redirect & Lang Persistence" below.
 
 ### I18n System
 
@@ -45,7 +45,7 @@ Manual i18n, static generation per language:
 i18n: {
   locales: ["en", "es"],
   defaultLocale: "en",
-  routing: { prefixDefaultLocale: false }
+  routing: { prefixDefaultLocale: true }
 }
 ```
 
@@ -69,6 +69,25 @@ const t = useTranslations(lang);
 ```
 
 All lang-aware routes need `getStaticPaths()` per language.
+
+### Root Redirect & Lang Persistence
+
+Root (`/`) handled at Vercel edge via `vercel.json` redirects (no `src/pages/index.astro`). Four-tier match order, first match wins:
+
+1. **Cookie `lang=es`** → `/es/`
+2. **Cookie `lang=en`** → `/en/`
+3. **`Accept-Language` starts with `es`** (regex `^es(-[A-Z]{2})?(,.*)?$`) → `/es/`
+4. **Fallback** → `/en/`
+
+All redirects are 307 (`permanent: false`) — keeps detection tweakable without burned cache.
+
+**Cookie write**: `Header.astro` ships an inline script that writes `lang=<current>; max-age=1y; samesite=lax; path=/` on every page load, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, and switcher clicks via one mechanism (no event listener).
+
+**Caveats**:
+
+- `pnpm preview` does not honor `vercel.json` — `/` 404s in local preview only. Use `pnpm dev` for full flow, or test post-deploy.
+- View transitions: inline script re-runs per page since `<ClientRouter>` re-executes inline scripts. If `transition:persist` is later added to Header, swap to an `astro:page-load` listener.
+- Verify post-deploy: `curl -I -H "Accept-Language: es-ES" https://<host>/` → 307 to `/es/`; with `--cookie "lang=en"` → 307 to `/en/`.
 
 ### Content Collections
 
