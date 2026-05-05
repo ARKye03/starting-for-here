@@ -2,17 +2,13 @@
   "redirects": [
     {
       "source": "/",
-      "has": [
-        { "type": "cookie", "key": "lang", "value": "es" }
-      ],
+      "has": [{ "type": "cookie", "key": "lang", "value": "es" }],
       "destination": "/es/",
       "permanent": false
     },
     {
       "source": "/",
-      "has": [
-        { "type": "cookie", "key": "lang", "value": "en" }
-      ],
+      "has": [{ "type": "cookie", "key": "lang", "value": "en" }],
       "destination": "/en/",
       "permanent": false
     },
