@@ -18,6 +18,15 @@ pnpm build
 # Preview production build locally
 pnpm preview
 
+# Lint (eslint .)
+pnpm lint
+
+# Type check (astro check)
+pnpm check
+
+# Format (prettier . --write)
+pnpm fmt
+
 # Direct Astro CLI access
 pnpm astro [command]
 ```
@@ -51,7 +60,7 @@ i18n: {
 
 **Key files**:
 
-- `/src/i18n/ui.ts` — translation dict (100+ keys by feature)
+- `/src/i18n/ui.ts` — translation dict organized by feature; exports `languages` map, `defaultLang`, and `ui` keyed by locale
 - `/src/i18n/utils.ts` — helpers:
   - `getLangFromUrl(url)` — extract lang from URL
   - `useTranslations(lang)` — get t() with fallback
@@ -93,9 +102,9 @@ All redirects are 307 (`permanent: false`) — keeps detection tweakable without
 
 Markdown content with schema validation:
 
-**Schema** (`/src/content/config.ts`):
+**Schema** (`/src/content.config.ts`):
 
-- Collection: `projects`
+- Collection: `projects` (uses `glob` loader on `src/content/projects/**/*.md`)
 - Fields: title, description, images, tags, url, github, featured, date, lang
 - Content by lang: `/src/content/projects/en/` and `/src/content/projects/es/`
 
@@ -103,24 +112,14 @@ Markdown content with schema validation:
 
 - Query with `getCollection("projects")`, filter by lang
 - Render with `const { Content } = await project.render()`
-- Images in `/public/projects/`, referenced in frontmatter
+- Images live in `/src/assets/projects/<slug>/`, referenced via relative paths in frontmatter `images:` array. Schema uses `image()` from `astro:content` → Sharp pipeline, ImportMetadata available at render.
 
 ### Component Architecture
 
-10 reusable Astro components in `/src/components/`:
+- **Layout** — `/src/layouts/Layout.astro` is the base HTML wrapper (Header/Footer, ClientRouter, fonts).
+- **Components** — `/src/components/*.astro` are page sections (Header, Hero, Projects, ProjectCard, Philosophy, Journey, Skills, CallToAction, Footer, AboutHero). List drifts; `ls src/components` for current set.
 
-- **Layout.astro** — base HTML wrapper with Header/Footer
-- **Header.astro** — sticky nav with lang switcher
-- **Hero.astro** — homepage banner
-- **Projects.astro** — featured projects grid (pins 3 by slug)
-- **ProjectCard.astro** — project thumbnail, hover effects
-- **Philosophy.astro** — about page bio section
-- **Journey.astro** — about page timeline
-- **Skills.astro** — about page skills showcase
-- **CallToAction.astro** — CTA section
-- **Footer.astro** — global footer, social links
-
-All components extract lang from URL, use translation helpers.
+All components receive/derive `lang`, call `useTranslations(lang)` for copy.
 
 ### Styling System
 
@@ -132,7 +131,7 @@ All components extract lang from URL, use translation helpers.
 - Dark mode via `prefers-color-scheme` (CSS-only, no JS toggle)
 - Two DaisyUI themes: `catppuccin` (light default), `catppuccin-dark` (dark, prefersdark)
 - Catppuccin Mauve as primary in both themes
-- Fonts: Montserrat (sans), Georgia (serif), Fira Code (mono)
+- Fonts: Astro 6 built-in Fonts API (`fontProviders.google()` in `astro.config.mjs`) — Space Grotesk → `--font-display`, DM Sans → `--font-body`, JetBrains Mono → `--font-mono`. No external `<link>` tags; Astro handles preload + self-hosting.
 - Mobile-first, container queries (`@container`)
 - DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
 - Icons: **astro-icon** with local SVGs in `src/icons/`, **NO inline SVG**
@@ -159,6 +158,8 @@ Add icons as SVG in `src/icons/`. Name = filename (e.g., `src/icons/mail.svg` �
 
 - `@assets/*` → `./src/assets/*`
 - `@components/*` → `./src/components/*`
+- `@lib/*` → `./src/lib/*`
+- `@i18n/*` → `./src/i18n/*`
 
 ### API Endpoints
 
@@ -215,7 +216,7 @@ export const prerender = false; // Required for server routes
 
 1. Create markdown in `/src/content/projects/en/` and `/src/content/projects/es/`
 2. Schema: title, description, date, tags, images (optional), url (optional), github (optional), featured (boolean), lang
-3. Images in `/public/projects/[project-name]/`
+3. Images in `/src/assets/projects/[project-name]/`; frontmatter `images:` is an array of relative paths (e.g. `../../../assets/projects/<slug>/main.webp`) — `image()` schema processes through Sharp
 4. Auto-appear in listing, sorted by date desc
 
 ### Modifying Translations
@@ -236,10 +237,10 @@ Pages use Astro's `<ClientRouter>` for SPA-like nav. Use `transition:name` for s
 
 ## Technology Stack
 
-- **Framework**: Astro 6.0.5 (SSG)
-- **Styling**: Tailwind CSS 4.1.18 (Vite plugin) + DaisyUI 5.5.19
-- **Email**: Resend 6.1.3
-- **Image Processing**: Sharp 0.34.4
+- **Framework**: Astro 6.2.1 (SSG, built-in Fonts API)
+- **Styling**: Tailwind CSS 4.2.4 (Vite plugin) + DaisyUI 5.5.19
+- **Email**: Resend 6.12.2
+- **Image Processing**: Sharp 0.34.5
 - **Icons**: astro-icon 1.1.5 (local SVGs in `src/icons/`)
-- **Deployment**: Vercel (@astrojs/vercel 10.0.1)
+- **Deployment**: Vercel (`@astrojs/vercel` 10.0.6)
 - **Package Manager**: pnpm
