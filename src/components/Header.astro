@@ -102,5 +102,11 @@ const links = [
 </header>
 
 <script is:inline define:vars={{ lang }}>
-  document.cookie = `lang=${lang}; path=/; max-age=31536000; samesite=lax`;
+  // Skip on non-prefixed routes (404 prerenders as "en" and would clobber the preference)
+  if (
+    location.pathname.startsWith(`/${lang}/`) ||
+    location.pathname === `/${lang}`
+  ) {
+    document.cookie = `lang=${lang}; path=/; max-age=31536000; samesite=lax`;
+  }
 </script>
