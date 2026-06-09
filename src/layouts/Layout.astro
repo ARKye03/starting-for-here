@@ -4,22 +4,33 @@ import { Font } from "astro:assets";
 import "../styles/global.css";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import profile from "@assets/profile.webp";
 
-import type { Language } from "../i18n/utils";
+import { getAlternateLangUrl, type Language } from "../i18n/utils";
+import { languages } from "../i18n/ui";
 
 export interface Props {
   title?: string;
   description?: string;
   currentPage?: "home" | "about" | "projects" | "contact";
   lang?: Language;
+  ogImage?: string;
 }
 
 const {
-  title = "Portfolio",
+  title = "Rafael Sanchez — Software Developer",
   description,
   currentPage = "home",
   lang = "en",
+  ogImage = profile.src,
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+const ogLocale = lang === "es" ? "es_ES" : "en_US";
+const ogLocaleAlternate = lang === "es" ? "en_US" : "es_ES";
+// hreflang only on lang-prefixed routes (404 lives outside /en|/es)
+const isLocalized = /^\/(en|es)(\/|$)/.test(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -31,6 +42,40 @@ const {
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      isLocalized &&
+        Object.keys(languages).map((l) => (
+          <link
+            rel="alternate"
+            hreflang={l}
+            href={
+              new URL(getAlternateLangUrl(Astro.url, l as Language), Astro.site)
+            }
+          />
+        ))
+    }
+    {
+      isLocalized && (
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={new URL(getAlternateLangUrl(Astro.url, "en"), Astro.site)}
+        />
+      )
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rafael Sanchez" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageUrl} />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     <Font cssVariable="--font-mono" />
