@@ -86,7 +86,7 @@ Root (`/`) → Vercel edge via `vercel.json` (no `src/pages/index.astro`). Four-
 
 All redirects 307 (`permanent: false`) — keeps detection tweakable, no burned cache.
 
-**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on every page load, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener.
+**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on lang-prefixed routes only, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener. Guard matters: 404 prerenders as `en`; unguarded write would clobber `lang=es` before the 404 ES-swap script reads it.
 
 **Caveats**:
 
