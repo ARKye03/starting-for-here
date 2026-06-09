@@ -138,6 +138,10 @@ export const ui = {
     "contact.form.error": "✗ Failed to send message. Please try again.",
     "contact.form.networkError":
       "✗ Network error. Please check your connection and try again.",
+    "contact.form.errorMissing": "✗ All fields are required.",
+    "contact.form.errorEmail": "✗ Please enter a valid email address.",
+    "contact.form.errorTooLong":
+      "✗ Your message is too long. Please shorten it.",
 
     // Project Details
     "project.viewLive": "View Live Site",
@@ -276,6 +280,10 @@ export const ui = {
     "contact.form.error": "✗ Error al enviar el mensaje. Inténtalo de nuevo.",
     "contact.form.networkError":
       "✗ Error de red. Comprueba tu conexión e inténtalo de nuevo.",
+    "contact.form.errorMissing": "✗ Todos los campos son obligatorios.",
+    "contact.form.errorEmail":
+      "✗ Por favor, introduce un correo electrónico válido.",
+    "contact.form.errorTooLong": "✗ Tu mensaje es demasiado largo. Acórtalo.",
 
     // Project Details
     "project.viewLive": "Ver Sitio en Vivo",

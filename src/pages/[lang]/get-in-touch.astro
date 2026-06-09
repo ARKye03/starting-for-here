@@ -47,12 +47,25 @@ const email = "rafa03-dev@proton.me";
           data-msg-success={t("contact.form.success")}
           data-msg-error={t("contact.form.error")}
           data-msg-network={t("contact.form.networkError")}
+          data-msg-missing-fields={t("contact.form.errorMissing")}
+          data-msg-invalid-email={t("contact.form.errorEmail")}
+          data-msg-too-long={t("contact.form.errorTooLong")}
         >
           <div
             id="form-status"
             class="hidden rounded-[var(--radius)] p-3 text-sm"
           >
           </div>
+
+          <!-- Honeypot: hidden from humans, bots fill it -->
+          <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            class="hp-field"
+          />
 
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="flex flex-col gap-1.5">
@@ -208,6 +221,14 @@ const email = "rafa03-dev@proton.me";
   .contact-link:hover {
     color: var(--primary);
   }
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
 </style>
 
 <script>
@@ -245,11 +266,17 @@ const email = "rafa03-dev@proton.me";
             statusDiv.textContent = form.dataset.msgSuccess || "✓ Sent!";
             form.reset();
           } else {
+            const errorMessages: Record<string, string | undefined> = {
+              missing_fields: form.dataset.msgMissingFields,
+              invalid_email: form.dataset.msgInvalidEmail,
+              too_long: form.dataset.msgTooLong,
+            };
             statusDiv.className = "rounded-[var(--radius)] p-3 text-sm border";
             statusDiv.style.borderColor = "var(--destructive)";
             statusDiv.style.color = "var(--destructive)";
             statusDiv.style.background = "transparent";
-            statusDiv.textContent = `✗ ${result.error || form.dataset.msgError || "Error"}`;
+            statusDiv.textContent =
+              errorMessages[result.error] || form.dataset.msgError || "✗ Error";
           }
         }
       } catch {

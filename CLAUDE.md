@@ -86,7 +86,7 @@ Root (`/`) → Vercel edge via `vercel.json` (no `src/pages/index.astro`). Four-
 
 All redirects 307 (`permanent: false`) — keeps detection tweakable, no burned cache.
 
-**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on every page load, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener.
+**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on lang-prefixed routes only, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener. Guard matters: 404 prerenders as `en`; unguarded write would clobber `lang=es` before the 404 ES-swap script reads it.
 
 **Caveats**:
 
@@ -169,9 +169,12 @@ export const prerender = false; // Required for server routes
 
 **Functionality**:
 
-- Validates form data (name, email, subject, message)
-- Sends email via Resend (`RESEND_API_KEY` env var required)
-- Returns JSON success/error
+- Validates form data (name, email, subject, message): required, email format, length caps
+- Honeypot field `website` — bots filling it get fake `success: true`
+- HTML-escapes all user input before email interpolation
+- Sends email via Resend (`RESEND_API_KEY` env var required; lazy-init in handler)
+- `CONTACT_FROM` / `CONTACT_TO` env vars override sender/recipient (defaults: `onboarding@resend.dev` / `rafa03-dev@proton.me`)
+- Returns JSON; errors are i18n codes (`missing_fields`, `invalid_email`, `too_long`, `send_failed`, `server_error`) mapped to translations client-side via `data-msg-*` attrs
 - Client-side AJAX w/ status messages
 
 ### Build & Deployment
@@ -186,8 +189,10 @@ export const prerender = false; // Required for server routes
 **Deployment**:
 
 - Platform: Vercel
-- Env var: `RESEND_API_KEY` (contact form)
+- Env vars: `RESEND_API_KEY` (contact form, required), `CONTACT_FROM`/`CONTACT_TO` (optional sender/recipient overrides)
 - Asset cache: 1yr for `/_astro/*`
+- SEO: `site` set in `astro.config.mjs`, `@astrojs/sitemap` (i18n-aware) → `/sitemap-index.xml`, `public/robots.txt`, canonical + hreflang + OG/Twitter meta in `Layout.astro` (hreflang only on lang-prefixed routes)
+- 404 prerenders as EN; inline script swaps to ES via `data-i18n` attrs when path starts `/es` or cookie `lang=es`
 
 ## Important Patterns
 
