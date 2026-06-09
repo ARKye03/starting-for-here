@@ -7,8 +7,11 @@ import vercel from "@astrojs/vercel";
 
 import icon from "astro-icon";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
+  site: "https://buildwitharkye.me",
   output: "static",
 
   i18n: {
@@ -51,5 +54,13 @@ export default defineConfig({
   },
 
   adapter: vercel(),
-  integrations: [icon()],
+  integrations: [
+    icon(),
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en-US", es: "es-ES" },
+      },
+    }),
+  ],
 });
