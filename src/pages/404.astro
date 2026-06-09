@@ -6,6 +6,19 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const getUrl = (path: string) => `/${lang}${path}`;
+
+// Page prerenders once at /404 (always "en"); client script swaps to ES when needed
+const tEs = useTranslations("es");
+const esStrings = {
+  "404.terminal": tEs("404.terminal"),
+  "404.title": tEs("404.title"),
+  "404.message": tEs("404.message"),
+  "404.backHome": tEs("404.backHome"),
+  "404.learnAbout": tEs("404.learnAbout"),
+  "404.lookingFor": tEs("404.lookingFor"),
+  "nav.projects": tEs("nav.projects"),
+  "nav.contact": tEs("nav.contact"),
+};
 ---
 
 <Layout title={t("404.title")} lang={lang}>
@@ -30,6 +43,7 @@ const getUrl = (path: string) => `/${lang}${path}`;
       <div
         class="mb-6 font-mono text-[13px]"
         style="color: var(--primary); letter-spacing: 0.02em"
+        data-i18n="404.terminal"
       >
         {t("404.terminal")}
       </div>
@@ -37,12 +51,14 @@ const getUrl = (path: string) => `/${lang}${path}`;
       <h1
         class="display-h2 mb-3"
         style="font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 700"
+        data-i18n="404.title"
       >
         {t("404.title")}
       </h1>
       <p
         class="mb-10 text-[15px] leading-[1.6]"
         style="color: var(--muted-foreground); font-family: var(--font-body)"
+        data-i18n="404.message"
       >
         {t("404.message")}
       </p>
@@ -51,12 +67,14 @@ const getUrl = (path: string) => `/${lang}${path}`;
         <a
           href={getUrl("/")}
           class="btn btn-primary btn-mono inline-flex items-center"
+          data-i18n="404.backHome"
         >
           {t("404.backHome")}
         </a>
         <a
           href={getUrl("/about")}
           class="btn btn-outline btn-mono inline-flex items-center"
+          data-i18n="404.learnAbout"
         >
           {t("404.learnAbout")}
         </a>
@@ -66,17 +84,18 @@ const getUrl = (path: string) => `/${lang}${path}`;
         <div
           class="mb-4 font-mono text-[11px] tracking-[0.1em] uppercase"
           style="color: var(--muted-foreground); opacity: 0.6"
+          data-i18n="404.lookingFor"
         >
           {t("404.lookingFor")}
         </div>
         <div class="flex flex-wrap justify-center gap-4">
           <a href={getUrl("/projects")} class="quick-link">
             <Icon name="arrow-right" class="h-3 w-3" />
-            {t("nav.projects")}
+            <span data-i18n="nav.projects">{t("nav.projects")}</span>
           </a>
           <a href={getUrl("/get-in-touch")} class="quick-link">
             <Icon name="arrow-right" class="h-3 w-3" />
-            {t("nav.contact")}
+            <span data-i18n="nav.contact">{t("nav.contact")}</span>
           </a>
           <a
             href="https://github.com/ARKye03"
@@ -92,6 +111,23 @@ const getUrl = (path: string) => `/${lang}${path}`;
     </div>
   </section>
 </Layout>
+
+<script is:inline define:vars={{ esStrings }}>
+  const wantsEs =
+    location.pathname.startsWith("/es") ||
+    /(?:^|;\s*)lang=es(?:;|$)/.test(document.cookie);
+  if (wantsEs) {
+    document.documentElement.lang = "es";
+    document.title = esStrings["404.title"];
+    for (const el of document.querySelectorAll("[data-i18n]")) {
+      const value = esStrings[el.dataset.i18n];
+      if (value) el.textContent = value;
+    }
+    for (const a of document.querySelectorAll('a[href^="/en/"]')) {
+      a.setAttribute("href", a.getAttribute("href").replace(/^\/en/, "/es"));
+    }
+  }
+</script>
 
 <style>
   .quick-link {
