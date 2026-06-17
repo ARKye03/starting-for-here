@@ -22,14 +22,14 @@ const email = "rafa03-dev@proton.me";
   lang={lang}
 >
   <section class="px-6 pt-24 pb-20 md:pt-32">
-    <div class="mx-auto max-w-[1120px]">
+    <div class="mx-auto max-w-280">
       <div class="mb-12">
         <div class="section-label mb-3">{t("section.contact")}</div>
         <h1 class="display-h1 mb-3" style="font-size: clamp(2rem, 5vw, 3rem)">
           {t("contact.heading")}
         </h1>
         <p
-          class="max-w-[640px] text-base"
+          class="max-w-160 text-base"
           style="color: var(--muted-foreground); font-family: var(--font-body)"
         >
           {t("contact.description")}
@@ -51,10 +51,7 @@ const email = "rafa03-dev@proton.me";
           data-msg-invalid-email={t("contact.form.errorEmail")}
           data-msg-too-long={t("contact.form.errorTooLong")}
         >
-          <div
-            id="form-status"
-            class="hidden rounded-[var(--radius)] p-3 text-sm"
-          >
+          <div id="form-status" class="hidden rounded-(--radius) p-3 text-sm">
           </div>
 
           <!-- Honeypot: hidden from humans, bots fill it -->

@@ -65,7 +65,7 @@ const nowRows = [
       {
         softSkills.map((s) => (
           <div
-            class="skill-card flex items-center gap-3 rounded-[var(--radius)] border border-[var(--border)] px-5 py-4 text-[14px] transition-colors hover:border-[var(--primary)]"
+            class="skill-card border-border hover:border-primary flex items-center gap-3 rounded-(--radius) border px-5 py-4 text-[14px] transition-colors"
             style="background: var(--card); color: var(--foreground); font-family: var(--font-body)"
           >
             <Icon name={s.icon} class="skill-card-icon h-5 w-5 shrink-0" />
@@ -83,7 +83,7 @@ const nowRows = [
       {
         techStack.map((tech) => (
           <div
-            class="flex flex-col items-center justify-center gap-2 rounded-[var(--radius)] border border-[var(--border)] px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--primary)]"
+            class="border-border hover:border-primary flex flex-col items-center justify-center gap-2 rounded-(--radius) border px-3 py-4 text-center transition-all hover:-translate-y-0.5"
             style="background: var(--card)"
           >
             <Icon
@@ -144,11 +144,11 @@ const nowRows = [
       <div>
         <h3 class="display-h3 mb-5 text-lg">{t("about.now.title")}</h3>
         <div
-          class="now-card relative overflow-hidden rounded-[var(--radius)] border border-[var(--border)] p-6"
+          class="now-card border-border relative overflow-hidden rounded-(--radius) border p-6"
           style="background: var(--card)"
         >
           <div
-            class="mb-5 font-mono text-[11px] tracking-[0.1em] uppercase"
+            class="mb-5 font-mono text-[11px] tracking-widest uppercase"
             style="color: var(--primary)"
           >
             {t("about.now.eyebrow")}
