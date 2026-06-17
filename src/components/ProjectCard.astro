@@ -46,7 +46,7 @@ const dateStr = date
   {
     featured && (
       <div
-        class="absolute top-3 right-3 z-[2] rounded-[var(--radius)] border px-2 py-[2px] font-mono text-[10px] tracking-[0.08em] uppercase"
+        class="absolute top-3 right-3 z-2 rounded-(--radius) border px-2 py-[2px] font-mono text-[10px] tracking-[0.08em] uppercase"
         style="color: var(--primary); border-color: var(--primary); opacity: 0.7"
       >
         {t("projects.filter.featured")}
@@ -54,7 +54,7 @@ const dateStr = date
     )
   }
 
-  <div class="card-index mb-4 font-mono text-[11px] tracking-[0.1em]">
+  <div class="card-index mb-4 font-mono text-[11px] tracking-widest">
     {num}
   </div>
 
