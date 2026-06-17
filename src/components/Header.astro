@@ -54,7 +54,7 @@ const links = [
       }
       <a
         href={alternateLangUrl}
-        class="ml-2 rounded-[var(--radius)] border px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors"
+        class="ml-2 rounded-(--radius) border px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors"
         style="color: var(--muted-foreground); border-color: var(--border)"
         title={`Switch to ${languages[alternateLang]}`}
       >
@@ -73,7 +73,7 @@ const links = [
       </summary>
 
       <nav
-        class="absolute top-full right-0 z-50 mt-2 flex w-56 flex-col gap-1 rounded-[var(--radius)] border p-3 shadow-lg"
+        class="absolute top-full right-0 z-50 mt-2 flex w-56 flex-col gap-1 rounded-(--radius) border p-3 shadow-lg"
         style="background: var(--card); border-color: var(--border)"
       >
         {
@@ -81,7 +81,7 @@ const links = [
             <a
               href={l.href}
               class:list={[
-                "nav-link rounded-[var(--radius)] px-3 py-2",
+                "nav-link rounded-(--radius) px-3 py-2",
                 { "is-active": currentPage === l.id },
               ]}
             >
@@ -91,7 +91,7 @@ const links = [
         }
         <a
           href={alternateLangUrl}
-          class="nav-link mt-2 rounded-[var(--radius)] border px-3 py-2"
+          class="nav-link mt-2 rounded-(--radius) border px-3 py-2"
           style="border-color: var(--border)"
         >
           {languages[alternateLang]}

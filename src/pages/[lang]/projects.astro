@@ -40,14 +40,14 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
   <div class="grid-bg-fixed"></div>
 
   <section class="relative px-6 pt-24 pb-20 md:pt-32">
-    <div class="mx-auto max-w-[1120px]">
+    <div class="mx-auto max-w-280">
       <div class="mb-12">
         <div class="section-label mb-3">{t("projects.portfolioLabel")}</div>
         <h1 class="display-h1 mb-3" style="font-size: clamp(2rem, 5vw, 3rem)">
           {t("page.projects.heading")}
         </h1>
         <p
-          class="mb-6 max-w-[640px] text-base"
+          class="mb-6 max-w-160 text-base"
           style="color: var(--muted-foreground); font-family: var(--font-body)"
         >
           {t("page.projects.description")}
