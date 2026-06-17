@@ -73,11 +73,7 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
         </div>
       </div>
 
-      <div
-        id="projects-grid"
-        class="grid gap-5"
-        style="grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr))"
-      >
+      <div id="projects-grid">
         {
           projects.map((project, i) => (
             <div
@@ -141,15 +137,97 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
   .project-item.is-hidden {
     display: none;
   }
+
+  /* Fallback / no-JS: responsive grid (functional, source-ordered). */
+  #projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  /* Native masonry where supported (Safari 26+, Firefox flag). JS bails here. */
+  @supports (grid-template-rows: masonry) {
+    #projects-grid {
+      grid-template-rows: masonry;
+    }
+  }
+
+  /* JS-driven order-preserving masonry (everywhere else). */
+  #projects-grid.is-js-masonry {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  #projects-grid.is-js-masonry :global(.masonry-col) {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
 </style>
 
 <script>
+  const GAP = 20;
+
   function setupProjectsFilter() {
+    const grid = document.getElementById("projects-grid");
     const tabs = document.querySelectorAll<HTMLButtonElement>(".filter-tab");
-    const items = document.querySelectorAll<HTMLElement>(".project-item");
     const countEl = document.getElementById("projects-count");
+    if (!grid) return;
+
     const total = parseInt(countEl?.dataset.total || "0", 10);
     const featured = parseInt(countEl?.dataset.featured || "0", 10);
+
+    // Capture source order once; reused for every relayout so packing stays stable.
+    const items = Array.from(grid.children).filter(
+      (el): el is HTMLElement =>
+        el instanceof HTMLElement && el.classList.contains("project-item"),
+    );
+
+    const nativeMasonry = CSS.supports("grid-template-rows", "masonry");
+
+    function colCount() {
+      const w = grid!.clientWidth;
+      if (w < 640) return 1;
+      if (w < 1024) return 2;
+      return 3;
+    }
+
+    // Greedy shortest-column placement in source order: first N items seed each
+    // column (left-to-right), so badges 01,02,03… read across the top row.
+    function relayout() {
+      if (nativeMasonry) return;
+      const cols = colCount();
+      const columns: HTMLDivElement[] = [];
+      const heights: number[] = [];
+      for (let i = 0; i < cols; i++) {
+        const c = document.createElement("div");
+        c.className = "masonry-col";
+        columns.push(c);
+        heights.push(0);
+      }
+      grid!.replaceChildren(...columns);
+      for (const item of items) {
+        if (item.classList.contains("is-hidden")) continue;
+        let idx = 0;
+        for (let i = 1; i < cols; i++) {
+          if (heights[i] < heights[idx]) idx = i;
+        }
+        columns[idx].appendChild(item);
+        heights[idx] += item.offsetHeight + GAP;
+      }
+    }
+
+    let currentCols = -1;
+    function maybeRelayout() {
+      if (nativeMasonry) return;
+      const c = colCount();
+      if (c !== currentCols) {
+        currentCols = c;
+        relayout();
+      }
+    }
 
     function apply(filter: string) {
       items.forEach((item) => {
@@ -160,6 +238,7 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
       if (countEl) {
         countEl.textContent = String(filter === "featured" ? featured : total);
       }
+      relayout();
     }
 
     tabs.forEach((tab) => {
@@ -169,6 +248,14 @@ const featuredCount = projects.filter((p) => p.data.featured).length;
         apply(tab.dataset.filter || "all");
       });
     });
+
+    if (!nativeMasonry) {
+      grid.classList.add("is-js-masonry");
+      // Width-driven: only re-pack when the column count actually changes,
+      // so our own height mutations never trigger a feedback loop.
+      new ResizeObserver(() => maybeRelayout()).observe(grid);
+      maybeRelayout();
+    }
   }
 
   document.addEventListener("astro:page-load", setupProjectsFilter);
