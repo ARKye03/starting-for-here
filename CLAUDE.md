@@ -8,6 +8,12 @@ ARKye03 portfolio — multilingual Astro, EN+ES, Vercel SSG.
 # Development server with hot reload
 pnpm dev
 
+# Background dev server (Astro 7) — agent-friendly, returns URL+PID then exits
+pnpm astro dev --background    # start (idempotent; lockfile blocks duplicates)
+pnpm astro dev status          # is it running?
+pnpm astro dev logs --follow   # tail output
+pnpm astro dev stop            # terminate
+
 # Production build (outputs to /dist)
 pnpm build
 
@@ -27,6 +33,8 @@ pnpm fmt
 pnpm astro [command]
 ```
 
+**Background dev (Astro 7)**: AI agent run → agent-detection auto-enables `--background` + JSON logging, no flag. Health endpoint `/_astro/status` → `{"ok":true}` for readiness poll. JSON logs via `--json` or `logger: logHandlers.json()` in `astro.config.mjs`. All `astro dev` subcommands idempotent (stop-when-stopped / start-when-running succeed quiet).
+
 ## Architecture Overview
 
 ### Routing Strategy
@@ -34,8 +42,8 @@ pnpm astro [command]
 File-based, lang-first:
 
 - **Localized routes**: `/src/pages/[lang]/*.astro` — lang-scoped
-- **Dynamic routes**: `/src/pages/[lang]/projects/[slug].astro` — project details
-- **API routes**: `/src/pages/api/*.ts` — server endpoints (prerender: false)
+- **Dynamic routes**: `/src/pages/[lang]/projects/[slug].astro` — project detail
+- **API routes**: `/src/pages/api/*.ts` — server endpoint (prerender: false)
 - **404**: `/src/pages/404.astro` — top-level fallback
 
 Both langs prefixed (`/en/*`, `/es/*`). Root `/` → Vercel edge redirect — see "Root Redirect & Lang Persistence".
@@ -84,13 +92,13 @@ Root (`/`) → Vercel edge via `vercel.json` (no `src/pages/index.astro`). Four-
 3. **`Accept-Language` starts with `es`** (regex `^es(-[A-Z]{2})?(,.*)?$`) → `/es/`
 4. **Fallback** → `/en/`
 
-All redirects 307 (`permanent: false`) — keeps detection tweakable, no burned cache.
+All redirects 307 (`permanent: false`) — detection stays tweakable, no burned cache.
 
-**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on lang-prefixed routes only, deriving lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener. Guard matters: 404 prerenders as `en`; unguarded write would clobber `lang=es` before the 404 ES-swap script reads it.
+**Cookie write**: `Header.astro` inline script writes `lang=<current>; max-age=1y; samesite=lax; path=/` on lang-prefixed routes only, lang from `Astro.props.lang`. Covers direct nav, deep links, switcher clicks — one mechanism, no event listener. Guard matters: 404 prerenders as `en`; unguarded write clobbers `lang=es` before 404 ES-swap script reads it.
 
 **Caveats**:
 
-- `pnpm preview` ignores `vercel.json` — `/` 404s in local preview only. Use `pnpm dev` for full flow or test post-deploy.
+- `pnpm preview` ignores `vercel.json` — `/` 404s local preview only. Use `pnpm dev` for full flow or test post-deploy.
 - View transitions: inline script re-runs per page since `<ClientRouter>` re-executes inline scripts. If `transition:persist` added to Header later, swap to `astro:page-load` listener.
 - Verify post-deploy: `curl -I -H "Accept-Language: es-ES" https://<host>/` → 307 to `/es/`; with `--cookie "lang=en"` → 307 to `/en/`.
 
@@ -106,8 +114,8 @@ Markdown w/ schema validation:
 
 **Usage**:
 
-- Query: `getCollection("projects")`, filter by lang
-- Render: `const { Content } = await project.render()`
+- Query: `getCollection("projects")`, filter by lang (entries content-layer; `project.id` is `<lang>/<slug>`)
+- Render: `import { render } from "astro:content"` → `const { Content } = await render(project)`
 - Images in `/src/assets/projects/<slug>/`, relative paths in frontmatter `images:`. Schema uses `image()` from `astro:content` → Sharp pipeline, ImportMetadata at render.
 
 ### Component Architecture
@@ -126,8 +134,8 @@ All components receive/derive `lang`, call `useTranslations(lang)` for copy.
 - OKLch color space
 - Dark mode via `prefers-color-scheme` (CSS-only, no JS toggle)
 - Two DaisyUI themes: `catppuccin` (light default), `catppuccin-dark` (dark, prefersdark)
-- Catppuccin Mauve as primary both themes
-- Fonts: Astro 6 built-in Fonts API (`fontProviders.google()` in `astro.config.mjs`) — Space Grotesk → `--font-display`, DM Sans → `--font-body`, JetBrains Mono → `--font-mono`. No external `<link>` tags; Astro handles preload + self-hosting.
+- Catppuccin Mauve primary both themes
+- Fonts: built-in Fonts API (`fontProviders.google()` in `astro.config.mjs`) — Space Grotesk → `--font-display`, DM Sans → `--font-body`, JetBrains Mono → `--font-mono`. No external `<link>` tags; Astro handles preload + self-hosting.
 - Mobile-first, container queries (`@container`)
 - DaisyUI component classes (`btn`, `input`, `textarea`, etc.)
 - Icons: **astro-icon** w/ local SVGs in `src/icons/`, **NO inline SVG**
@@ -154,7 +162,6 @@ Add icons as SVG in `src/icons/`. Name = filename (e.g., `src/icons/mail.svg` �
 
 - `@assets/*` → `./src/assets/*`
 - `@components/*` → `./src/components/*`
-- `@lib/*` → `./src/lib/*`
 - `@i18n/*` → `./src/i18n/*`
 
 ### API Endpoints
@@ -170,11 +177,11 @@ export const prerender = false; // Required for server routes
 **Functionality**:
 
 - Validates form data (name, email, subject, message): required, email format, length caps
-- Honeypot field `website` — bots filling it get fake `success: true`
+- Honeypot field `website` — bots that fill it get fake `success: true`
 - HTML-escapes all user input before email interpolation
-- Sends email via Resend (`RESEND_API_KEY` env var required; lazy-init in handler)
+- Sends email via Resend (`RESEND_API_KEY` required; lazy-init in handler)
 - `CONTACT_FROM` / `CONTACT_TO` env vars override sender/recipient (defaults: `onboarding@resend.dev` / `rafa03-dev@proton.me`)
-- Returns JSON; errors are i18n codes (`missing_fields`, `invalid_email`, `too_long`, `send_failed`, `server_error`) mapped to translations client-side via `data-msg-*` attrs
+- Returns JSON; errors i18n codes (`missing_fields`, `invalid_email`, `too_long`, `send_failed`, `server_error`) mapped to translations client-side via `data-msg-*` attrs
 - Client-side AJAX w/ status messages
 
 ### Build & Deployment
@@ -238,10 +245,10 @@ Pages use Astro's `<ClientRouter>` for SPA-like nav. Use `transition:name` for s
 
 ## Technology Stack
 
-- **Framework**: Astro 6.2.1 (SSG, built-in Fonts API)
+- **Framework**: Astro 7.0.2 (SSG, built-in Fonts API, Vite 8, Sätteri Markdown)
 - **Styling**: Tailwind CSS 4.2.4 (Vite plugin) + DaisyUI 5.5.19
 - **Email**: Resend 6.12.2
 - **Image Processing**: Sharp 0.34.5
 - **Icons**: astro-icon 1.1.5 (local SVGs in `src/icons/`)
-- **Deployment**: Vercel (`@astrojs/vercel` 10.0.6)
+- **Deployment**: Vercel (`@astrojs/vercel` 11.0.0)
 - **Package Manager**: pnpm
