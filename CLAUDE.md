@@ -246,7 +246,7 @@ Pages use Astro's `<ClientRouter>` for SPA-like nav. Use `transition:name` for s
 ## Technology Stack
 
 - **Framework**: Astro 7.0.2 (SSG, built-in Fonts API, Vite 8, Sätteri Markdown)
-- **Styling**: Tailwind CSS 4.2.4 (Vite plugin) + DaisyUI 5.5.19
+- **Styling**: Tailwind CSS 4.3.1 (Vite plugin) + DaisyUI 5.5.19
 - **Email**: Resend 6.12.2
 - **Image Processing**: Sharp 0.34.5
 - **Icons**: astro-icon 1.1.5 (local SVGs in `src/icons/`)
