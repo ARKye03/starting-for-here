@@ -46,11 +46,7 @@ const langs = [
 const nowRows = [
   { label: t("about.now.working"), value: t("about.now.workingValue") },
   { label: t("about.now.learning"), value: t("about.now.learningValue") },
-  {
-    label: t("about.now.status"),
-    value: t("about.now.statusValue"),
-    pulse: true,
-  },
+  { label: t("about.now.status"), value: t("about.now.statusValue") },
   { label: t("about.now.location"), value: t("about.now.locationValue") },
 ];
 ---
@@ -170,7 +166,6 @@ const nowRows = [
                     class="flex flex-1 items-center gap-2 text-[14px]"
                     style="color: var(--foreground); font-family: var(--font-body)"
                   >
-                    {row.pulse && <span class="now-pulse" />}
                     <span>{row.value}</span>
                   </dd>
                 </div>
@@ -207,24 +202,5 @@ const nowRows = [
       transparent
     );
     opacity: 0.7;
-  }
-
-  .now-pulse {
-    width: 8px;
-    height: 8px;
-    border-radius: 9999px;
-    background: var(--primary);
-    box-shadow: 0 0 0 0 var(--primary-glow);
-    animation: now-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes now-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 var(--primary-glow);
-    }
-    50% {
-      box-shadow: 0 0 0 6px transparent;
-    }
   }
 </style>
