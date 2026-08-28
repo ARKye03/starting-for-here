@@ -14,7 +14,8 @@
     "astro": "astro",
     "lint": "eslint .",
     "check": "astro check",
-    "fmt": "exec prettier . --write"
+    "fmt": "exec prettier . --write",
+    "prepare": "husky"
   },
   "dependencies": {
     "resend": "6.12.2"
@@ -35,6 +36,7 @@
     "eslint": "10.3.0",
     "eslint-plugin-astro": "1.7.0",
     "globals": "17.6.0",
+    "husky": "^9.1.7",
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
