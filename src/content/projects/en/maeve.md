@@ -3,7 +3,16 @@ title: "Maeve"
 description: "A desktop app that compares Mercado Libre Uruguay and TEMU listings by true landed cost, then lets two Gemini models argue and pick the winner."
 date: 2026-11-17
 featured: false
-tags: ["Rust", "Iced", "Python", "Gemini", "Web Scraping", "Desktop App", "Browser Extension"]
+tags:
+  [
+    "Rust",
+    "Iced",
+    "Python",
+    "Gemini",
+    "Web Scraping",
+    "Desktop App",
+    "Browser Extension",
+  ]
 github: "https://github.com/ARKye03/maeve"
 images: ["@assets/projects/maeve/preview.webp"]
 lang: "en"

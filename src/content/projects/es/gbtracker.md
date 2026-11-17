@@ -3,7 +3,15 @@ title: "GBTracker"
 description: "Una app de escritorio nativa que muestra todos los issues, tareas y épicas de git-bug de todos tus repositorios en una sola ventana, construida con Rust e iced."
 date: 2026-11-17
 featured: false
-tags: ["Rust", "Iced", "App de Escritorio", "git-bug", "Herramientas de Desarrollo", "Tokio"]
+tags:
+  [
+    "Rust",
+    "Iced",
+    "App de Escritorio",
+    "git-bug",
+    "Herramientas de Desarrollo",
+    "Tokio",
+  ]
 github: "https://github.com/ARKye03/gbtracker"
 images: ["@assets/projects/gbtracker/preview.webp"]
 lang: "es"

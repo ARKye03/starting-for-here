@@ -3,7 +3,16 @@ title: "Maeve"
 description: "Una app de escritorio que compara publicaciones de Mercado Libre Uruguay y TEMU por su costo real puesto en casa, y deja que dos modelos Gemini debatan y elijan al ganador."
 date: 2026-11-17
 featured: false
-tags: ["Rust", "Iced", "Python", "Gemini", "Web Scraping", "App de Escritorio", "Extensión de Navegador"]
+tags:
+  [
+    "Rust",
+    "Iced",
+    "Python",
+    "Gemini",
+    "Web Scraping",
+    "App de Escritorio",
+    "Extensión de Navegador",
+  ]
 github: "https://github.com/ARKye03/maeve"
 images: ["@assets/projects/maeve/preview.webp"]
 lang: "es"
